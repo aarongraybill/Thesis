@@ -1,6 +1,6 @@
 {
     "id": "DB4AC271",
-    "path": "~/Desktop/Thesis/AnnotatedBibliography.Rmd",
+    "path": "/Volumes/GoogleDrive/My Drive/Thesis_Git/Thesis/AnnotatedBibliography.Rmd",
     "project_path": "AnnotatedBibliography.Rmd",
     "type": "r_markdown",
     "hash": "0",
@@ -11,16 +11,16 @@
     "relative_order": 1,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "8,14",
+        "cursorPosition": "18,128",
         "scrollLine": "0",
         "docOutlineVisible": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1632364249,
+    "lastKnownWriteTime": 1632364629,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1632364249353,
+    "last_content_update": 1632364629,
     "read_only": false,
     "read_only_alternatives": []
 }
