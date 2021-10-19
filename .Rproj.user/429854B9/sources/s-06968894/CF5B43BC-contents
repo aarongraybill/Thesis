@@ -1,0 +1,62 @@
+---
+title: "Minimal Stochastic Production Model"
+author: "Aaron Graybill"
+date: "9/27/2021"
+output:
+  pdf_document:
+  word_document: default
+biblio-style: apalike
+csl: "../apa.csl"
+bibliography: Draft1.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## I add stochasticity to a model presented in @bronnenbergEconomicsBrandsBranding2019
+
+A firm can have reputation $H$ or reputation $L$. Consumers assume that a firm has reputation $H$ until they receive a product of quality $q_l$. Upon recceiving a $q_l$ product the consumer will permanently believe that the firm is of type $L$. The firm can spend $c_h$ dollars on the chance to produce a high quality product. We assume that upon spending $c_h$, the firm succeeds in producing a product of quality $q_h$ with probability $\omega$ and fails and produces a $q_L$ product with probability $1-\omega$. Producing a low quality good can be done with certainty for price $c_l$
+
+Selling a high quality product gives the firm $p_H$ (the price) and a low product gives the firm $p_L$. If it wishes, the firm may choose to sell a low quality product for $p_h$, knowing that their reputation will be lost after that period.
+
+Suppose the firm has a discount factor $\rho$. If the firm commits to always trying to produce high quality products (supposing they haven't already lost their reputation is) they receive the following expected discounted payoff:
+
+\[
+\sum_{t=1}^\infty\omega^{t-1}(1-\omega)\left((p_h-c_h)\frac{(1-\rho^{t})}{1-\rho}+(p_l-c_l)\frac{\rho^t}{1-\rho}\right)
+\]
+
+Which simplifies to:
+\[
+\frac{1}{1-\omega\rho}(p_H-c_H)+\frac{\rho}{1-\rho}\frac{1-\omega}{1-\omega\rho}(p_L-c_L)
+\]
+
+
+In order for the firm to stick to this production scheme, it must be better than all alternatives. However, for simplicity, I only consider whether or not the firm should deceive in period one. I believe that this situation would yield the second highest utility, though I can't articulate why. The firm's discounted profits would then be:
+
+\[
+p_h-c_l+\frac{\rho}{1-\rho}(p_l-c_l)
+\]
+
+
+Which to be sustained in equilbrium requires that:
+
+\begin{align*}
+\frac{1}{1-\omega\rho}(p_H-c_H)+\frac{\rho}{1-\rho}\frac{1-\omega}{1-\omega\rho}(p_L-c_L)&\geq p_h-c_l+\frac{\rho}{1-\rho}(p_l-c_l)\\
+p_h&\geq\frac{\alpha c_h}{\alpha-1}+\frac{c_l}{\alpha-1}(\alpha\beta(1-\omega)-\beta-1)-\frac{p_l}{\alpha-1}(\alpha\beta(1-\omega)-\beta)
+\end{align*}
+
+
+Where $\alpha=\frac{1}{1-\omega\rho}$ and $\beta=\frac{\rho}{1-\rho}$. Implicitly in there I assume that $\rho\omega>\frac{1}{2}$ (else the inequality would be flipped), although flipped or not the inequality holds under the same conditions. We should expect that this condition would hold in the real world.
+
+Since $p_H$ does not depend on the other parameters, it will always be possible to have sufficiently high $p_h$ such that the high reputation equlibrium can be maintained. Additionally note that increasing the price of the low good always tightens the constraint. This should make sense as there is less incentive to do the costly high quality product. Increasing the cost of the high quality good always tightens the constraint. The affect of increasing the cost of the low quality good is ambiguous. The ambiguity is coming from two opposing forces. First increasing $c_l$ decreases the payoff in case your reputation is lost this makes the risky strategy less appealing. Call this the *downside effect*. The counteracting effect, the *upside effect*, comes from when you increase the cost of producing the low quality product, the deceitful $p_h-c_l$ payoff is no longer so attractive. This pushes the firm to produce in the more risky high reputation equilibrium.
+
+## Don't read this part:
+I model the development of reputation in much the same way that [@shapiroPremiumsHighQuality1983] models it. My only alteration is the introduction of uncertainty in the production function.
+
+To begin, let there consider a firm $j$ out of a continuum of other firms who produce one unit of a good at the beginning of each period $t$. Firm $j$ chooses an effort value $z_{tj}$ knowing that their effort will stochastically produce one item of the good according to some relationship between their effort $e_{tj}$ and a random component $\varepsilon_{tj}$. The random component is assumed to be independent of effort, time, and other firms. As such, an item of quality $q$ is given by $q_{tj}(e_{tj},\varepsilon_{tj})$. The density of $q(e_{tj},\varepsilon_{tj})$ is given by $f(q)$. There is a cost of effort denoted $c(e_{tj})$ satisfying $c'(e_{tj})\geq 0$ and $c''(e_{tj})>0$ **WHY DOES SHAPIRO ASSUME $\geq$ vs $>$.** It is the firms job to choose a vector of effort values $\mathbf{e}=[e_t,e_{t+1},\ldots]$
+
+Consumer $i$ can only observe the final quality of the goods that they and every other consumer receive, $\mathbf{q}_t$.  Consumers are assumed to have ex ante knowledge of the stochastic production technology. Consumers have a reputation about the firm $R_{tj}(Q)\colon \mathbb{R}^{t-1}\to\mathbb{R}$. Where $Q$ denotes the history of qualities that every consumer has recieved up until.
+
+\newpage
+### Bibliography

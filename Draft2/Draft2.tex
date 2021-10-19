@@ -1,0 +1,205 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={First Dynamic Programming Example},
+  pdfauthor={Aaron Graybill},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{First Dynamic Programming Example}
+\author{Aaron Graybill}
+\date{October 1, 2021}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+In this preliminary draft, I use dynamic programming to model an
+artist's optimal investment in reputation over time. Previous models
+have looked for equilibria and market clearance, and this model will
+explore a single artist's ideal tradeoff between investing in reputation
+(given the market's reputation evolution function) and taking a less
+costly option.
+
+The analysis is nuanced by stochasticity in the equation of motion. The
+artist can invest in their reputation, but this investment may not
+payoff. The artist may have a ``bad gig'' caused by outside factors
+which damages their reputation.
+
+\hypertarget{the-model}{%
+\subsection{The Model}\label{the-model}}
+
+In period \(t\), denote the artist's reputation \(R_t\). The artist is
+assumed to be a price taker, and that the price of their product is
+solely determined by their reputation coming into period \(t\). We
+denote this price function, \(p(R_t)\). The artist is assumed to sell
+only one item per period. The artist's reputation is determined by the
+quality of the products they have produced in all pervious period. The
+quality that the artist produces is determined by a stochastic quality
+production function \(q(z,\varepsilon)\) where the effort is given by
+\(z\in\mathbb{R}\). In addition to effort, quality is determined by the
+value of a random variable \(\varepsilon\). We assume that reputation is
+exclusively determined by the history of realized values of quality,
+\(q_t(z,\varepsilon)\). We assume that consumers update their reputation
+according to \(R_{t+1}=f(q_t,R_t)\).
+
+We assume that each unit of effort has some opportunity cost given by
+\(c(z)\). We further assume that the artist maximizes their discounted
+stream of profits. Denote the discount factor \(\beta\). An artist's
+profit in time \(t\) is given by \(p(R_t)-c(z_t)\). However, the artist
+knows that their choice of effort will affect their future reputation
+and the prices they will receive as a result.
+
+We can formulate the agent's discounted profits using the following
+dynamic problem: \[
+V(R_t)=\max_z\left\{p(R_t)-c(z_t)+\beta V(R_{t+1})\right\}\mid R_{t+1}=f(q(z_t,\varepsilon),R_t)
+\]
+
+\hypertarget{reproducing-shapiro}{%
+\subsection{Reproducing Shapiro}\label{reproducing-shapiro}}
+
+The reputational update function, \(f\), is central to this analysis,
+and various functional forms should be explored. For now, assume that
+\(R_{t}=q_{t-1}\), this mirrors the analysis conducted by (Shapiro,
+1983), and I use this as a first pass to ensure that Shapiro's results
+can be replicated. Shapiro's work includes a deterministic quality
+function---the firm produces exactly the quality it wishes to---so I
+begin by examining the case in which \(\varepsilon\) is the degenerate
+random variable taking \(0\) with certainty.
+
+At this point, we can let reputation and quality have units such that
+\(p(R_t)=R_t\). In this case, the dynamic program can be rewritten as:
+
+\[
+V(R_t)=\max_z\left\{R_t-c(z_t)+\beta V(z_t)\right\}
+\]
+
+Of course, the solution to this dynamic program greatly depends on the
+functional form of \(c(z)\). As a first pass, I will assume that
+\(c(z)=\gamma z\), so there is constant marginal costs \(\gamma\)
+
+\[
+V(z_t)=\max_z\left\{R_t-\gamma z_t+\beta V(z_t)\right\}
+\]
+
+Suppose I conjecture that the true optimal effort supplied in every
+period is given by \(z_{t+1}=\theta z_t\), where \(\theta\) is a
+currently undetermined, time-invariant fraction of the previous effort.
+
+Instead of the Bellman Equation we can alternately view the problem as
+maximizing the lifetime discounted sum of profits:
+
+\[
+\sum_{t=0}^\infty \beta^t\left( R_t-\gamma z_t\right)
+\]
+
+Assuming that the agent always supplies the same fraction of their
+previous utility, \(\theta\), we can rewrite the expression as:
+
+\[
+\begin{align*}
+&R_0-\gamma z_0+\sum_{t=1}^\infty \beta^t\left( \theta^tz_0-\gamma \theta^tz_0\right)\\
+&R_0-\gamma z_0+z_0(1-\gamma)\sum_{t=1}^\infty \left(\beta\theta\right)^t\\
+&R_0-\gamma z_0+z_0(1-\gamma)\frac{\beta\theta}{1-\beta\theta}\\
+\end{align*}
+\]
+
+The agent then chooses \(\theta\) and \(z_0\) to maxize the expression
+above. We have:
+
+\[
+\begin{align*}
+\frac{\partial}{\partial\theta}&\colon z_0(1-\gamma)\frac{\beta(1-\beta\theta)-\beta\theta(-\beta)}{(1-\beta\theta)^2}=0\\
+\frac{\partial}{\partial\theta}&\colon -\gamma+(1-\gamma)\frac{\beta\theta}{1-\beta\theta}=0
+\end{align*}
+\] \[
+z_0(1-\gamma)\frac{\beta}{(1-\beta\theta)^2}=0\implies z_0=0
+\]
+
+\[
+-\gamma+(1-\gamma)\frac{\beta\theta}{1-\beta\theta}=0\implies\frac{\gamma}{\beta(1-\gamma)}=\frac{\theta}{1-\beta\theta}
+\]
+
+\[
+\frac{\gamma}{\beta(1-\gamma)}=\frac{\theta}{1-\beta\theta}\implies\frac{\gamma}{\beta(1-\gamma)}-\frac{\theta}{1-\gamma}=\theta
+\]
+
+\[
+\frac{\gamma}{\beta(1-\gamma)}-\frac{\theta}{1-\gamma}=\theta\implies\theta=\left(1+\frac{1}{1-\gamma}\right)\frac{\gamma}{\beta(1-\gamma)}
+\]
+
+\hypertarget{outstanding-questions}{%
+\subsection{Outstanding questions:}\label{outstanding-questions}}
+
+\begin{itemize}
+\tightlist
+\item
+  Is there any meaningful difference between reputation and price?
+  Specifically, can give reputation in dollar units so that the new
+  reputation is just the price that consumers are willing to pay for the
+  good. I think I can do this!
+\end{itemize}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-shapiroPremiumsHighQuality1983}{}%
+Shapiro, C. (1983). Premiums for High Quality Products as Returns to
+Reputations. \emph{The Quarterly Journal of Economics}, \emph{98}(4),
+659--679. \url{https://doi.org/10.2307/1881782}
+
+\end{document}

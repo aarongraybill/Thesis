@@ -1,0 +1,95 @@
+---
+title: "Annotated Bibliography II"
+author: "Aaron Graybill"
+date: "9/27/2021"
+output:
+  word_document: default
+  pdf_document:
+biblio-style: apalike
+csl: "../apa.csl"
+bibliography: ../Draft3/Draft3.bib
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(echo = TRUE)
+refs <- bibtex::read.bib("../Draft3/Draft3.bib")
+```
+
+## Introduction and Selection Criteria
+
+In this annotated bibliography, I focus on the literature related to corporate branding, the development of artistic "superstars." I have also researched various modern market structures (Spotify, Airbnb, and Uber) to gain a better anecdotal understanding of how reputation develops in the gig economy.
+
+### The Economics of Superstars
+
+`r capture.output(print(refs[["rosenEconomicsSuperstars1981a"]]))`
+
+1. This paper provides a model of how income distribution can be more concentrated in the few than the distribution of the observable underlying talent. He calls these high earners "superstars."  Rosen motivates his work by saying that many markets have superstars, and often obtaining relevant data is impossible, so between the prevalence and lack of empirics, models must be used.
+
+2. Rosen positions his analysis as bridging the gap between the superstar effect and traditional economic theory that says that "more talent means more pay." Rosen agrees with that sentiment, but Rosen tries to explain why talented shoemakers don't become superstars, but musicians can [@bronnenbergEconomicsBrandsBranding2019, p. 845]. Rosen uses flexible personal market size (so product differentiation) which he claims stands out from traditional perfect competition theory.
+
+3. There is no data used in this paper.
+
+4. The methodology, I have learned, is a fairly standard approach to finding market equilibrium. Rosen first solves the consumer's utility maximization problem taking as given firm behavior, then Rosen solves the firm's profit maximization problem taking as given consumer behavior. Then Rosen finds the intersection of the quantity demanded and quantity supplied and this becomes the market equilibrium. From there, Rosen describes the characteristics of this equilibrium and discusses some comparative statics.\
+\
+In a bit more detail, the consumer gets to choose a quality of final good, and the number of goods of that quality they consume (they don't consume multiple qualities). Quality and quantity are assumed to be substitutal according to $nz$ where $n$ is the number of units consumed at quality $z$. This convenient functional form assumption implicitly defines the price function (which is a function of quality) based on a simple differential equation. TI believe that this says that the market is large enough where neither the consumer nor the producer has price setting ability, but I'm honestly not sure. \
+\
+From there, the producer chooses a quantity to produce taking as given their underlying ability,so the firm's decision is one dimensional. The firm has a convex cost function in their quantity produced. I will leave the explanation there because those are the most important parts to the analysis I intend to conduct.
+
+5. One main result is the convexity of the revenue function in the artist's underlying talent. With this convexity, small increases in talent lead to disproportionately large increases in revenue. This is the justification that Rosen uses to explain how this leads to salary concentration and superstars. 
+
+6. Opportunities for further research (which I intend to explore) include moving the analysis to a multiperiod model to see if salary concentration can be maintained over time. A multiperiod model should include a decoupling of the artist's underlying talent and their present reputation, and Rosen's paper does not do this. Rosen assumes that talent is perfectly inferrable (though not directly observable) through the artist's production choices. The final element that could be added to Rosen's analysis is a stochastic production function. This is one way to obfuscate the talent of the artist from their current reputation. Artistic "talent" is a fickle thing, so adding a reputational element is important. One element that I think that Rosen should have clarified is the importance of a convex cost function on his results. It seems as though if costs are not treated as convex, then the convexity of revenue falls.
+
+
+### The Economics of Rising Stars
+
+`r capture.output(print(refs[["macdonaldEconomicsRisingStars1988"]]))`
+
+1. This paper is overtly derivative from [@rosenEconomicsSuperstars1981a]. It models artist's wages based on underlying talent. This paper differs from Rosen by incorporating multiple periods (two) and uncertainty about the talent of each artist.
+
+2. The work of [@rosenEconomicsSuperstars1981a] is a "hedonic" model---a model in which preference over idiosyncratic elements of a good affect its utility. MacDonald explains that these hedonic models allow for right skewed income distribution, but do not require them (say if the talent is sufficiently skew left). MacDonald' frames his paper's deepends our understanding of how the distribution of talent affects revenue outcomes. In particular, he introduces uncertainty (by both consumers and producers) about underlying talent to see how this affects revenue. It also provides a short implementation of reputation development over two periods, new to the "Superstar" literature.
+
+3. There is no data used in this paper.
+
+4. Similar to Rosen, this is a market equilibrium model/. Both consumers and producers (artists) are assumed to not know the talent of a given artist. In each of two periods, the artist performs which can either be good or bad. The probability of a good performance is increasing in the artist's talent. As such, in period one, no one has information about the artist, so everyone is of the same type and receives the same wage, however after performing once, the artist can be new to the market (quality fully unknown), good type (having one good performance), or bad type (having one bad performance). Further, artists can leave the market after period one. The model then looks at expected profit and utility maximization for consumers and artists and finds the resulting equilibrium ticket price for untested, good, and bad performers. The consumer maxmizes over their choice of whether or not to attend a performan e of a certain type (given their ticket price). The artist maximizes over whether or not to perform or take an outside option given the induced ticket price and number of tickets sold.\
+\
+The interesting part of the model comes in the analysis of the equilibrium wage and the composition of sellers in period two (how many artists left and how many entered).
+
+5.  MacDonald finds that on the consumer side, behavior is separated into three categories based on the difference in utility between good and bad performances.People who don't see much difference between good and bad performances don't attend performances at all. In the middle, consumers choose to buy tickets from unknown performers in period one. The most "discerning" consumers wait until period two and only take the higher ticket price for performers with a good track record. On the artists' side, MacDonald finds that artists are willing to accept lower returns than an outside option in period one while hoping for a good performance and higher wages in period 2. The most critical assumption for this to hold is the general form of the model. The binary outcome of the performance is really central. While the author acknowledges that extensions could address a more nuanced performance outcome space (by varying the repertoire of the performer), the effects of haiving only good or bad outcomes is not clear.
+
+6. Overall, I believe that this is a well executed paper, but the one critique that I would pose is that extending the analysis to more than two period would have been valuable. This paper allows for a non-binary talent distribution, but does not leverage it. More periods would allow consumers to better separate higher talent artists from lower talent artists. As a final note, this paper's section analysis of deviations from the steady state may prove useful in my work.
+
+### Peer-to-Peer Markets
+
+`r capture.output(print(refs[["einavPeertoPeerMarkets2016"]]))`
+
+1. This paper discusses and briefly models how peer-to-peer (P2P) markets differ from traditional markets. The author's motivate their work using the emergence and dominance of digital P2P services like eBay, Uber, etc. 
+
+2. This paper puts P2P literature into three buckets: P2P's ability to match buyers to sellers, flexible pricing strategies, and the big one to me, the explicit incorporation of trust and reputation. Their work tries to address primarily address the first two. They don't explicitly point to other theoretical papers about P2P markets, making it seem like this paper provides a baseline model. Most of the work in this field seems to be experimental, so this paper provides some theory to back the modelling.
+
+2. There is no data used in this paper.
+
+3. One thing that I really like about this paper is the way that it identifies the key aspects of P2P markets (the buckets given above) that it wishes to include in a model before diving into the model itself.  The model seeks to find how many P2P sellers enter the market. This model is intended to provide a comparison, and so the model that the author's build uses traditional businesses as a baseline. For example, the model assumes that traditional businesses have non-zero startup costs (they must build a hotel), whereas P2P sellers have zero startup costs (you already have a house to rent out for Airbnb). However, marginal costs for P2P sellers is higher than traditional sellers. Another interesting feature of the model is exogenous stochastic demand functions. The artists simply assume that the demand curve takes one of a continuum of possible realizations. \ \
+After the model concludes, the authors discuss the implications of their model to legislation. 
+
+4. One of the conclusions is that random increases in demand benefit P2P sellers because they can enter the market freely and their higher marginal cost is compensated by the higher willingness to pay. The authors also find that there is an equilibrium where neither traditional nor P2P sellers wish to enter or exit the market. They also show that this equilibrium is unique and maximizes consumer surplus. The final conclusion from their model that I will point out is that markets with high fixed costs (they call frictions) like taxi licensing costs are ripe for P2P entrance.
+
+5. This is a really nice paper that is fairly parsimonious and still gets at the deep insights of P2P markets. The only component they leave out is the development of reputations (which is unfortunately why I was interested in this paper). Incorporating reputation would have to substantially alter their proposed model, so I can see why it was excluded, but reputation plays an important role in modern P2P markets.
+
+
+
+### Relationships between artistic movements and careers of modern artists: evidence from hedonic regressions with auction data
+
+`r capture.output(print(refs[["hodgsonRelationshipsArtisticMovements2019"]]))`
+
+1. This empirical paper explores how the characteristics of an artistic movement, and an artist's time entering the movement combine to affect the selling value of art. This paper is motivated by a lack of hedonic regression using fine art auction data. That is, a regression incorporating artistic, historical, and physical elements of paintings to predict selling price.  
+
+2. 
+
+
+\newpage
+
+### Bibliography
+
+---
+nocite: '@*'
+---

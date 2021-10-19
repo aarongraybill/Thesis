@@ -1,0 +1,74 @@
+---
+title: "Derivation"
+author: "Aaron Graybill"
+date: "10/13/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## DS Derivation
+
+**I won't include this derivation in the final version, but it's here for my reference**
+
+First note that we can break this into a two stage problem. Since $g$ is the numeraire, we can essentially think of a number of units of $g$ to purchase and spend the rest of the money $E_a$ (expenditure on arts) optimally on artistic goods.
+
+Taking for the moment as given, $E_a$, let's analyze the consumer's optimal art bundle. They maximize:
+\[
+\left(\int_0^N[n(i)r(i)]^\rho di\right)^\frac{1}{\rho} s.t. \int_0^Nn(i)p(r(i))\leq E_a
+\]
+
+Maximization decisions are preserved under monotonically increasing transformations, so I raise the utility function to $\rho$, the new objective function becomes: $\int_0^N[n(i)r(i)]^\rho di$ with langrangian first order condition for a given $i$:
+
+\begin{align*}
+\rho n(i)^{\rho-1}r(i)^\rho-\lambda p(r(i))&=0\\
+n(i)^{\rho-1}&=\frac{\lambda p(r(i))}{\rho r(i)^\rho}\\
+n(i)&=\left(\frac{\lambda p(r(i))}{\rho r(i)^\rho}\right)^\frac{1}{\rho-1}
+\end{align*}
+
+The ratio of given $i_1$ and $i_2$ must satisfy:
+
+\[
+\frac{n(i_1)}{n(i_2)}=\left(\frac{r(i_2)}{r(i_1)}\right)^{\frac{\rho}{\rho-1}}\left(\frac{p(r(i_1))}{p(r(i_2))}\right)^{\frac{1}{\rho-1}}
+\]
+
+Multiplying both sides by $n(i_2)$ yields:
+
+\[
+n(i_1)=n(i_2)\left(\frac{r(i_2)}{r(i_1)}\right)^{\frac{\rho}{\rho-1}}\left(\frac{p(r(i_1))}{p(r(i_2))}\right)^{\frac{1}{\rho-1}}
+\]
+
+Multiplying both sides by $p(r(i_1))$ and integrating over $[0,N]$ with respect to $i_1$ yields:
+\[
+\int_0^Nn(i_1)p(r(i_1))di_1=\int_0^Nn(i_2)\left(\frac{r(i_2)}{r(i_1)}\right)^{\frac{\rho}{\rho-1}}\left(\frac{p(r(i_1))}{p(r(i_2))}\right)^{\frac{1}{\rho-1}}p(r(i_1))di_1
+\]
+
+Let $\sigma=\frac{1}{1-\rho}$. And note that this left hand side represents all of the money we will spend over all goods. That is $E_a$ by definition. Using that fact, pulling out constant terms and solving for $n(i_2)$
+
+\[
+n(i_2)=\left(\frac{r(i_2)}{p(r(i_2))}\right)^\sigma \frac{E_a}{r(i_2)\int_0^N\left(\frac{r(i_1)}{p(r(i_1))}\right)^{1-\sigma}di_1}
+\]
+
+Worthy of note is that changes in income have no effect on the relative consumption of certain goods. Further let $P=\left[\int_0^N\left(\frac{p(r(\omega))}{r(\omega)}\right)^{1-\sigma}d\omega\right]^{\frac{1}{1-\sigma}}$. Using our new definition of $P$ and noting that there is nothing particuluar about $i_1$ or $i_1$, we can say that this relationship holds for any $i$:
+\[
+n(i)=\left(\frac{r(i)}{p(r(i))}\right)^\sigma r(i)^{-1} E_a P^{\sigma-1}=\left(P\frac{r(i)}{p(r(i))}\right)^\sigma\frac{E_a}{r(i)P}
+\]
+
+*Too lazy to verify the following as of now, but we probably have the following:*
+\[
+U=\frac{E_a}{P} \ \& \ e(P,U)=PU
+\]
+
+Then we can complete the second stage of the process by maximizing:
+\[
+U+v(g) \ s.t. PU+g=I
+\]
+
+The corresponding lagrangian gives the follows FOCs: $v'(g)=\lambda$ and that $1-P\lambda=0$ or that $g^*=[v']^{-1}\left(\frac{1}{P}\right)$ and correspondingly, $U^*=\frac{I-g^*}{P}$. Or more usefully that $I-g^*=E_a$ which allows us to get $n(i)$ in terms of only exogenous variables:
+\[
+n(i_2)=\left(\frac{r(i_2)}{p(r(i_2))}\right)^\sigma r(i_2)^\rho E_a P^{\sigma-1}=\left(P\frac{r(i_2)}{p(r(i_2))}\right)^\sigma r(i_2)^\rho \frac{I-[v']^{-1}\left(\frac{1}{P}\right)}{P}
+\]
+
+**End derivation**

@@ -6,7 +6,7 @@ output:
   word_document: default
   pdf_document:
 biblio-style: apalike
-csl: "apa.csl"
+csl: "../apa.csl"
 bibliography: InUseBib.bib
 ---
 

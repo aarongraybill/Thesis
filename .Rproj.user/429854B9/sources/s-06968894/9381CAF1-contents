@@ -1,0 +1,36 @@
+---
+title: "Money for Nothing, or something"
+short: "Plagiarizing the AER's format"
+journal: "AER" # AER, AEJ, PP, JEL
+month: "`r format(Sys.Date(), '%m')`"
+year: "`r format(Sys.Date(), '%Y')`"
+vol: 1
+issue: 1
+jel:
+  - A10
+  - A11
+keywords:
+  - first keyword
+  - second keyword
+author:
+  - name: Aaron Graybill
+    firstname: Aaron
+    surname: Graybill
+    email: agraybill@haverford.edu
+    affiliation: Haverford College
+acknowledgements: |
+  Nice People
+abstract: |
+  Reputation over time
+biblio-style: apalike
+csl: "../apa.csl"
+bibliography: Draft3.bib
+output: rticles::aea_article
+---
+
+Some intro things. This is based off of 
+\section{Model}
+
+\appendix
+
+\section{Mathematical Appendix}

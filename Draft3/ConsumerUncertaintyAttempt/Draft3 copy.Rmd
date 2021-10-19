@@ -1,0 +1,68 @@
+---
+title: "Money For Nothing, Clicks for Free (Haha, so funny and it's also been done before)"
+author: "Aaron Graybill"
+date: "10/7/2021"
+output:
+  pdf_document: default
+  html_document: default
+biblio-style: apalike
+csl: ../apa.csl
+bibliography: Draft3.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+The advent of social media and streaming services like Spotify, Youtube, and Instagram have given artists of all kinds unprecendented ability to connect their work to their audience (SOURCE?). However, the increased supply of artists makes it harder for each to cut through the noise and reach financial freedom from their craft (SOURCE?).
+
+Throughout history, artists have had to earn the accolades of their fan. Yatta yatta, that's still true, but this paper explores how the introduction of internet media changes the economic incentives and decisions of artists.
+
+This paper develops and analyzes a model of how artists build and maintain a reputation. This paper pulls from the cultural economics of [@rosenEconomicsSuperstars1981a] and the branding literature [@kleinRoleMarketForces1981; @shapiroPremiumsHighQuality1983].
+
+
+## Model
+
+Before laying out the maximization problems in the model at hand, I will briefly discuss some of the important assumptions that this model makes. Following [@rosenEconomicsSuperstars1981a], in this model I assume that intrinsic talent is decoupled from the quality of the art produced by the artist. We assume that consumers can observe the quality, but not the underlying talent of the artist. Rosen allows consumers to choose the quality of the good they purchase directly. Since consumers in Rosen's model choose quality, consumers pay for exactly the good that they will receive. 
+
+In this analysis, I take the arguably more realistic assumption that consumers cannot choose the quality of the product and instead face some uncertainty. This idea is explored in [@macdonaldEconomicsRisingStars1988] where neither the artist nor the consumer knows the underlying talent of the artist. However, in this analysis, we will lean closer toward the branding literature of [@kleinRoleMarketForces1981; @shapiroPremiumsHighQuality1983] which model the evolution of reputation (branding) over multiple periods. I model reputation by assuming that the artist has knowledge of their underlying talent and can choose to supply an amount of art taking as given how this will affect the quality of each piece and the reputation that the exposure and quality affords them.
+
+## The Consumer's Problem
+
+We begin by assuming that there exists a representative consumer who has per period income $I$. She derives per period utility according to $u(g,a(n,z))$ where $g$ is a numeraire aggregate consumption good, and $a(n,z)$ is the aggregated value of artistic consumption where $n$ is the number of art pieces consumed at observable quality $z$. Following the assumptions made by [@rosenEconomicsSuperstars1981a], we assume that $a(n,z)=nz$ (SHOULD PROBABLY EXPLAIN WHY HE SAYS THIS IS REASONABLE).
+
+Recall that the consumer cannot select the quality $z$ directly. Instead she must choose a firm with reputation $r$, and use this reputation to inform her beliefs about what qualities could result. Formally, we let beliefs about resultant qualities be given by the random variable $\tilde{Z}$ with support $\Omega$ and conditional density $b_{\tilde{Z}|r}(\tilde{z}|r)$.
+
+The consumer takes the price schedule as given. Since the reputation is the only observable variable, we must use it as the input variable to price. Let this price schedule be given by $p(r)$. Recalling that $g$-type consumption goods are set as the numeraire, we can express the consumers utility maximization problem as:
+\[
+\max_{g,r,n}\left\{\int_\Omega u(g,n\tilde z)b_{\tilde{Z}|r}(\tilde{z}|r)d\tilde z \ \ s.t. \ \ g+p(r)n\leq I\right\}
+\]
+
+***Then at this point I have no idea what do to do. How in the world do you take the derivative wrt $r$??***
+
+At the end of every period, given the consumed $n$, quality $z$, and reputation $r$, the consumer updates their reputation of the firm according to $r'=\mathcal{R}(n,z,r)$.
+
+## The Artist's Problem
+
+We model the artist's problem dynamically. Let the artist have underlying artistic talent $k$ (thinking of it as a proxy for capital). The artist decides on a number of pieces to produce $m$. Each unit produced incurs some cost $C(m)$ that is independent of their underlying talent (why is this reasonable, like might good artists be more tech savvy??).
+
+The artist understands that their underlying talent $k$ and number of releases $m$ affects the quality of the product they produce according to $z=q(k,m)$. In addition to talent and number of releases, the artist carries reputation $r$ which dictates the price they can sell their releases for. As such, we can formulate the artist's problem with the following Bellman Equation:
+\[
+V(r)=\max_{m}\left\{p(r)m-C(m)+\beta V(r') \ \ s.t. \ \ r'=\mathcal{R}\left(m,q(k,m),r\right)\right\}
+\]
+
+***And at this point I expect there to be no way of finding the optimal $m$, so numerical methods are likely required, but I need help there too!***
+
+## Market Equilibrium
+
+By this point, I will have some insights about how the artist and consumer behave optimally taking the other's response as given. Then the market equilibrium is then just the conditions under which artists and consumers agree on the amount to supply and demand etc.
+
+## Perturbation Exploration (reputational Shocks)
+
+
+
+\newpage
+## Bibliography
+
+
