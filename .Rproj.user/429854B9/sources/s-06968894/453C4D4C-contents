@@ -3,15 +3,18 @@ title: "Money For Nothing, Clicks for Free (Haha, so funny and it's also been do
 author: "Aaron Graybill"
 date: "10/7/2021"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 biblio-style: apalike
 csl: ../apa.csl
 bibliography: Draft3.bib
+header-includes: 
+  - \usepackage{tikz}
+  - \usepackage{pgfplots}
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo=F,message=F,warning=F)
 ```
 
 ## Introduction
@@ -57,24 +60,78 @@ The expression above gives the Marshallian demand for art from artist $i$ in ter
 
 ### The Artist's Problem
 
-We model the artist's problem dynamically. Let the artist have underlying artistic talent $k$ (it can be viewed as a relative of capital). The market is assumed to be monopolistically competitive, so every artist has full control of their price in every period, but price decisions may cause consumers to substitute to other products. The artist takes their current reputation as given. This assumption is used to simplify analysis. Allowing a flexible reputation in the current period obfuscates how reputation evolves by allowing producers to increase there reputation more quickly. As argued above, consumer demand is a function of both price and reputation. However, with the fixed reputation, the artist only has access to a single demand curve in each period. Changes to reputation in future periods shift the artist's available demand curve. This can be represented graphically in the following way.
+We model the artist's problem dynamically. Let the artist have underlying artistic talent $\kappa$ (it can be viewed as a relative of capital). The market is assumed to be monopolistically competitive, so every artist has full control of their price in every period, but price decisions may cause consumers to substitute to other products. The artist takes their current reputation as given. This assumption is used to simplify analysis. Allowing a flexible reputation in the current period obfuscates how reputation evolves by allowing producers to increase there reputation more quickly. As argued above, consumer demand is a function of both price and reputation. However, with the fixed reputation, the artist only has access to a single demand curve in each period. Changes to reputation in future periods shift the artist's available demand curve. This can be represented graphically in the following way.
 
-**HERE IS WHERE I DRAW DEMAND CURVE PICTURE**
+```{r make demand plot}
+library(ggplot2)
+library(latex2exp)
+library(ggrepel)
+source("../ggplotTheme.R")
+
+demand <- function(p, r, sig, P, E) {
+  return((P * r / p) ^ sig * E / (P * r))
+}
+
+sig <- 1.5
+P <-  1
+E <- 1
+
+base <-
+  ggplot() +
+  theme_function()
+
+
+base +
+  xlim(0.2, 2) +
+  geom_function(
+    fun = function(x)
+      demand(x, .5, sig, P, E)
+  ) +
+  geom_function(
+    fun = function(x)
+      demand(x, 4, sig, P, E)
+  ) +
+  ggtitle(TeX("Changes To Reputation Shift Firm's Available Demand")) +
+  xlab(TeX("Price set by firm $i$")) +
+  ylab(TeX("Qunatity Demanded For Firm $i$")) +
+  coord_flip() +
+  annotate(
+    "text",
+    x = 1.2 * .5,
+    y = 1.3 * demand(.5, .5, sig, P, E),
+    label = TeX("$Q_D(r_1)$"),
+    parse = T
+  ) +
+  annotate(
+    "text",
+    x = 1.2 * .5,
+    y = 1.1 * demand(.5, 4, sig, P, E),
+    label = TeX("$Q_D(r_2)$"),
+    parse = T
+  ) +
+  theme(legend.position = "none") +
+  geom_segment(aes(
+    x = .5,
+    xend = .5,
+    y = demand(.5, .5, sig, P, E),
+    yend = demand(.5, 4, sig, P, E)
+  ), arrow = arrow(length = unit(.1,"inches")),color="red",)
+```
 
 The artist's current revenue is the product of the price they set, $p$, and the demand induced by that price choice **$n(i,p,r)$ This is terrible notation, help**. In addition to revenue, the artist's choice of price affects the number of goods they must produce which incurs some cost $C(n(p,r))$. **ADD ASSUMPTIONS ABOUT CONVEXITY IF WE'RE DOING THAT**. The current period's profit is given by $p\cdot n(i,p,r)-C(n(p,r))$.
 
-The artist's problem is not just to maximize current profits, but to maximize the discounted stream of all profits. Unlike traditional growth models, the link tying one period to another is not capital accumulation, but reputation accumulation. I assume that next period's reputation, $r'$, is a function of the current period's reputation, and the number of units sold. Denote this reputation $\mathcal{R}$ such that $r'=\mathcal R(n,r)$. The functional form of $\mathcal R$ is integral to this analysis and multiple specifications will be examined and connected to real world scenarios. 
+The artist's problem is not just to maximize current profits, but to maximize the discounted stream of all profits. Unlike traditional growth models, the link tying one period to another is not capital accumulation, but reputation accumulation. I assume that next period's reputation, $r_{t+1}$, is a function of the current period's reputation, and the number of units sold. Denote this reputation update function $\mathcal{R}$ such that $r_{t+1}=\mathcal R(n_t,r_t,\kappa)$. The functional form of $\mathcal R$ is integral to this analysis and multiple specifications will be examined and connected to real world scenarios. 
 
 We can formulate the artist's problem two ways. First, I can think of the artist choosing a $p_t$ and $r_{t+1}$ in every period. I can represent this as:
 \[
-\max_{p_t,r_t}\left\{\sum_{t=0}^\infty\beta^t\left(p_t\cdot n(i,p_t,r_t)-C(n(p,r_t))\right) \ s.t. \ r_{t+1}=\mathcal R(n(i,p_t,r_t),r_t)\right\}
+\max_{p_t,r_{t+1}}\left\{\sum_{t=0}^\infty\beta^t\left[p_t\cdot n(p_t,r_t)-C(n(p,r_t))-\lambda_t(r_{t+1}-\mathcal R(n(p_t,r_t),r_t,\kappa))\right] \right\}
 \]
 
 
 Alternately, I can define the firm's problem recursively, the agent's maximal discounted lifetime profit is their profits in this period plus their discounted maximal lifetime  from next period onward. The state variable that links one period to the next is their reputation, $r$. As such The Bellman equation is the function $V(r)$ satisfying
 
 \[
-V(r)=\max_{m}\left\{p(r)m-C(m)+\beta V(r') \ \ s.t. \ \ r'=\mathcal{R}\left(m,r\right)\right\}
+V(r)=\max_{m}\left\{p(r)m-C(m)+\beta V(r') \ \ s.t. \ \ r'=\mathcal{R}\left(m,r,\kappa\right)\right\}
 \]
 
 ## Exploration of First Order Conditions
@@ -83,11 +140,23 @@ I will extensively use the fact that $-\sigma n(\cdot)= p n_p(\cdot)$ (this is a
 
 Using the every-period summation model, the first order conditions are that:
 
+$$
 \begin{align*}
-\frac{\partial V}{\partial p}&\colon \beta^t\left[n(\cdot)+p\cdot n_p(\cdot)-C'(n)n_p(\cdot)\right]-\lambda \mathcal R_n(\cdot)n_p(\cdot)=0\\
-\frac{\partial V}{\partial r_{t+1}}&\colon \lambda = 0\\
-\frac{\partial V}{\partial r_{t+1}}&\colon \ r_{t+1}=\mathcal R(n(p_t,r_t),r_t)
+\frac{\partial V}{\partial p}&\colon \beta^t\left[n(\cdot)+p_t n_p(\cdot)-C'(n(\cdot))n_p(\cdot)+\lambda_t \mathcal R_n(n(\cdot),r_t,\kappa)n_p(\cdot)\right]=0\\
+
+\frac{\partial V}{\partial r_{t+1}}&\colon -\beta^t\lambda_t+\beta^{t+1}\left[n_r(\cdot)p_{t+1}-C'(n(\cdot))n_r(\cdot)+\lambda_{t+1}\left(\mathcal R(n(\cdot),r_{t+1}n_r(\cdot)+\mathcal R(n(\cdot,r_{t+1})\right)\right]=0\\
+
+\frac{\partial V}{\partial \lambda_{t}}&\colon \ r_{t+1}=\mathcal R(n(\cdot),r_t)
 \end{align*}
+$$
+
+Before simplifying those expressions, I will briefly interpret them in the context of the traditional theory of the firm by explaining where marginal benefit equals marginal cost. The derivative of lifetime utility with respect to price is akin to the firm's price setting problem. The artist will continue to raise the price of their work until the marginal benefits of that price increase the marginal cost of that increase in price. The marginal benefit has two channels. First, increases to price have a direct effect on revenue, the $n(\cdot)+p_t n_p(\cdot)$ term in the above first order condition. The overall effect of increasing price on marginal revenue is ambiguous, while the demand and price are non-negative, quantity demanded is decreasing in price, so the sum of the aforementioned terms is ambiguous. 
+
+In addition to the present pecuniary value of increasing prices, changing price has an affect on the present quantity demanded which has an effect on the artist's next period's reputation. The reputational benefit is given by: $\lambda_t \mathcal R_n(n(\cdot),r_t,\kappa)n_p(\cdot)$. The marginal increase in reputation from increased changes in quanityt adjusted by the cost of violating the constraint at time $t$ combine to make the marginal reputational benefit. The sign of this benefit is abiguous and depends on the sign of $\mathcal R_n$. In some markets, we might expect more exposure (higher $n$) to increase reputation and in others, we might see more scarcity (lower $n$) increase reputation. In the case of more exposure giving more reputation, increasing price decreases next period's reputation because fewer people buy more expensive products.
+
+The cost of increasing price only enters explicitly in the $C'(n(\cdot))n_p(\cdot)$ term. Since the cost function is increasing in $n$ and the quantity demanded is decreasing in price, the $C'(n(\cdot))n_p(\cdot)$ must be negative. As such the overall contribution of increasing price on utility is positive due to suppressed demand.
+
+While the artist cannot directly choose their next period's reputation, $r_{t+1}$, this first order condition is also worth framing in the marginal benefit equals marginal cost context. To begin, note that the sign of $n_r(\cdot)$ depends on $\sigma$. When the consumer has less than unit elasticity of substitution ($\sigma<1$), increases to reputation decrease consumption of the good. We find this result because the other goods are poor good substitutes, so the consumer would rather spend their money on more diverse consumption and use the reputation to compensate for the lost quantity. 
 
 
 ## Market Equilibrium
