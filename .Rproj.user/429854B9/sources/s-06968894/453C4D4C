@@ -3,7 +3,7 @@
     "path": "/Volumes/GoogleDrive/My Drive/Thesis_Git/Thesis/Draft3/Draft3.Rmd",
     "project_path": "Draft3/Draft3.Rmd",
     "type": "r_markdown",
-    "hash": "840087965",
+    "hash": "4291111137",
     "contents": "",
     "dirty": false,
     "created": 1633646468989.0,
@@ -11,16 +11,16 @@
     "relative_order": 2,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "158,593",
-        "scrollLine": "36",
+        "cursorPosition": "223,0",
+        "scrollLine": "215",
         "last_setup_crc32": "06968894bb338d19"
     },
-    "folds": "",
-    "lastKnownWriteTime": 1634763147,
+    "folds": "79|23|133|0|\n",
+    "lastKnownWriteTime": 1635346740,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1634763147545,
+    "last_content_update": 1635346740957,
     "read_only": false,
     "read_only_alternatives": []
 }
