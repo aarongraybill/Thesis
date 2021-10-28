@@ -1,5 +1,5 @@
 ---
-title: "Money For Nothing, Clicks for Free (Haha, so funny and it's also been done before)"
+title: "Money For Nothing, Clicks for Free"
 author: "Aaron Graybill"
 date: "10/7/2021"
 output:
@@ -135,15 +135,15 @@ base +
 
 The artist's current revenue is the product of the price they set, $p$, and the demand induced by that price choice **$n(i,p,r,\alpha)$ This is terrible notation, help**. In addition to revenue, the artist's choice of price affects the number of goods they must produce which incurs some cost $C(n(p,r,\alpha))$. **ADD ASSUMPTIONS ABOUT CONVEXITY IF WE'RE DOING THAT**. The current period's profit is given by $p\cdot n(p,r,\alpha)-C(n(p,r,\alpha))$.
 
-The artist's problem is not just to maximize current profits, but to maximize the discounted stream of all profits. Unlike traditional growth models, the link tying one period to another is not capital accumulation, but reputation accumulation. I assume that next period's reputation, $r_{t+1}$, is a function of the current period's reputation, and the number of units sold. Denote this reputation update function $\mathcal{R}$ such that $r_{t+1}=\mathcal R(n_t,r_t,\kappa)$. The functional form of $\mathcal R$ is integral to this analysis and multiple specifications will be examined and connected to real world scenarios. 
+The artist's problem is not just to maximize current profits, but to maximize the discounted stream of all profits. Unlike traditional growth models, the link tying one period to another is not capital accumulation, but reputation accumulation. I assume that next period's reputation, $r_{t+1}$, is a function of the current period's reputation, the number of units sold, and the artist's underlying talent. Denote this reputation update function $\mathcal{R}$ such that $r_{t+1}=\mathcal R(n_t,r_t,\kappa)$. The functional form of $\mathcal R$ is integral to this analysis and multiple specifications will be examined and connected to real world scenarios. 
 
-We can formulate the artist's problem two ways. First, I can think of the artist choosing a $p_t$ and $r_{t+1}$ in every period. I can represent this as:
+We can formulate the artist's problem two ways. First, the artist can choose a $p_t$ and $r_{t+1}$ in every period. I can represent this as:
 \[
 \max_{p_t,r_{t+1}}\left\{\sum_{t=0}^\infty\beta^t\left[p_t\cdot n(p_t,r_t)-C(n(p_t,r_t))-\lambda_t(r_{t+1}-\mathcal R(n(p_t,r_t),r_t,\kappa))\right] \right\}
 \]
 
 
-Alternately, I can define the firm's problem recursively, the agent's maximal discounted lifetime profit is their profits in this period plus their discounted maximal lifetime  from next period onward. The state variable that links one period to the next is their reputation, $r$. As such The Bellman equation is the function $V(r)$ satisfying
+Alternately, firm can optimize recursively such the agent's maximal discounted lifetime profit is their profits in this period plus their discounted maximal lifetime from next period onward. The state variable that links one period to the next is their reputation, $r$. As such The Bellman equation is the function $V(r)$ satisfying
 
 \[
 V(r)=\max_{p}\left\{pn(p,r)-C(n(p,r))+\beta V(r') \ \ s.t. \ \ r'=\mathcal{R}\left(m,r,\kappa\right)\right\}
@@ -151,10 +151,7 @@ V(r)=\max_{p}\left\{pn(p,r)-C(n(p,r))+\beta V(r') \ \ s.t. \ \ r'=\mathcal{R}\le
 
 ## Exploration of First Order Conditions
 
-I will extensively use the fact that $-\sigma n(\cdot)= p n_p(\cdot)$ (this is a biproduct of CES).
-
 Using the every-period summation model, the first order conditions are that:
-
 
 \begin{align*}
 \frac{\partial V}{\partial p}&\colon \beta^t\left[n(\cdot)+p_t n_p(\cdot)-C'(n(\cdot))n_p(\cdot)+\lambda_t \mathcal R_n(n(\cdot),r_t,\kappa)n_p(\cdot)\right]=0\\
@@ -162,69 +159,106 @@ Using the every-period summation model, the first order conditions are that:
 \frac{\partial V}{\partial \lambda_{t}}&\colon \ r_{t+1}=\mathcal R(n(\cdot),r_t)
 \end{align*}
 
-Before simplifying those expressions, I will briefly interpret them in the context of the traditional theory of the firm by explaining where marginal benefit equals marginal cost. The derivative of lifetime utility with respect to price is akin to the firm's price setting problem. The artist will continue to raise the price of their work until the marginal benefits of that price increase the marginal cost of that increase in price. The marginal benefit has two channels. First, increases to price have a direct effect on revenue, the $n(\cdot)+p_t n_p(\cdot)$ term in the above first order condition. The overall effect of increasing price on marginal revenue is ambiguous, while the demand and price are non-negative, quantity demanded is decreasing in price, so the sum of the aforementioned terms is ambiguous. 
+Before simplifying those expressions, I will briefly interpret them in the context of the traditional theory of the firm by explaining where marginal benefit equals marginal cost. The derivative of lifetime utility with respect to price is akin to the firm's price setting problem. The artist will continue to raise the price of their work until the marginal benefits of that price increase equal the marginal cost of that increase in price. The marginal benefit has two channels. First, increases to price have a direct effect on revenue, the $n(\cdot)+p_t n_p(\cdot)$ term in the above first order condition. The overall effect of increasing price on marginal revenue is generically ambiguous, while the demand and price are non-negative, quantity demanded is decreasing in price, so the sum of the aforementioned terms is ambiguous. However, in this case so long as $\sigma<1$, increases to price increase revenue despite lower quantity demanded. I will later argue that $\sigma<1$
 
-In addition to the present pecuniary value of increasing prices, changing price has an affect on the present quantity demanded which has an effect on the artist's next period's reputation. The reputational benefit is given by: $\lambda_t \mathcal R_n(n(\cdot),r_t,\kappa)n_p(\cdot)$. The marginal increase in reputation from increased changes in quanityt adjusted by the cost of violating the constraint at time $t$ combine to make the marginal reputational benefit. The sign of this benefit is abiguous and depends on the sign of $\mathcal R_n$. In some markets, we might expect more exposure (higher $n$) to increase reputation and in others, we might see more scarcity (lower $n$) increase reputation. In the case of more exposure giving more reputation, increasing price decreases next period's reputation because fewer people buy more expensive products.
+In addition to the present pecuniary value of increasing prices, changing price has an affect on the present quantity demanded which has an effect on the artist's next period's reputation. The reputational benefit is given by: $\lambda_t \mathcal R_n(n(\cdot),r_t,\kappa)n_p(\cdot)$. The marginal increase in reputation from increased changes in quantity adjusted by the cost of violating the constraint at time $t$ combine to make the marginal reputational benefit. The sign of this benefit is abiguous and depends on the sign of $\mathcal R_n$. In some markets, we might expect more exposure (higher $n$) to increase reputation and in others, we might see more scarcity (lower $n$) increase reputation. In the case of more exposure giving more reputation, increasing price decreases next period's reputation because fewer people buy more expensive products.
 
-The cost of increasing price only enters explicitly in the $C'(n(\cdot))n_p(\cdot)$ term. Since the cost function is increasing in $n$ and the quantity demanded is decreasing in price, the $C'(n(\cdot))n_p(\cdot)$ must be negative. As such the overall contribution of increasing price on utility is positive due to suppressed demand.
+The cost of increasing price only enters explicitly in the $C'(n(\cdot))n_p(\cdot)$ term. Since the cost function is increasing in $n$ and the quantity demanded is decreasing in price, the $C'(n(\cdot))n_p(\cdot)$ must be negative. As such the overall contribution of increasing price on utility is positive due to suppressed demand allowing to incur fewer production costs.
 
-While the artist cannot directly choose their next period's reputation, $r_{t+1}$, this first order condition is also worth framing in the marginal benefit equals marginal cost context. Note that $\lambda_t$ is the shadow cost of violating the constraint in period $t$. As such, we can say that this shadow cost for period $t$ plus the discounted costs of production next period, $\beta C'(n)n_r$. These two costs combine and must equal the marginal benefit. The marginal benefit in this case is the discounted marginal revenue generated from increased reputation in period $t+1$, $\beta n_r()p$, plus the reputational benefit $\mathcal R_n(n(\cdot),r_{t+1})n_r(\cdot)+\mathcal R_r(n(\cdot),r_{t+1})$ scaled by next period's shadow cost, $\lambda_{t+1}$. That is to say the reputational benefits gain value relative to per period profits in situations where violating the constraint is more costly. The sign of $\mathcal R_n(n(\cdot),r_{t+1})n_r(\cdot)+\mathcal R_r(n(\cdot),r_{t+1})$ is ambiguous and dependent on how strongly increased quantity affects reputation. If increased quantity strongly negatively affects reputation, then increases to costs next period tighten the constraint, and make the artist produce less. However, if the reputational gain from increased quantity is less important than your previous reputation (reputations are sticky), the increasing the shadow cost next period loosens the constraint and allow the artist to produce more.
+While the artist cannot directly choose their next period's reputation, $r_{t+1}$, this first order condition is also worth framing in the marginal benefit equals marginal cost context. Note that $\lambda_t$ is the shadow cost of violating the constraint in period $t$. As such, we can say that this shadow cost for period $t$ plus the discounted costs of production next period, $\beta C'(n)n_r$, combine and must equal the marginal benefit. The marginal benefit in this case is the discounted marginal revenue generated from increased reputation in period $t+1$, $\beta n_r()p$, plus the reputational benefit $\mathcal R_n(n(\cdot),r_{t+1})n_r(\cdot)+\mathcal R_r(n(\cdot),r_{t+1})$ scaled by next period's shadow cost, $\lambda_{t+1}$. Reputational benefits gain value relative to per period profits in situations where violating the constraint is more costly. The sign of $\mathcal R_n(n(\cdot),r_{t+1})n_r(\cdot)+\mathcal R_r(n(\cdot),r_{t+1})$ is ambiguous and dependent on how strongly increased quantity affects reputation. If increased quantity strongly negatively affects reputation, then increases to costs next period tighten the constraint, and make the artist produce less. However, if the reputational gain from increased quantity is less important than your previous reputation (reputations are sticky), then increasing the shadow cost next period loosens the constraint and allow the artist to produce more.
 
 ### Alternate Formulation, Maximizing over Quantity Instead of Price
 
 To reiterate, the artist is a price setter, but they know that their price decisions perfectly inform the quantity of art demanded for each firm. This implies that we can instead think of the artist as choosing an ideal quantity to produce and then deducing which price they must charge to induce their desired demand. As such, I rewrite the artist's problem as follows:
+**WHAT GOES UNDER MAX HERE**
 \[
-\max_{\{\lambda\}_t,\{n\}_t,\{r\}_{t+1}}\left\{ \sum_{t=0}^\infty\beta^t\left[n_tp(n_t,r_t,\alpha_t)-C(n_t)-\lambda_t(r_{t+1}-\mathcal{R}(n_t,r_t))\right]\right\}
+\max_{\{\lambda\}_t,\{n\}_t,\{r\}_{t+1}}\left\{ \sum_{t=0}^\infty\beta^t\left[p(n_t,r_t,\alpha_t)n_t-C(n_t)-\lambda_t(r_{t+1}-\mathcal{R}(n_t,r_t))\right]\right\}
 \]
 
 This formulation has the benefit of minimizing the number of chain rules in the first order conditions.
 
 The first order conditions become:
 
-
-\begin{align*}
-\frac{\partial V}{\partial n_t}&\colon p(n_t,r_t,\alpha_t)+np_n(n_t,r_t,\alpha_t)-C'(n_t)+\lambda_t\mathcal{R}_n(n_t,r_t,\kappa)=0\\
+$$
+\begin{aligned}
+\frac{\partial V}{\partial n_t}&\colon p(n_t,r_t,\alpha_t)+n_tp_n(n_t,r_t,\alpha_t)-C'(n_t)+\lambda_t\mathcal{R}_n(n_t,r_t,\kappa)=0\\
 \frac{\partial V}{\partial r_{t+1}}&\colon -\beta^t\lambda_t+\beta^{t+1}\left[n_{t+1}p_r(n_{t+1},r_{t+1},\alpha_{t+1})+\lambda_{t+1}\mathcal{R}_r(n_{t+1},r_{t+1},\kappa)\right]=0\\
 \frac{\partial V}{\partial \lambda_{t}}&\colon \ r_{t+1}=\mathcal{R}(n_{t},r_{t},\kappa)
-\end{align*}
+\end{aligned}
+$$
 
 
 From the $n_t$ first order condition, we can simplify to:
 \[
-\lambda_t=\frac{C'(n)-p(n_t,r_t,\alpha_t)(1+\frac{1}{\sigma})}{\mathcal{R}(n_t,r_t,\kappa)}
+\lambda_t=\frac{C'(n_t)+p(n_t,r_t,\alpha_t)(\frac{1}{\sigma}-1)}{\mathcal{R}_n(n_t,r_t,\kappa)}
 \]
 Using the previous result, we can simplify the reputation first order condition to:
 \[
-\lambda_{t}=\beta\left[ np_r^{t+1}(\cdot)+\frac{C'(n_{t+1})-p^{t+1}(\cdot)(1+\frac{1}{\sigma})}{\mathcal{R}_n^{t+1}(\cdot)}\mathcal{R}_r^{t+1}\right]
+\lambda_{t}=\beta\left[ n_{t+1}p_r^{t+1}(\cdot)+\frac{C'(n_{t+1})+(\frac{1}{\sigma}-1)p^{t+1}(\cdot)}{\mathcal{R}_n^{t+1}(\cdot)}\mathcal{R}_r^{t+1}\right]
 \]
+
+We can implicitly define the optimal policy function $n_{t+1}$ in terms of $n_t$ by substituting in our expression for $\lambda_t$ which yields the following:
+\[
+\frac{C'_t(\cdot)+(\frac{1}{\sigma}-1)p^t(\cdot)}{\mathcal{R}_n^t(\cdot)}=\beta\left[n_{t+1}p_r^{t+1}(\cdot)+\frac{C'_{t+1}(\cdot)+(\frac{1}{\sigma}-1)p^{t+1}(\cdot)}{\mathcal{R}_n^{t+1}(\cdot)/\mathcal{R}_r^{t+1}(\cdot)}\right]
+\]
+
+However, we cannot progess any further because there are $n_{t+1}$s inside most of the functions, and without functional forms, we cannot isolate $n_{t+1}$ solely in terms of factors uncontrollable to the artist.
+
 ### Functional Form Assumptions
 
-It is difficult to draw additional insight from the model without making functional form assumptions to simplify the algebra. As such, I assume that $C(n)=\frac{c}{2}n^2$, so cost is increasing and convex in the number of units produced, $n$. This functional form is intended to capture an artist's finite time and increasing difficulty of producing additional quality work. The $c$ parameter measures the convexity of the cost function and gives the constant rate at which marginal cost increases. **THIS NEXT CLAIM SHOULD BE JUSTIFIED OR SOURCE CITED OR SMTH**. The quadratic cost function is the exponent of minimum degree that maintains convexity. As such, this specification is weak and cost probably increases more quickly than the manner specified above.
+It is difficult to draw additional insight from the model without making functional form assumptions to simplify the algebra. As such, I assume that $C(n)=\frac{c}{2}n^2$, so cost is increasing and convex in the number of units produced, $n$. This functional form is intended to capture an artist's finite time and increasing difficulty of producing additional quality work. The $c$ parameter measures the convexity of the cost function and gives the constant rate at which marginal cost increases. **NEED TO JUSTIFY WHY EXPONENT 2**
 
 I will use $\mathcal R(n,r,\kappa)=(1-\delta)\kappa\left(\frac{r}{n}\right)^\gamma$. The $\delta$ term, similar to the neoclassical growth framework, parametrizes the depreciation of reputation. The $\kappa$ term in this case is akin to technology in the $AK$ model. Holding other factors equal, increases to $kappa$ increase the total reputation by a constant amount. The $\gamma$ term in the above functional form is used to parametrize the importance of the temporal variables $n$ and $r$ in reputation production. Low values of $\gamma$ prioritize innate talent $\kappa$, but high values of $\gamma$ imply that increasing reputation of quanity produced have larger effects on next period's reputation. Further note that $R(n,r,\kappa)$ is homogenous of degree zero in $n$ and $r$, scaling up both by the same amount has no net effect on reputation. This specification is intentionally weak as we would expect that prior reputation has a larger affect on current reputation than past level of sales. As such, this functional forms understates the importance of investment in reputation, so results should hopefully be strong enough to support reputation investment empirically.
 
 Under these functional form specifications, we can simplify the first order conditions from above to:
 \[
-\lambda_t=\beta n_{t+1}\left[-\frac{1}{\sigma}p_r^{t+1}-\frac{c}{r_{t+1}}n_{t+1}\right]
+\begin{aligned}
+\lambda_t&=\beta\left[n_{t+1}p_r^{t+1}(\cdot)+\frac{C'_{t+1}(\cdot)+(\frac{1}{\sigma}-1)p^{t+1}(\cdot)}{\mathcal{R}_n^{t+1}(\cdot)/\mathcal{R}_r^{t+1}(\cdot)}\right]\\
+&=\beta\left[n_{t+1}p_r^{t+1}(\cdot)+\frac{C'_{t+1}(\cdot)+(\frac{1}{\sigma}-1)p^{t+1}(\cdot)}{-r_{t+1}/n_{t+1}}\right]\\
+&=\beta n_{t+1}\left[p_r^{t+1}(\cdot)+\frac{C'_{t+1}(\cdot)+(\frac{1}{\sigma}-1)p^{t+1}(\cdot)}{-r_{t+1}}\right]\\
+&=\beta n_{t+1}\left[p_r^{t+1}(\cdot)-\frac{C'_{t+1}(\cdot)}{r_{t+1}}- \left(\frac{1}{\sigma}-1 \right)\frac{p^{t+1}(\cdot)}{r_{t+1}}\right]\\
+&=\beta n_{t+1}\left[p_r^{t+1}(\cdot)-\frac{C'_{t+1}(\cdot)}{r_{t+1}}- \left(\frac{1}{\sigma}-1 \right)p^{t+1}_r(\cdot)\right]\\
+&=\beta n_{t+1}\left[-\frac{C'_{t+1}(\cdot)}{r_{t+1}}+ \left(2-\frac{1}{\sigma} \right)p^{t+1}_r(\cdot)\right]\\
+&=\beta n_{t+1}\left[\left(2-\frac{1}{\sigma}\right)p_r^{t+1}(\cdot)-\frac{c}{r_{t+1}}n_{t+1}\right]
+\end{aligned}
 \]
 
-Then we can use the expression for $\lambda_t$ from the first order condition for quantity, $n$ to find $n$ solely interms of $r$ and exogenous parameters.
+Then we can use the expression for $\lambda_t$ from the first order condition for quantity, $n$ to find $n$ solely in terms of $r$ and exogenous parameters.
 
 Doing so gives:
 
+$$
+\begin{aligned}
+\frac{cn_t+p^t(\cdot)(\frac{1}{\sigma}-1)}{\mathcal{R}^t_n(\cdot)}&=\beta n_{t+1}\left[\left(2-\frac{1}{\sigma}\right)p_r^{t+1}(\cdot)-\frac{c}{r_{t+1}}n_{t+1}\right]\\
+\frac{cn_t+p^t(\cdot)(\frac{1}{\sigma}-1)}{-\gamma n^{-1}_t\mathcal{R}^t(\cdot)}&=\beta n_{t+1}\left[\left(2-\frac{1}{\sigma}\right)p_r^{t+1}(\cdot)-\frac{c}{r_{t+1}}n_{t+1}\right]\\
+\frac{cn_t-p^t(\cdot)(\frac{1}{\sigma}-1)}{-\gamma n^{-1}_tr_{t+1}}&=\beta n_{t+1}\left[\left(2-\frac{1}{\sigma}\right)p_r^{t+1}(\cdot)-\frac{c}{r_{t+1}}n_{t+1}\right]\\
+\left[cn_t+p^t(\cdot)(\frac{1}{\sigma}-1)\right]n_t&=-\beta\gamma n_{t+1}\left[\left(2-\frac{1}{\sigma}\right)p_r^{t+1}(\cdot)r_{t+1}-\frac{c}{r_{t+1}}n_{t+1}r_{t+1}\right]\\
+\left[cn_t+p^t(\cdot)(\frac{1}{\sigma}-1)\right]n_t&=-\beta\gamma n_{t+1}\left[\left(2-\frac{1}{\sigma}\right)p^{t+1}(\cdot)-cn_{t+1}\right]\\
+\left[cn_t+p^t(\cdot)(\frac{1}{\sigma}-1)\right]n_t&=\beta\gamma n_{t+1}\left[cn_{t+1}-\left(2-\frac{1}{\sigma}\right)p^{t+1}(\cdot)\right]\\
+\end{aligned}
+$$
 
-\begin{align*}
-\frac{cn_t-p^t(\cdot)(1+\frac{1}{\sigma})}{\mathcal{R}^t_n(\cdot)}&=\beta n_{t+1}\left[-\frac{1}{\sigma}p_r^{t+1}-\frac{c}{r_{t+1}}n_{t+1}\right]\\
-\frac{cn_t-p^t(\cdot)(1+\frac{1}{\sigma})}{-\gamma n^{-1}_t\mathcal{R}^t(\cdot)}&=\beta n_{t+1}\left[-\frac{1}{\sigma}p_r^{t+1}-\frac{c}{r_{t+1}}n_{t+1}\right]\\
-\frac{cn_t-p^t(\cdot)(1+\frac{1}{\sigma})}{-\gamma n^{-1}_tr_{t+1}}&=\beta n_{t+1}\left[-\frac{1}{\sigma}p_r^{t+1}-\frac{c}{r_{t+1}}n_{t+1}\right]\\
-\frac{cn_t-p^t(\cdot)(1+\frac{1}{\sigma})}{-\gamma n^{-1}_tr_{t+1}}&=\beta n_{t+1}\left[-\frac{1}{\sigma}p_r^{t+1}-\frac{c}{r_{t+1}}n_{t+1}\right]\\
-\left[cn_t-p^t(\cdot)(1+\frac{1}{\sigma})\right]n_t&=-\beta\gamma n_{t+1}\left[-\frac{1}{\sigma}p_r^{t+1}r_{t+1}-\frac{c}{r_{t+1}}n_{t+1}r_{t+1}\right]\\
-\left[cn_t-p^t(\cdot)(1+\frac{1}{\sigma})\right]n_t&=-\beta\gamma n_{t+1}\left[-\frac{1}{\sigma}p^{t+1}-cn_{t+1}\right]\\
-\end{align*}
+### Steady State Analysis
 
+The above derivation is hard to take any further, but in the steady state equilibrium we can drop the time subscripts and solve for $n$. This gives:
 
+$$
+\begin{aligned}
+\left[cn+p(\frac{1}{\sigma}-1)\right]n&=\beta\gamma n\left[cn-\left(2-\frac{1}{\sigma}\right)p\right]\\
+cn+p(\frac{1}{\sigma}-1)&=\beta\gamma \left[cn-\left(2-\frac{1}{\sigma}\right)p\right]\\
+(1-\beta\gamma)cn&= -\beta\gamma\left(2-\frac{1}{\sigma}\right)p-p\left(\frac{1}{\sigma}-1\right)\\
+(1-\beta\gamma)cn&= \beta\gamma\left(\frac{1}{\sigma}-2\right)p-p\left(\frac{1}{\sigma}-1\right)\\
+(1-\beta\gamma)cn/p&= \beta\gamma\left(\frac{1}{\sigma}-2\right)-\left(\frac{1}{\sigma}-1\right)\\
+(1-\beta\gamma)cn/p&= (\beta\gamma-1)\frac{1}{\sigma}-2\beta\gamma+1\\
+(1-\beta\gamma)cn/p&= (\beta\gamma-1)\frac{1}{\sigma}+(1-\beta\gamma)-\beta\gamma\\
+cn/p&= -\frac{1}{\sigma}+1-\frac{\beta\gamma}{(1-\beta\gamma)}\\
+cn/p&= 1-\frac{1}{\sigma}-\frac{\beta\gamma}{(1-\beta\gamma)}\\
+\end{aligned}
+$$
 
+**HOWEVER, THE TERM ABOVE ON THE RHS IS LESS THAN ZERO BC $\sigma<1$ SO EITHER I'VE MADE A MISTAKE OR THERE IS NO STEADY STATE**
 
+And it's actually less than zero not because of the convexity of cost in $n$ (in fact any positive exponent on $n$ will still give this undesirable result.) Actually, you can even get this result with only an increasing cost function, so no functional form required. Also changing $\mathcal{R}_n$ such that increases to quantity increase reputation still has this terrible negative quantity produced business. That seems to indicate to me that there just may not be a steady state.
 
 
 
