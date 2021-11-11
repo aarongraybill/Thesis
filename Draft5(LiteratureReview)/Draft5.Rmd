@@ -7,10 +7,12 @@ output:
   html_document: default
 biblio-style: apalike
 csl: ../apa.csl
-bibliography: Draft4.bib
+bibliography: Draft5.bib
 header-includes: 
   - \usepackage{tikz}
   - \usepackage{pgfplots}
+  - \usepackage{cmbright}
+  - \usepackage[OT1]{fontenc}
 ---
 
 ```{r setup, include=FALSE}
@@ -18,7 +20,8 @@ knitr::opts_chunk$set(echo=F,message=F,warning=F)
 ```
 
 ## Introduction
-The advent of social media and streaming services like Spotify, Youtube, and Instagram have given artists of all kinds unprecendented ability to connect their work to their audience (SOURCE?). However, the increased supply of artists makes it harder for each to cut through the noise and reach financial freedom from their craft (SOURCE?).
+
+The advent of social media and streaming services like Spotify, Youtube, and Instagram have given artists of all kinds unprecedented ability to connect their work to their audience (SOURCE?). However, the increased supply of artists makes it harder for each to cut through the noise and reach financial freedom from their craft (SOURCE?).
 
 Throughout history, artists have had to earn the accolades of their fan. Yatta yatta, that's still true, but this paper explores how the introduction of internet media changes the economic incentives and decisions of artists.
 
@@ -182,7 +185,7 @@ Entering into comparative statics, we need a few assumptions. Beginning with $\s
 
 I will further assume that both $C'(n)$ and $C''(n)$ are positive, so increasing production increases cost and at an increasing rate.
 
-With that, the effect of increasing $\kappa$ the talent parameter is ambiguous and depends on the sign of $\left(1-\frac{\sigma}\right)p_n(n_2,r')-C''(n_2)$ at the optimum.
+With that, the effect of increasing $\kappa$ the talent parameter is ambiguous and depends on the sign of $\left(1-\frac{1}{\sigma}\right)p_n(n_2,r')-C''(n_2)$ at the optimum.
 
 So long as reputation is increasing in investment, we have that increasing talent $\kappa$ decreases investment. Similarly, increasing reputation depreciation has an ambiguous effect on production, $n_2$, but increases reputation investment. Finally increasing initial reputation has an ambiguous effect on quantity produced and an negative effect on investment.
 
