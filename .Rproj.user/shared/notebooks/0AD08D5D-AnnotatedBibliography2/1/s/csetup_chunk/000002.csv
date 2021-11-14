@@ -1,6 +1,0 @@
-"0","refs <- bibtex::read.bib(""../Draft3/Draft3.bib"")
-"
-"2","ignoring entry 'dingelBasicsDixitStiglitzLite' (line 17) because :
-	A bibentry of bibtype ‘Article’ has to specify the fields: journal, year
-
-"
