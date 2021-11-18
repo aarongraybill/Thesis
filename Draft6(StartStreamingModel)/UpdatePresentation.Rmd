@@ -74,7 +74,7 @@ Content.
   
 # Next Steps
 
-- Keep reading (penetration curve literature
+- Keep reading (penetration curve literature)
 - Write down a baseline model for methodology assignment
   - Solve said model
   - Interpret FOCs
