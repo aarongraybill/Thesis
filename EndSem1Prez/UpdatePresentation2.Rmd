@@ -1,0 +1,213 @@
+---
+title: "Exposure Doesn't Pay the Bills"
+#subtitle: "Aristic Production and Algorithmic Uncertainty in Streaming Markets"
+author: "Aaron Graybill"
+date: "09 December 2021"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    includes:
+      in_header:
+        - 'Test.html'
+    css: [xaringan-themer.css, bullets.css]
+biblio-style: apalike
+csl: ../apa.csl
+bibliography: ../RunningBib.bib
+---
+```{r setup, include=FALSE}
+options(htmltools.dir.version = T)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#8C2730",
+  secondary_color= "#D8E6F2",
+  black_color = "#261201",
+  title_slide_background_image = "image (3).jpg",
+  #title_slide_background_size = "contain",
+  header_font_google = google_font("Playfair Display"),
+  text_font_google   = google_font("Average", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  text_font_size = "1.5rem",
+  footnote_position_bottom = "10px"
+)
+```
+
+
+# Outline
+
+1.    Intro and Motivation
+1.    Related Literature
+1.    Model
+1.    Initial Findings
+1.    Questions
+
+
+---
+class: left
+# Intro and Motivation
+
+-   YouTube's 2021 Q3 Ad Revenue is $7.2B<sup>1</sup> 
+-   Streaming Platforms are driven by **content creators**
+-   Content creation can be a full time job
+-   We should explore the evolution of quality and popularity 
+-   Creators make content, but algorithm decides who sees it
+    
+.footnote[
+[1] [Source](https://abc.xyz/investor/static/pdf/2021Q3_alphabet_earnings_release.pdf)
+]
+---
+
+# Related Literature
+
+### Branding
+-   Klein and Leffler (1981)
+-   Shapiro (1983)
+
+### Superstar
+-   Rosen (1981)
+-   Macdonald (1988)
+
+---
+# Related Literature, cont.
+
+### Streaming
+-   Thomes (2013)
+-   Aguiar & Waldfogel (2018)
+
+### My Niche
+-   Artist's optimal behavior
+-   Role of algorithmic uncertainty
+-   Time component
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+# .white[The Model]
+
+
+---
+
+## What should a model describe?
+
+.lesspaced[
+### Consumer Behavior:
+-   Artist discovery
+-   Consumption based on quality
+
+### Streaming Platform:
+- Algorithmic consumer-artist matching
+- Useful but imperfect matching 
+
+### Artist/Content Creator:
+-   Quality-quantity trade-off under audience uncertainty
+-   Maximize royalties from streams
+]
+
+---
+
+# Consumer behavior
+
+- No ex-ante knowledge of an artist, require algorithmic exposure
+- If consumer knows about an artist they consume based on quality, $n(z)$
+- Consumer forgets about an artist with probability $\delta$ every period.
+- All consumers the same
+
+---
+
+# Artist Behavior
+
+- Artist decides a quality, $z$, and quantity, $m$ subject to cost
+  - All releases same quality in one period
+- Artist gets royalty $r$ for every stream
+- Artist can't choose audience size directly
+- More releases $\to$ more chances to go viral
+
+---
+# Algorithmic Behavior
+
+- Can't measure quality directly, can use consumer streams
+  - Use last period's streams, $n_{t-1}$
+-   For every release by an artist, algorithm shows:
+  - $I(n_{t-1})+\varepsilon_{it}$, iid mean zero
+
+---
+# Putting the pieces together:
+
+### Total Audience size: 
+
+#### $A_t(m)=(1-\delta)A_{t-1}+mI(n_{t-1})+\sum_{i=1}^m \varepsilon_{it}$
+
+### Per-period revenue: 
+
+#### $rA_t(m)n(z)-C(m,z;\kappa)$
+
+---
+# The Artist's problem: 
+</br></br>
+ 
+\begin{gather*}
+\max_{m,z}\left\{E\left(A_t(m)n(z)-C(m,z;\kappa)\right) \\
+ s.t. \\
+A_t(m)=(1-\delta)A_{t-1}+mI(n_{t-1})+\sum_{i=1}^m \varepsilon_{it}\right\}
+\end{gather*}
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+</br>
+</br>
+# Initial Findings & Next Steps
+
+---
+## A nice result from a binary choice case
+
+$1$ piece at quality $\overline{z}$, or $2$ pieces at $\underline z$
+
+$$
+\begin{cases}
+2, &  \frac{n(\overline z)}{n(\underline z)} < \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)\\
+1, &  \frac{n(\overline z)}{n(\underline z)} > \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)
+\end{cases}
+$$
+Established artists choose high quality, new artists choose more exposure
+
+---
+## Next Steps
+
+- Solve this in the two-period case (then $\infty$-period)
+- Further explore how $\kappa$ reveals itself in the distribution of successful artists
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+</br>
+</br>
+# Thanks, Questions?
+
+
+---
+
+```{r, load_refs, echo=FALSE,message=F}
+library(RefManageR)
+bib <- ReadBib("../RunningBib.bib", check = FALSE)
+#ui <- "- "
+```
+.tiny[
+```{r, print_refs, results='asis', echo=FALSE, warning=FALSE, message=FALSE}
+#writeLines(ui)?
+print(bib[key = c("aguiarQualityPredictabilityWelfare2018","kleinRoleMarketForces1981","shapiroPremiumsHighQuality1983","thomesEconomicAnalysisOnline2013","macdonaldEconomicsRisingStars1988","shapiroPremiumsHighQuality1983")], 
+  .opts = list(check.entries = FALSE, 
+               style = "html", 
+               bib.style = "authoryear"))
+
+
+```
+]
