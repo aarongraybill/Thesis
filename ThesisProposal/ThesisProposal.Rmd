@@ -1,0 +1,213 @@
+---
+title: "Exposure Doesn't Pay the Bills"
+author: "Aaron Graybill"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document: 
+    number_sections: true
+  word_document: default
+  html_document: default
+biblio-style: apalike
+csl: ../apa.csl
+bibliography: ../RunningBib.bib
+nocite: 
+linestretch: 1.5
+indent: true
+urlcolor: myBlue
+linkcolor: myRed
+header-includes:
+- \usepackage{tikz}
+- \usepackage{pgfplots}
+- \let\textlozenge\relax
+- \usepackage{heuristica}
+- \usepackage[heuristica,vvarbb,bigdelims]{newtxmath}
+- \usepackage[T1]{fontenc}
+- \renewcommand*\oldstylenums[1]{\textosf{#1}}
+- \definecolor{myBlue}{HTML}{255059}
+- \definecolor{myRed}{HTML}{8C2730}
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=F,message=F,warning=F)
+```
+
+# Intro
+
+Why is this interesting
+
+why is artist's problem different than other literatures
+
+summary of results already
+
+justify why noise enters where it does
+
+Why is this economics
+
+Spotify claimed that 93% of its 2020 quarter two revenue comes from premium subscribers.[^1] This paper provides a valuable description of the incentives of the streaming platform when designing its features and pricing, but the analysis below will take these features as given to focus on the artist's problem.
+
+[^1]: Calculated from Spotify's published shareholder letter, available here: <https://s22.q4cdn.com/540910603/files/doc_financials/2020/q2/Shareholder-Letter-Q2-2020_FINAL.pdf>
+
+# Literature Review
+
+In this paper I will examine how an artist's production decisions and reputation are influenced by algorithmically uncertain audience size in the digital streaming economy. This topic is tethered to multiple lines of research each of which informs the construction of the model below. I discuss connections to the branding literature, the superstar literature, and the novel streaming literature.
+
+The branding literature provides tools to analyze how the information that a firm communicated, its brand, affects consumers' decisions. In this analysis, firms must build a reputation even if that doesn't take the form of a traditional brand, logos, typography, and other factors. The superstar literature analyzes how market concentration can develop, particularly in art markets. I will analyze how the introduction of an algorithm influences the distribution of talent in an art market using the superstar literature as a pre-digitization baseline. Finally, the streaming literature models the incentives and optimal behavior of streaming platforms and end users. The model below supplements the streaming literature by analyzing the artist's problem taking the properties of streaming platform and the end user as given.
+
+## Branding Literature
+
+An artist concerned with growing their audience faces many similar incentives to a new firm trying to develop a brand. One can view a brand as a set of signals about the quality of a firm's product. Branding becomes an important consideration when consumers do not have ex ante knowledge about the quality of the product they are purchasing. As such, consumers rely on the signals presented by a firm's brand to inform their consumption decisions. The branding literature begins with the signalling literature pioneered in @spenceJobMarketSignaling1973. In this paper, Spence finds that observable characteristics, both impactful and superficial, can have substantial effects on the hiring decisions of a potential employer. More directly, @kleinRoleMarketForces1981 presents a simple model that identifies key characteristics that a market must possess in order for firms to invest in branding and selling a high quality product. Central to their model is consumer reputation formation. They propose a rather draconian baseline in which consumers' trust can never be regained upon a firm choosing to deceive them. A key finding is that with sufficient differentiation between high and low quality products, some firms may choose to invest in their reputation into perpetuity. This provides evidence that even when a firm's brand offers no intrinsic consumer utility, consumers benefit enough from the information of a brand, that it is worthwhile for both the firm and the consumer to invest in the more expensive branding. @shapiroPremiumsHighQuality1983 generalizes the model proposed by Klein and Leffler to a case where reputation can exist on a continuum of values and can evolve in a less austere manner. Shapiro confirms the results of Klein and Leffler while expanding on the fragility of branding. Shapiro finds that even when a firm is able to charge more for a branded product than an unbranded alternative, this premium is fleeting and sensitive to changes in consumer preferences.
+
+The application of the branding literature to the problem posed in this paper lies in the way that streaming platforms' algorithms reveal information and content to consumers. Generally streaming platforms allow users to choose their own content, but many platforms like Youtube, Spotify, and Apple Music also algorithmically provide content based on the consumer's history of the content they have consumed and how they have consumed it (number of times, shares, etc.). When this content is previously unknown to the consumer, we can view the platform as relying on its branding to present desirable content to the user. I will extend the branding literature by exploring the context in which reputation is subject to uncontrollable shocks that can positively or negatively influence next period's reputation.
+
+## Superstar Literature
+
+A related strand of literature to branding is the superstar literature which lies more towards cultural economics. Rosen, the preeminent author the superstar literature, characterizes a superstar market as having a: "relatively small numbers of people \[who\] earn enormous amounts of money and dominate the activities in which they engage" \[@rosen1981, p. 845\]. **(LET ME KNOW IF THAT CITATION IS DONE WRONG)** In his paper, he presents a model where consumers can perfectly observe talent ex ante. In this framework, Rosen finds that small increases in underlying artistic talent can have disproportionately large increases in resultant revenue in market equilibrium. This leads to revenues being concentrated among only a few artists. Art market concentration is further explored in @macdonaldEconomicsRisingStars1988 which takes an alternate modeling approach and introduces uncertainty in the talent of an artist. This uncertainty is market-wide where neither the consumer nor the artist knows their talent until they have performed. This model also intersects with the branding literature because it explores how an artist's perceived talent evolves over multiple periods based on the quality of their performance.
+
+The superstar literature is important to this analysis because it emphasizes the artist's production decisions and how they affect market revenues. As I will discuss later, much of the recent literature on streaming economies has focused on the streaming platform and the end consumers, so the superstar literature gives a more nuanced view of how artistic production can be modeled and optimized. However, I add to the superstar literature by modernizing the analysis and seeing if the same patterns emerge under a digitally-based economy. In particular, I will provide further insight into how the distribution of underlying talent may or may not be reflected in the realized distribution of talent in successful artists.
+
+## Streaming Literature
+
+The third and most closely related field of study is the streaming literature. The advent of streaming has garnered considerable attention from both theoretical and empirical angles. Streaming platforms can take many forms, but I will follow the characterization given in @thomesEconomicAnalysisOnline2013. He characterizes a streaming economy as an internet-based two-sided media marketplace. The streaming platform is in the middle of this two sided marketplace. The first side of the marketplace is the streaming platform accepting media from content creators. The other side of this marketplace is the streaming service delivering this content to consumers. Usually money is changed hands on both sides of this market. Researchers have focused on various aspects of the streaming economy as it has evolved. I will begin by giving an overview of some of the key topics addressed by theoretical papers. After discussing theory, I will mention some relevant empirical studies that analyze how digitization has affected the distribution of artist popularity---a central question of the research at hand.
+
+Early papers in the streaming literature investigate how streaming may curb pirating, the (usually free) illegal download of unlicensed music, like on Napster. One such early paper is @thomesEconomicAnalysisOnline2013 which takes the perspective of the music streaming platform when deciding how to price its paid subscription service relative to its free-with-ads alternative. This paper takes the artist's behavior as given, and does not tackle the conditions under which artists will choose to produce content for the platform.
+
+Another more recent paper that takes the streaming platform's perspective is @benderAttractingArtistsMusic2021. This paper analyzes competition between permanent digital MP3 sales and streaming platforms. It analyzes consumer demand, and how the platform should optimally set its royalty to attract artists to the platform. The authors find that it is the most popular artists that might choose to hold out and sell their work only via permanent download, a result seen anecdotally with the Beatles who kept their music off of streaming services for a famously long time.[^2] The analysis below examines how artists should optimally produce once they have already committed to making content for a streaming platform.
+
+[^2]: A discussion of the Beatles decision to stream their music is available here: <https://www.fastcompany.com/3054965/its-official-the-beatles-are-coming-to-spotify-apple-music-and-more>
+
+@hillerRiseStreamingMusic2017 incorporates elements from both @thomesEconomicAnalysisOnline2013 and @benderAttractingArtistsMusic2021 by modelling an economy with digital purchases in addition to free and paid subscriptions on a streaming service. The authors investigate the artist's decision to produce one high-quality piece of art versus multiple comparatively lower-quality pieces. The authors find that the streaming economy fosters an environment in which profit-maximizing artists focus on generating high-quality singles instead of lower-quality albums. I will examine this quantity-quality trade-off will below, but with the key difference of uncertain audience size. The proceeding analysis acknowledges the fact that releasing more content may increase an artist's chance of reaching a larger audience.
+
+Another driving question of this research pertains to the debate of whether or not streaming platforms have created a "long tail" of products. I will now summarize some empirical work that analyzes this topic.
+
+The term long tail was popularized in @andersonLongTailWhy2006. The principle of the long tail is that digitization of commerce allows consumer's access to a wider variety of products---far more than a brick and mortar store could every stock. The greater variety of products allows consumers to pinpoint the product that best suits their preferences. A diverse product set results in many products having a small number consumers. As such, the distribution of consumers per product should have much longer tail than pre-digitization. The streaming economy is an excellent example of where this long tail might exist as Spotify can stock hundreds of times more songs into a server than a vinyl record store could ever stock in-store. The long tail hypothesis would suggest a diffusion of revenues across many artists. However, @rosenEconomicsSuperstars1981a, finds that revenue should be concentrated among only a few artists. These factors are not necessarily at odds, we may have most of the revenue while still having a long tail, but this paper will examine whether or not we have a long thick tail, or an initial bump with a long thin tail afterwards.
+
+That being said, opinions are mixed as to whether or not the long tail hypothesis holds empirically. @elberseShouldYouInvest2008 initially pushed back against the idea of a long tail. She cites data from Quickflix (a now-defunct Australian pay-per-view movie streaming platform) which showed that a small number of DVDs comprised a large portion of sales. The proceding analysis in this paper will model a different type of streaming platform, one in which customers have unlimited access to content either for free or for a monthly subscription fee.
+
+A more recent alternate perspective on the long tail, @aguiarQualityPredictabilityWelfare2018, posits digitization substantially lowers the entry cost of new firms. Lower entry costs allow firms with lower expected profit into the market, increasing the diversity of sellers. The authors robustly show that consumers value having a variety of producers when it is difficult to forecast an artist's talent before purchasing. They argue that the value of variety provides further justiciation that there exists a long tail of producers. I will examine whether or not producers naturally form a long tail even under uncertainty about the number of consumers that they will be able to reach with their product.
+
+## This Paper's Contribution to the Literature
+
+The preceding discussion reveals a few key unexplored area that this paper will investigate. One, previous literature has focused on behavior of the streaming platform and the end-user. This analysis contributes to the comparatively-understudied role of the artist in the streaming economy. Two, this paper will endogenize audience development, a similarity to the branding and superstar literature not yet applied to the streaming literature. Third, this paper will contribute the debate of the long tail in the streaming literature by exploring the equilibrium distribution of artist talent. Finally, This paper will also contribute to the presently-unexplored role of unpredictable algorithms on streaming platforms in shaping an artist's career and optimal behavior.
+
+# The Model
+
+The streaming economy has three primary actors: the end consumer, the streaming platform, and the artist. For the purposes of this analysis, I will assume that the behavior of the consumer and the streaming platform are exogenous. I will limit attention to the artist who must choose a quality and quantity of art to produce. The streaming platform's algorithm is driven by consumer engagement last period. It combines this user engagement with the number of new releases to decide the number of new consumers to show an artist's work to. I will assume that consumers have no ex ante knowledge of an artist and require the algorithm to reveal an artist to them. I will call these algorithmic revelations, impressions. Once a consumer has received an impression, their number of streams will depend on the quality of the art that the artist released in that period. The algorithm observes the streams per impression and uses this to decide how many times to show the artist's work next period.
+
+The artist earns a royalty every time a song is streamed, and the artist tries to maximize this discounted flow of royalties. The trade-off between quantity of releases and the quality of those releases will be central to their maximization problem. Increases to quality ensure that once a consumer receives an artist's work, they will consume that product more. Increasing quality also has the inter-temporal benefit of encouraging next period's algorithm to show the art to more consumers. On the other hand, the artist can increase their quantity at the expense of quality. The algorithm will have more pieces to show to consumers (increasing the probability that a given consumer discovers an artist), but it also leaves audience size more up to the random component of the algorithm.
+
+## Hypotheses
+
+Before describing the model in detail, I will first lay out hypothesized results based on the literature presented above. The first hypothesis pertains to the "long tail" theory described in @aguiarQualityPredictabilityWelfare2018. Following @rosen1981, I will measure the long tail of outcomes by examining the convexity of the expected profit function in an artist's underlying talent. I pose the following:
+
+> *Hypothesis 1: Unpredictability of a streaming platform's content matching algorithm will decrease the convexity of profits in talent.*
+
+The second hypothesis relates to audience development. Similar to the work of @benderAttractingArtistsMusic2021, I will examine how the choices of established artists differ from artists with smaller starting audiences.
+
+> *Hypothesis 2: Artists with smaller initial audiences will be more likely to choose a low-quality, high-quantity strategy relative to established artists.*
+
+The final hypothesis pertains to how the previous hypothesis is affected by time. The quality-quantity trade-off becomes less clear cut when quality informs next period's audience. I propose:
+
+> *Hypothesis 3: Artists will prioritize quality more in a multi-period setting than they will in a one-period environment.*
+
+## Consumer Behavior
+
+I assume there is an infinitely large market of consumers with identical preferences on a streaming platform. This assumption does not fully depict the consumer-base of a streaming platform. However, for an emerging artist in an established genre, this assumption is more realistic. Ex ante, consumers have no knowledge of a given artist and require the algorithm to reveal an artist to them. Upon receiving an impression of an artist, the consumer gains knowledge of all of an artist's work from that period, not just the piece they were exposed to. I will assume that after an impression a consumer will stream the artist's work $n(z)$ times, where $z$ is the quality of the art. I will assume that $n_z>0$ and $n_{zz}<0$, so increases to quality always increase demand, but at a lessening rate. A notable assumption in the above modelling decision is that the quantity of releases has no influence on the amount of streams by a given consumer. Consumers see the quality and might choose to stream one song all $n$ times, or they might spread their consumption across multiple pieces of art.
+
+## Artist Behavior
+
+The artist's problem is to maximize the royalties they receive from their audience streaming their music. In particular, I will assume that each stream earns the artist an amount $r$, so the total revenue in each period is the total number of streams time $r$. The artist chooses to produce $m$ pieces each of which at the same quality $z$. I will assume that the artist's combination of $m$ and $z$ also incur a cost $C(m,z;\kappa)$ where $\kappa$ is the artist's underlying talent that makes production easier. An more typical approach too introducing a talent parameter would be as a positive influence on production, not cost. However, interpreting cost in terms of opportunity cost allows us to include talent not as reducing monetary cost but the non-pecuniary cost of producing an additional unit of art. I will impose some standard assumptions on $C$. Namely, I will assume $C_m>0,C_z>0,C_{mm}>0,C_{zz}>0,C_{z\kappa}<0,C_{m\kappa}<0$. The assumptions say that increases to quality or quantity also increase cost, and additional units of quantity of quality are more costly than the previous. The cross partial derivatives say that increasing talent decrease the marginal cost in each of the inputs. In order for $\kappa$ to be meaningful as a talent parameter, we should require that at every input, an additional unit of talent makes the next unit of production less costly. I will further assume $C_\kappa<0$ and $C_{\kappa\kappa}>0$, so increases to underlying talent lower costs, but additional increases to talent are less and less impactful.
+
+## Audience Evolution and Algorithmic Behavior
+
+There are three drivers of audience evolution: last period's audience, the new audience algorithm, and the unforecastable random noise present in the algorithm. I will assume that every period, a fraction $\delta$ of the audience "forgets" about an artist and needs reimpression in order to consume an artist's work again. As such, the share of last period's audience that endures is $(1-\delta)$. The other two components are related to the algorithm. I assume that the streaming platform's algorithm governs the number of new impressions for each song released by an artist. For the algorithm to be a meaningful tool, it should not be entirely random. It should some measure of engagement to dictate how many impressions in the next period. For the purposes of this model, the algorithm will use last period's number of streams per audience member as the measure of engagement. By construction, at time $t$, the algorithm will use $n(z_{t-1})$, so the algorithm is indirectly incorporating quality.
+
+There are multiple ways to interpret the uncertainty in the algorithm. One such way is to interpret a streaming platform's algorithm as an imperfect instrument that measures talent. An alternate way to interpret algorithmic uncertainty is in the context of producer uncertainty. In this case, the artist understands the average effects of the algorithm, but the streaming platform intentionally or inadvertently obfuscates exactly how the algorithm behaves so there is always some artist uncertainty about the true number of impressions in the next period. One concern when modeling an uncertain algorithm is that artist with higher talent may be favored by the random component of the algorithm. However, most artists, at least for professional content creators, can observe any information in the algorithm that might benefit them when making their product. By definition, the most algorithmically favored products are shown the most. As such, artists have ample opportunity to analyze which components of successful and any useful information can be quickly arbitraged out by observant content creators. Further analyses could explore this relationship in more detail, but this model will assume that talent and algorithmic uncertainty are independen.t
+
+With the aforementioned assumption, I construct the algorithm as follows. First denote the impression algorithm for an artist's $i$th art piece in period $t$ as $I(n_{t-1})+\varepsilon_{it}$ where $\varepsilon_{it}$ is a mean zero independent identically distributed random variable. Interpreting the algorithm as a useful, if imperfect, measure of quality, I will assume that $I_n>0$. So increases to engagement mean more exposures next period.
+
+For each art piece that an artist produces in the present period, they must submit this work through the algorithm which is subject to random noise. The artists total number of impressions from the audience is then given by $mI(n_{t-1})+\sum_{i=1}^m \varepsilon_{it}$. As such, the expected number of impressions is simply $mI(n_{t-1})$ with variance $m\textrm{Var}(\varepsilon)$. Increasing the number of releases increases the expected audience, but equally increases the variance of outcomes. Putting all of these pieces together, the equation of motion for audience size at time $t$, $A_t$, is given by:
+
+```{=tex}
+\begin{equation} \label{eq:eqn_of_motion}
+A_t=(1-\delta)A_{t-1}+mI(n_{t-1})+\sum_{i=1}^m\varepsilon_{it}
+\end{equation}
+```
+## The Artist's One-Period Maximization Problem
+
+We can assemble the above pieces into the respective one-period revenue maximization problem. The timing of the model is as follows, the artist chooses $m$ and $z$, then the random variables in the algorithm are realized, then consumers stream the artist work according to $n(z)$. As such, we can express the artist's problem as:
+
+```{=tex}
+\begin{equation} \label{eq:one_period_general}
+V(m,z)=\max_{m,z}\left\{E\left[rA_tn(z)-C(m,z;\kappa)\right]  \textrm{s.t.}A_t=(1-\delta)A_{t-1}+mI(n_{t-1})+\sum_{i=1}^m\varepsilon_{it}\right\}
+\end{equation}
+```
+Substituting in with $A_t$ allows us to solve this problem as an unconstrained maximization problem with the following first order conditions:
+
+```{=tex}
+\begin{equation} \label{eq:general_focs}
+\begin{split}
+\frac{\partial V}{\partial z}&\colon r\left[(1-\delta)A_{t-1}+mI(n_{t-1})\right]mn'(z)-C_z(m,z;\kappa)=0 \\
+\frac{\partial V}{\partial m}&\colon r I(n_{t-1})n(z)-C_m(m,z;\kappa)=0
+\end{split}
+\end{equation}
+```
+I will now use the implicit function theorem to interpret some comparative statics in terms of the parameters of the model. I summarize the results below
+
+|                     | $\partial m$ | $\partial z$ |
+|---------------------|:------------:|:------------:|
+| $/\partial r$       | $\downarrow$ | $\downarrow$ |
+| $/\partial \delta$  |     $0$      |  $\uparrow$  |
+| $/\partial A_{t-1}$ |     $0$      | $\downarrow$ |
+| $/\partial n_{t-1}$ | $\downarrow$ | $\downarrow$ |
+| $/\partial \kappa$  | $\downarrow$ | $\downarrow$ |
+
+Since $z$ does not affect the future engagement measures (because I only consider one period), the artist will try to substitute away from using $z$ in production because it is more costly. As such, when the royalty rate increases, the artist will be able to recoup the same amount of revenue selling fewer units, so they will chose to lower their $z$ due to it's increasing costliness.
+
+We have a similar result for changes to the quantity produced. Again, producing more quantity incurs costs that the artist substitutes away from when given more slack by the other parameters. Interestingly, the previous period's audience makes no impact on the artist's choice to produce a greater quantity. This comes from the fact that prior audience is sunk in $m$. Since $m$ can only influence the number of new listeners, the artist need not consider how much of the previous audience they've retained.
+
+## One Period-Binary Choice Example
+
+To fix ideas, I will now explore the case in which the artist can only choose from one of two options. In order to collapse the problem to a binary choice set, instead of using a cost function, I will use a budget constraint, $C(m,z)=Y$ which implicitly defines $z$ in terms of $m$. As such, let's consider the case where the artist is choosing to produce either $1$ or $2$ products. If the artist chooses $m=1$, they can produce one higher quality good at quality $\overline{z}$. In the other case, the artist can produce $2$ goods, each at quality $\underline{z}$. The artist will then choose:
+
+```{=tex}
+\begin{equation} \label{eq:binary_choice}
+\max\left\{r\left((1-\delta)A_{t-1}+I(n_{t-1})\right)n(\overline{z}),r\left((1-\delta)A_{t-1}+2I(n_{t-1})\right)n(\underline{z}) \right\}
+\end{equation}
+```
+The artist's optimal production choice can be summarized as
+
+```{=tex}
+\begin{equation} \label{eq:one_period_behavior}
+\begin{cases}
+\underline{z} &  n(\overline z) < \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)n(\underline z)\\
+\textrm{Either} & n(\overline z) = \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)n(\underline z) \\
+\overline{z}, &  n(\overline z) > \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)n(\underline z)
+\end{cases}
+\end{equation}
+```
+By monotonicity of demand $n(\overline{z})/n(\underline{z})>1$, so we can think of $\frac{I_0}{I_0+(1-\delta)A_0}$ as the minimal premium for which the artist will produce the high quality option. Begin by noting that the denominator in the above expression is the expected audience size when the artist chooses the high quality option. As such, we can interpret the premium as the percent of expected audience that is earned by the algorithm. Holding other factors equal, an artist with a larger initial audience is more likely to have a smaller premium to induce high quality production relative to a new artist where most of their audience is new. Therefore, established artists are more likely to produce high quality content. In contrast, new artists are likely to produce a greater number of lower-quality art and rely on the algorithm to get their art into the hands of new consumers.
+
+## Two Period Binary Choice
+
+I now explore the case where the artist has the same options as before, one or two products at quality $\overline z$ and $\underline z$ respectively. However, in this case, I examine the artist's behavior over two periods. In this case, their choice of $z$ in the first period influences the number over impressions that the algorithm produces next period. I will now introduce some new notation. Let $\overline {I}$ be the impressions awarded to the artist when their choice of quality $\overline z$ induces consumption $n(\overline z)$. Define $\underline I$ analogously. We proceed using backwards induction. I have already fully characterized behavior in the final period, so we can take optimal second-period behavior as given when characterizing optimal artist behavior.
+
+Artist has four options, either quality in either period.
+
+## Next Steps
+
+I don't have the time to juggle all of the inequalities of that two period model right now , but I will briefly summarize my next steps.
+
+1.  Solve that two period model and see if new artists are more incentivized to invest in quality
+
+2.  Given optimal two-period play, how large of a shock is required in order to make an artist change their strategy in the second period. Conducting this analysis is quite simple once I've found optimal play because we've already characterized final-period optimal play, so we can see how artist set them self up for period two, and then look at how far away the inequality bounds are from their chosen set up, and that gives how sensitive the artist is to a shock.
+
+3.  In the one period model, examine how an initial distribution of talent is transformed when considering optimal play. I haven't totally figured out the best way to explore this because in the binary-choice case, talent doesn't enter directly, so I'd have to think the non-binary functions $\underline{z}(\kappa)$ and $\overline{z}(\kappa)$ but that doesn't feel right. If I try to use the general equations, I don't know how to convert the FOCs into distributional analysis
+
+4.  This I have no idea how to implement, but I'm really interested in the conditions under which the market naturally brings talented to the top. For example, does a sufficiently large shock guarantee you're popular forever, or do the effects of shocks eventually die out because you can't maintain the level of quality needed to retain such a large audience.
+
+5.  goal motivation. what is it, why important, why care, what am I doing about it
+
+\newpage
+
+# References {.unnumbered}
