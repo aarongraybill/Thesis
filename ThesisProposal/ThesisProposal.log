@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.12.7)  7 DEC 2021 20:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.12.7)  8 DEC 2021 09:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1468,68 +1468,68 @@ File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
 ) (./ThesisProposal.aux)
 \openout1 = `ThesisProposal.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/zutmi/m/it on input line 108.
-LaTeX Font Info:    Trying to load font information for OML+zutmi on input line 108.
+LaTeX Font Info:    Checking defaults for OML/zutmi/m/it on input line 109.
+LaTeX Font Info:    Trying to load font information for OML+zutmi on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/omlzutmi.fd
 File: omlzutmi.fd 2014/04/14 Fontinst v1.933 font definitions for OML/zutmi.
 )
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 108.
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 108.
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 108.
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 108.
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 108.
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 108.
-LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 108.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 109.
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 108.
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 108.
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 108.
-LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 108.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 109.
+LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/cyrillic/t2acmr.fd
 File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for T2B/cmr/m/n on input line 108.
-LaTeX Font Info:    Trying to load font information for T2B+cmr on input line 108.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for T2B/cmr/m/n on input line 109.
+LaTeX Font Info:    Trying to load font information for T2B+cmr on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/cyrillic/t2bcmr.fd
 File: t2bcmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for T2C/cmr/m/n on input line 108.
-LaTeX Font Info:    Trying to load font information for T2C+cmr on input line 108.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for T2C/cmr/m/n on input line 109.
+LaTeX Font Info:    Trying to load font information for T2C+cmr on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/cyrillic/t2ccmr.fd
 File: t2ccmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 108.
-LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 108.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 109.
+LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/ly1/ly1ptm.fd
 File: ly1ptm.fd 2001/02/01 font definitions for LY1/ptm using Berry names.
 )
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 108.
-LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 108.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 109.
+LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 108.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 108.
-LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 108.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 109.
+LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    ... okay on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/grfext/grfext.sty
@@ -1542,7 +1542,7 @@ Package grfext Info: Graphics extension search list:
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 108.
+Package hyperref Info: Link coloring ON on input line 109.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1552,9 +1552,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count328
 )
-LaTeX Info: Redefining \ref on input line 108.
-LaTeX Info: Redefining \pageref on input line 108.
-LaTeX Info: Redefining \nameref on input line 108.
+LaTeX Info: Redefining \ref on input line 109.
+LaTeX Info: Redefining \pageref on input line 109.
+LaTeX Info: Redefining \nameref on input line 109.
 (./ThesisProposal.out) (./ThesisProposal.out)
 \@outlinefile=\write4
 \openout4 = `ThesisProposal.out'.
@@ -1595,69 +1595,69 @@ LaTeX Info: Redefining \nameref on input line 108.
 
 
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into your preamble.
- on input line 108.
+ on input line 109.
 
 \c@mv@tabular=\count329
 \c@mv@boldtabular=\count330
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 110.
+(Font)              scaled to size 17.28pt on input line 111.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 110.
+(Font)              scaled to size 12.0pt on input line 111.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 8.8pt on input line 110.
+(Font)              scaled to size 8.8pt on input line 111.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 6.6pt on input line 110.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 110.
+(Font)              scaled to size 6.6pt on input line 111.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 111.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 110.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 111.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 110.
+LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 111.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 110.
+LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 111.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 110.
+LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 111.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 113.
+(Font)              scaled to size 14.4pt on input line 114.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 113.
+(Font)              scaled to size 14.4pt on input line 114.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 126.
+(Font)              scaled to size 7.3pt on input line 127.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 126.
+(Font)              scaled to size 5.5pt on input line 127.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 128.
+(Font)              scaled to size 8.0pt on input line 129.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 6.2pt on input line 128.
+(Font)              scaled to size 6.2pt on input line 129.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 158.
+(Font)              scaled to size 12.0pt on input line 159.
 [1
 
 {/Users/aarongraybill/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 219.
+(Font)              scaled to size 10.0pt on input line 220.
 [2] [3] [4] [5]
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 431.
+(Font)              scaled to size 10.0pt on input line 432.
 [6] [7] [8] [9] [10] [11] (./ThesisProposal.aux)
 Package rerunfilecheck Info: File `ThesisProposal.out' has not changed.
 (rerunfilecheck)             Checksum: 32A0A41DD54E2B2B50EED3F0F3ACAAFF;2635.
  ) 
 Here is how much of TeX's memory you used:
- 35402 strings out of 480313
- 795756 string characters out of 5895947
+ 35403 strings out of 480313
+ 795770 string characters out of 5895947
  1186021 words of memory out of 5000000
- 52557 multiletter control sequences out of 15000+600000
+ 52558 multiletter control sequences out of 15000+600000
  474943 words of font info for 142 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  84i,16n,80p,732b,609s stack positions out of 5000i,500n,10000p,200000b,80000s

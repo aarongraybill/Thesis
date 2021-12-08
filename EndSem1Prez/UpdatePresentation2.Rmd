@@ -26,7 +26,7 @@ library(xaringanthemer)
 style_duo_accent(
   primary_color = "#8C2730",
   secondary_color= "#D8E6F2",
-  black_color = "#261201",
+  black_color = "#13091C",
   title_slide_background_image = "image (3).jpg",
   #title_slide_background_size = "contain",
   header_font_google = google_font("Playfair Display"),

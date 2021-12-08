@@ -43,15 +43,15 @@
   --header-h3-font-size: 1.75rem;
 
   /* Colors */
-  --text-color: #261201;
+  --text-color: #13091C;
   --header-color: #8C2730;
   --background-color: #FFFFFF;
   --link-color: #8C2730;
   --text-bold-color: #8C2730;
   --code-highlight-color: rgba(255,255,0,0.5);
-  --inverse-text-color: #261201;
+  --inverse-text-color: #13091C;
   --inverse-background-color: #D8E6F2;
-  --inverse-header-color: #261201;
+  --inverse-header-color: #13091C;
   --inverse-link-color: #8C2730;
   --title-slide-background-color: #8C2730;
   --title-slide-text-color: #FFFFFF;
@@ -60,7 +60,7 @@
   --primary: #8C2730;
   --secondary: #D8E6F2;
   --white: #FFFFFF;
-  --black: #261201;
+  --black: #13091C;
 }
 
 html {
