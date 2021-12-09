@@ -41,6 +41,7 @@ style_duo_accent(
 # Outline
 
 1.    Intro and Motivation
+  - Why model the streaming economy?
 1.    Related Literature
 1.    Model
 1.    Initial Findings

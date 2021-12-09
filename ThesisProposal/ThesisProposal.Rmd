@@ -10,11 +10,11 @@ output:
 biblio-style: apalike
 csl: ../apa.csl
 bibliography: ../RunningBib.bib
-nocite: 
 linestretch: 1.5
 indent: true
 urlcolor: myBlue
 linkcolor: myRed
+link-citations: yes
 header-includes:
 - \usepackage{tikz}
 - \usepackage{pgfplots}
@@ -26,7 +26,9 @@ header-includes:
 - \definecolor{myBlue}{HTML}{255059}
 - \definecolor{myRed}{HTML}{8C2730}
 - \definecolor{myBlack}{HTML}{13091C}
-link-citations: yes
+- \interfootnotelinepenalty=10000
+nocite: |
+ @YouTubeStarsRhett2020
 ---
 
 ```{r setup, include=FALSE}
@@ -35,19 +37,35 @@ knitr::opts_chunk$set(echo=F,message=F,warning=F)
 
 # Intro
 
-Why is this interesting
+YouTube, the video streaming giant, reported 19.7 Billion dollars in ad revenue during 2020.[^1] Spotify, the music streaming platform, posted a similarly giant 7.8 Billion dollars in revenue from 2020.[^2] Comparing revenues to nominal GDP, this would put YouTube at a similar size to the nation of Afghanistan.[^3] Revenue numbers like these cannot be ignored.
 
-why is artist's problem different than other literatures
+[^1]: Available on page 27 at <https://abc.xyz/investor/static/pdf/2020_alphabet_annual_report.pdf?cache=8e972d2>
 
-summary of results already
+[^2]: Available on page 5 at <https://s22.q4cdn.com/540910603/files/doc_financials/2020/ar/4e770a8c-ee99-49a8-9f9e-dcc191807b56.pdf>
 
-justify why noise enters where it does
+[^3]: [<https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal>)](https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)) I need a source that isn't wikipedia, but maybe this is stupid anyway.
 
-Why is this economics
+YouTube and Spotify, among their industry peers like Instagram, TikTok, lie at the intersection of two burgeoning markets: streaming platforms and social media. Services like YouTube, Spotify, Instagram, and TikTok, which I will refer to as *platforms*, provide a rich opportunity for economic analysis.
 
-Spotify claimed that 93% of its 2020 quarter two revenue comes from premium subscribers.[^1] This paper provides a valuable description of the incentives of the streaming platform when designing its features and pricing, but the analysis below will take these features as given to focus on the artist's problem.
+Platforms are fundamentally a marketplace. *Content creators*, firms, are given an opportunity to connect with consumers who wish to consumer their product. However, platforms provide a marketplace unlike anything that has been previously seen. One key distinction between a physical marketplace and a digital platform is that consumption is usually nonrivalrous. One consumer's decision to listen to an artist's newest release on Spotify has no negative impact on another consumer's ability to consume that product. A content creator's inventory is limited only by the bandwidth of the platform and the number of consumers who wish to consume their product. The number of willing consumers is a content creator's audience, and is central to the analysis conducted below.
 
-[^1]: Calculated from Spotify's published shareholder letter, available here: <https://s22.q4cdn.com/540910603/files/doc_financials/2020/q2/Shareholder-Letter-Q2-2020_FINAL.pdf>
+Audience evolution is another key difference between a streaming economy and traditional market structures. Of course, consumers can seek out content directly if they know that a creator exists, but that does not fully describe consumer-creator matching on a platform. A central component of streaming markets is the *algorithm*. A platform's algorithm can take multiple forms, but I will use it mean a platform's way of analyzing a release by a content creator and deciding which consumers will be shown that release. In some markets, like an outdoor farmer's market, the algorithm is nonexistent. Consumers are required to self-select products they wish to purchase. However, platforms use their algorithm to show content to consumers content they may not have ex ante knowledge.
+
+Content creators have both celebrated algorithms as a way of gaining exposure that would have been impossible in a pre-internet economy. Others have maligned the algorithm for its unpredictability and bias towards content that appeals to the lowest common denominator. However, all successful content creators must acknowledge the importance of a platform's algorithm and adapt to its changes.
+
+A useful anecdote comes from Stevie Wynne Levine, Chief Creative Officer of Mythical. Mythical is a YouTube video conglomerate with over 75 million subscriber across its channels and 25 billion total views on its videos. In reference to how their team analyzes the algorithm, Wynne Levine reveals:
+
+> It's something that we do not only every day, but three, four times a day. We analyze each video that we've put out for that day and how we can improve impressions and views. So definitely not something that we set it and forget it, because it's constantly evolving. (para. 12)
+
+The above discussion reveals that content creators have a unique economic problem that is worthy of study. Recent literature has focused on the optimal behavior of consumer and platforms, but content creators have been mostly omitted in the literature of streaming platforms. Work that has tackled artist's optimal behavior has primarily considered fine art in non-digital markets. The analysis below explores whether or not streaming platforms create conditions that mirror fine art markets by concentrating revenue in a small minority of the total number of producers.
+
+In this paper, I will explore how content creators must balance the inherent quantity-quality trade-off present in making content for platform. A higher number of releases offers a content creator more opportunities for the random component of the algorithm to make their content viral. However, investing in greater quality encourages consumers who do know about an artist's content to stream that content more.
+
+I construct a model of artist/content creator behavior in which artists must decide a quantity and quality of art to release in every period. Their quantity choice affords them a number of chances at algorithmic exposure. Additionally, the algorithm will also factor in how many times past audience members consumed an artist's work when deciding audience size. An artist's underlying talent (ability to produce the same quality/quantity at a lower cost) will govern optimal production, and I will show how the distribution of talent relates to the distribution of revenue in successful artists.
+
+I will show that artists early in their career, where new audience members make up a large share of their total audience, are more likely to produce low quality content, and then switch to a low-volume, high-quality strategy later in their career. The interaction of artist decisions in the streaming economy and algorithmic uncertainty is novel to this paper.
+
+The remainder of this paper is broken into (SOME NUMBER) of sections. In the [literature review] I discuss how related literature has informed the expectations of the model. In [the model] section, I hypothesize results based on the literature, and present the primary model used in this analysis. In the (REST OF SECTIONS GO HERE)...
 
 # Literature Review
 
@@ -63,7 +81,7 @@ The application of the branding literature to the problem posed in this paper li
 
 ## Superstar Literature
 
-A related strand of literature to branding is the superstar literature which lies more towards cultural economics. Rosen, the preeminent author the superstar literature, characterizes a superstar market as having a: "relatively small numbers of people \[who\] earn enormous amounts of money and dominate the activities in which they engage" \[@rosen1981, p. 845\]. **(LET ME KNOW IF THAT CITATION IS DONE WRONG)** In his paper, he presents a model where consumers can perfectly observe talent ex ante. In this framework, Rosen finds that small increases in underlying artistic talent can have disproportionately large increases in resultant revenue in market equilibrium. This leads to revenues being concentrated among only a few artists. Art market concentration is further explored in @macdonaldEconomicsRisingStars1988 which takes an alternate modeling approach and introduces uncertainty in the talent of an artist. This uncertainty is market-wide where neither the consumer nor the artist knows their talent until they have performed. This model also intersects with the branding literature because it explores how an artist's perceived talent evolves over multiple periods based on the quality of their performance.
+A related strand of literature to branding is the superstar literature which lies more towards cultural economics. Rosen, the preeminent author the superstar literature, characterizes a superstar market as having a: "relatively small numbers of people \[who\] earn enormous amounts of money and dominate the activities in which they engage", \[@rosenEconomicsSuperstars1981a, p. 845\]. **(LET ME KNOW IF THAT CITATION IS DONE WRONG)** In his paper, he presents a model where consumers can perfectly observe talent ex ante. In this framework, Rosen finds that small increases in underlying artistic talent can have disproportionately large increases in resultant revenue in market equilibrium. This leads to revenues being concentrated among only a few artists. Art market concentration is further explored in @macdonaldEconomicsRisingStars1988 which takes an alternate modeling approach and introduces uncertainty in the talent of an artist. This uncertainty is market-wide where neither the consumer nor the artist knows their talent until they have performed. This model also intersects with the branding literature because it explores how an artist's perceived talent evolves over multiple periods based on the quality of their performance.
 
 The superstar literature is important to this analysis because it emphasizes the artist's production decisions and how they affect market revenues. As I will discuss later, much of the recent literature on streaming economies has focused on the streaming platform and the end consumers, so the superstar literature gives a more nuanced view of how artistic production can be modeled and optimized. However, I add to the superstar literature by modernizing the analysis and seeing if the same patterns emerge under a digitally-based economy. In particular, I will provide further insight into how the distribution of underlying talent may or may not be reflected in the realized distribution of talent in successful artists.
 
@@ -73,9 +91,9 @@ The third and most closely related field of study is the streaming literature. T
 
 Early papers in the streaming literature investigate how streaming may curb pirating, the (usually free) illegal download of unlicensed music, like on Napster. One such early paper is @thomesEconomicAnalysisOnline2013 which takes the perspective of the music streaming platform when deciding how to price its paid subscription service relative to its free-with-ads alternative. This paper takes the artist's behavior as given, and does not tackle the conditions under which artists will choose to produce content for the platform.
 
-Another more recent paper that takes the streaming platform's perspective is @benderAttractingArtistsMusic2021. This paper analyzes competition between permanent digital MP3 sales and streaming platforms. It analyzes consumer demand, and how the platform should optimally set its royalty to attract artists to the platform. The authors find that it is the most popular artists that might choose to hold out and sell their work only via permanent download, a result seen anecdotally with the Beatles who kept their music off of streaming services for a famously long time.[^2] The analysis below examines how artists should optimally produce once they have already committed to making content for a streaming platform.
+Another more recent paper that takes the streaming platform's perspective is @benderAttractingArtistsMusic2021. This paper analyzes competition between permanent digital MP3 sales and streaming platforms. It analyzes consumer demand, and how the platform should optimally set its royalty to attract artists to the platform. The authors find that it is the most popular artists that might choose to hold out and sell their work only via permanent download, a result seen anecdotally with the Beatles who kept their music off of streaming services for a famously long time.[^4] The analysis below examines how artists should optimally produce once they have already committed to making content for a streaming platform.
 
-[^2]: A discussion of the Beatles decision to stream their music is available here: <https://www.fastcompany.com/3054965/its-official-the-beatles-are-coming-to-spotify-apple-music-and-more>
+[^4]: A discussion of the Beatles decision to stream their music is available here: <https://www.fastcompany.com/3054965/its-official-the-beatles-are-coming-to-spotify-apple-music-and-more>
 
 @hillerRiseStreamingMusic2017 incorporates elements from both @thomesEconomicAnalysisOnline2013 and @benderAttractingArtistsMusic2021 by modelling an economy with digital purchases in addition to free and paid subscriptions on a streaming service. The authors investigate the artist's decision to produce one high-quality piece of art versus multiple comparatively lower-quality pieces. The authors find that the streaming economy fosters an environment in which profit-maximizing artists focus on generating high-quality singles instead of lower-quality albums. I will examine this quantity-quality trade-off will below, but with the key difference of uncertain audience size. The proceeding analysis acknowledges the fact that releasing more content may increase an artist's chance of reaching a larger audience.
 
@@ -83,9 +101,9 @@ Another driving question of this research pertains to the debate of whether or n
 
 The term long tail was popularized in @andersonLongTailWhy2006. The principle of the long tail is that digitization of commerce allows consumer's access to a wider variety of products---far more than a brick and mortar store could every stock. The greater variety of products allows consumers to pinpoint the product that best suits their preferences. A diverse product set results in many products having a small number consumers. As such, the distribution of consumers per product should have much longer tail than pre-digitization. The streaming economy is an excellent example of where this long tail might exist as Spotify can stock hundreds of times more songs into a server than a vinyl record store could ever stock in-store. The long tail hypothesis would suggest a diffusion of revenues across many artists. However, @rosenEconomicsSuperstars1981a, finds that revenue should be concentrated among only a few artists. These factors are not necessarily at odds, we may have most of the revenue while still having a long tail, but this paper will examine whether or not we have a long thick tail, or an initial bump with a long thin tail afterwards.
 
-That being said, opinions are mixed as to whether or not the long tail hypothesis holds empirically. @elberseShouldYouInvest2008 initially pushed back against the idea of a long tail. She cites data from Quickflix (a now-defunct Australian pay-per-view movie streaming platform) which showed that a small number of DVDs comprised a large portion of sales. The proceding analysis in this paper will model a different type of streaming platform, one in which customers have unlimited access to content either for free or for a monthly subscription fee.
+That being said, opinions are mixed as to whether or not the long tail hypothesis holds empirically. @elberseShouldYouInvest2008 initially pushed back against the idea of a long tail. She cites data from Quickflix (a now-defunct Australian pay-per-view movie streaming platform) which showed that a small number of DVDs comprised a large portion of sales. The proceeding analysis in this paper will model a different type of streaming platform, one in which customers have unlimited access to content either for free or for a monthly subscription fee.
 
-A more recent alternate perspective on the long tail, @aguiarQualityPredictabilityWelfare2018, posits digitization substantially lowers the entry cost of new firms. Lower entry costs allow firms with lower expected profit into the market, increasing the diversity of sellers. The authors robustly show that consumers value having a variety of producers when it is difficult to forecast an artist's talent before purchasing. They argue that the value of variety provides further justiciation that there exists a long tail of producers. I will examine whether or not producers naturally form a long tail even under uncertainty about the number of consumers that they will be able to reach with their product.
+A more recent alternate perspective on the long tail, @aguiarQualityPredictabilityWelfare2018, posits digitization substantially lowers the entry cost of new firms. Lower entry costs allow firms with lower expected profit into the market, increasing the diversity of sellers. The authors robustly show that consumers value having a variety of producers when it is difficult to forecast an artist's talent before purchasing. They argue that the value of variety provides further justification that there exists a long tail of producers. I will examine whether or not producers naturally form a long tail even under uncertainty about the number of consumers that they will be able to reach with their product.
 
 ## This Paper's Contribution to the Literature
 
@@ -99,7 +117,7 @@ The artist earns a royalty every time a song is streamed, and the artist tries t
 
 ## Hypotheses
 
-Before describing the model in detail, I will first lay out hypothesized results based on the literature presented above. The first hypothesis pertains to the "long tail" theory described in @aguiarQualityPredictabilityWelfare2018. Following @rosen1981, I will measure the long tail of outcomes by examining the convexity of the expected profit function in an artist's underlying talent. I pose the following:
+Before describing the model in detail, I will first lay out hypothesized results based on the literature presented above. The first hypothesis pertains to the "long tail" theory described in @aguiarQualityPredictabilityWelfare2018. Following @rosenEconomicsSuperstars1981a, I will measure the long tail of outcomes by examining the convexity of the expected profit function in an artist's underlying talent. I pose the following:
 
 > *Hypothesis 1: Unpredictability of a streaming platform's content matching algorithm will decrease the convexity of profits in talent.*
 
