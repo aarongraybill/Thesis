@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.12.16)  16 DEC 2021 19:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.12.16)  10 JAN 2022 15:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1663,33 +1663,79 @@ LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
 (Font)              scaled to size 10.0pt on input line 318.
 [4] [5] [6] [7] [8] [9]
-<ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf, id=196, 469.755pt x 325.215pt>
+<ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf, id=201, 469.755pt x 325.215pt>
 File: ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf Graphic file (type pdf)
 <use ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf>
-Package pdftex.def Info: ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf  used on input line 732.
+Package pdftex.def Info: ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf  used on input line 733.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[10] [11 <./ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf>] [12] [13] [14] [15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 1065--1071
+[10] [11 <./ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf>] [12] [13] [14] [15]
+Overfull \hbox (3.60228pt too wide) in paragraph at lines 1106--1106
+ []|\T1/Heuristica-TLF/m/n/10 44.0|
+ []
+
+
+Overfull \hbox (3.60228pt too wide) in paragraph at lines 1107--1108
+ []|\T1/Heuristica-TLF/m/n/10 46.9|
+ []
+
+
+Overfull \hbox (3.60228pt too wide) in paragraph at lines 1108--1108
+ []|\T1/Heuristica-TLF/m/n/10 49.1|
+ []
+
+
+Overfull \hbox (3.60228pt too wide) in paragraph at lines 1109--1110
+ []|\T1/Heuristica-TLF/m/n/10 21.0|
+ []
+
+
+Overfull \hbox (3.60228pt too wide) in paragraph at lines 1110--1110
+ []|\T1/Heuristica-TLF/m/n/10 38.2|
+ []
+
+
+Overfull \hbox (3.60228pt too wide) in paragraph at lines 1111--1112
+ []|\T1/Heuristica-TLF/m/n/10 61.4|
+ []
+
+
+Overfull \hbox (3.60228pt too wide) in paragraph at lines 1112--1112
+ []|\T1/Heuristica-TLF/m/n/10 52.0|
+ []
+
+
+Overfull \hbox (3.60228pt too wide) in paragraph at lines 1113--1114
+ []|\T1/Heuristica-TLF/m/n/10 34.4|
+ []
+
+[16] [17]
+<ThesisProposal_files/figure-latex/DiscernPlot-1.pdf, id=274, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/DiscernPlot-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/DiscernPlot-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/DiscernPlot-1.pdf  used on input line 1181.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[18 <./ThesisProposal_files/figure-latex/DiscernPlot-1.pdf>] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 1287--1293
 \T1/Heuristica-TLF/m/n/10 link -[] explain -[] how -[] algorithm -[] changes -[] supercharged -[] their -[] business -[] to -[] an -[] estimated -[] 17 -[] 5 -[] million -[]
  []
 
-[17] (./ThesisProposal.aux)
+[20] (./ThesisProposal.aux)
 Package rerunfilecheck Info: File `ThesisProposal.out' has not changed.
-(rerunfilecheck)             Checksum: 04C00C327D09257B8224A7A086365537;3031.
+(rerunfilecheck)             Checksum: F37C11DE97C6CDC85FF5F3D35F7D478D;3166.
  ) 
 Here is how much of TeX's memory you used:
- 35469 strings out of 480313
- 796953 string characters out of 5895946
- 1191152 words of memory out of 5000000
- 52610 multiletter control sequences out of 15000+600000
+ 35492 strings out of 480313
+ 797479 string characters out of 5895946
+ 1198151 words of memory out of 5000000
+ 52620 multiletter control sequences out of 15000+600000
  474943 words of font info for 142 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  84i,16n,80p,732b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/enc/dvips/heuristica/zut_geqeyh.enc}</Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/heuristica/Heuristica-Bold.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/heuristica/Heuristica-Italic.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/heuristica/Heuristica-Regular.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/erewhon/erewMI.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txexs.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txmiaSTbb.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on ThesisProposal.pdf (17 pages, 453908 bytes).
+Output written on ThesisProposal.pdf (20 pages, 1048650 bytes).
 PDF statistics:
- 340 PDF objects out of 1000 (max. 8388607)
- 298 compressed objects within 3 object streams
- 82 named destinations out of 1000 (max. 500000)
- 154 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 383 PDF objects out of 1000 (max. 8388607)
+ 335 compressed objects within 4 object streams
+ 94 named destinations out of 1000 (max. 500000)
+ 167 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,4 +1,4 @@
-d <- read.csv("/Users/aarongraybill/Downloads/TryData (3).csv")
+d <- read.csv("inputs/SimulationDataWithShocks.csv")
 
 library(ggplot2)
 library(dplyr)

@@ -711,6 +711,26 @@
             "type": ""
         },
         {
+            "abstract": "The mysterious YouTube algorithm. It’s confused people for years, and will continue to do so. So why isn’t YouTube more transparent? It used to be that they wouldn’t tell anyone how it works - but now, it’s that they can’t. Let’s talk about deep learning algorithms, neural networks, and search engine optimisation. CREDITS: Thanks to animator Matt Ley for the wonderful cartoon of me: https://www.youtube.com/user/Thelaser... I put this together in three days, plus a day of checking and proofing, in Adobe After Effects. It took about eight hours to render, but that’s because every frame has keying, lighting, camera, and motion blur effects, and because the original footage of me was in 4.6k lossless. Yes, the sound of the black box working is the sound of a microwave (it’s the one in my kitchen). Also, those aren’t faked desktop screenshots, I had to install a copy of Windows ME to make this. SOURCES: \"Deep Neural Networks for YouTube Recommendations\", https://research.google.com/pubs/arch... [PDF]  some people are saying this link 404s, but it works for me? Search for the title and you’ll find it. There’s a good layperson summary of the paper here: http://www.tubefilter.com/2017/02/16/... The Defamation Act is published under the Open Government License 3.0: http://www.nationalarchives.gov.uk/do... and is available at http://www.legislation.gov.uk/ukpga/2... The music in the cartoon section is called ’Ukulele Beach’, and it’s in the YouTube audio library. REFERENCES: There are a lot of references and in-jokes in here, and hopefully people will spot most of them in the comments. But if anyone wants confirmation: yes, there are references to Billy Joel, Aqua, a He-Man remix, and Elton John. The last one’s pretty obscure, well done to you at home if you got that. VFX breakdown and references explained: https://www.youtube.com/watch?v=6s9aG... ABOUT ME: I’m at http://tomscott.com on Twitter at http://twitter.com/tomscott on Facebook at http://facebook.com/tomscott and on Snapchat and Instagram as tomscottgo",
+            "author": [
+                {
+                    "literal": "Tom Scott"
+                }
+            ],
+            "id": "tomscottWhyYouTubeAlgorithm2017",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017,
+                        5
+                    ]
+                ]
+            },
+            "publisher": "https://www.youtube.com/watch?v=BSpAWkQLlgM",
+            "title": "Why The YouTube Algorithm Will Always Be A Mystery",
+            "type": ""
+        },
+        {
             "abstract": "Glenn A. Withers, Unbalanced Growth and the Demand for Performing Arts: An Econometric Analysis, Southern Economic Journal, Vol. 46, No. 3 (Jan., 1980), pp. 735-742",
             "id": "UnbalancedGrowthDemand",
             "language": "en-US",
@@ -726,6 +746,27 @@
             "language": "en-US",
             "publisher": "https://mythical.com/pages/about-us",
             "title": "ABOUT US - Mythical",
+            "type": ""
+        },
+        {
+            "abstract": "Is there an ideal video length? Is there an optimal number of times to upload per week? In this Master Class, YouTube creator Simon Whistler from Today I Found Out shares his advice on how long videos should be, how often creators should publish and what things you can look out for in Analytics. Hear Simon’s 5 things creators should be thinking about when considering these questions, and be sure to check out the rest of his Master Class episodes here: https://goo.gl/HmTspQ Check out Simon’s channel: https://www.youtube.com/user/TodayIFo... Subscribe and hit the bell to see a new video each Tuesday: https://goo.gl/So4XIG \\blackpointerright Level up your YouTube skills with Creator Academy lessons: https://goo.gl/1P8bT4 \\blackpointerright See index of all lessons: https://goo.gl/x2h1NG \\blackpointerright Get step-by-step instructions: https://goo.gl/fBzr7",
+            "author": [
+                {
+                    "literal": "YouTube Creators"
+                }
+            ],
+            "id": "youtubecreatorsWhatIdealVideo2018",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018,
+                        9
+                    ]
+                ]
+            },
+            "publisher": "https://www.youtube.com/watch?v=uB-1j2ZOjlw",
+            "title": "What’s the Ideal Video Length? | Master Class #1 ft. Today I Found Out",
+            "title-short": "What’s the Ideal Video Length?",
             "type": ""
         },
         {

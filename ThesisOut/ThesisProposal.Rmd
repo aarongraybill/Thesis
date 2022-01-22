@@ -32,6 +32,7 @@ header-includes:
 - \definecolor{myBlack}{HTML}{13091C}
 - \interfootnotelinepenalty=10000
 - \newtheorem{prop}{Proposition}
+fig_caption: yes
 
 nocite: |
  @YouTubeStarsRhett2020
@@ -53,19 +54,17 @@ YouTube, the video streaming giant, reported 19.7 Billion dollars in ad revenue 
 
 YouTube and Spotify, among their industry peers like Instagram, TikTok, lie at the intersection of two burgeoning markets: streaming platforms and social media. Services like YouTube, Spotify, Instagram, and TikTok, which I will refer to as *platforms*, provide a rich opportunity for economic analysis.
 
-Platforms are fundamentally a marketplace. *Content creators*, firms, are given an opportunity to connect with consumers who wish to consumer their product. However, platforms provide a marketplace unlike anything that has been previously seen. One key distinction between a physical marketplace and a digital platform is that consumption is usually nonrivalrous. One consumer's decision to listen to an artist's newest release on Spotify has no negative impact on another consumer's ability to consume that product. A content creator's inventory is limited only by the bandwidth of the platform and the number of consumers who wish to consume their product. The number of willing consumers is a content creator's audience, and is central to the analysis conducted below.
+Platforms are fundamentally a marketplace. *Content creators*, firms, are given an opportunity to connect with consumers who wish to consume their product. However, platforms provide a marketplace unlike anything that has been previously seen. In this way, streaming economies are *two-sided markets*, markets in which both the buyer and sellers connect through a third party. In our case, the streaming platform serves as the point of connection. One key distinction between a physical marketplace and a digital platform is that consumption is usually nonrivalrous. One consumer's decision to listen to an artist's newest release on Spotify has no negative impact on another consumer's ability to consume that product. However, one consumer's choices do indeed have an effect on others. We expect that a platform's algorithm measures one user's engagement and uses that and other factors to decide whether or not to show a product to a different consumer. Furthermore, a content creator's inventory is limited only by the bandwidth of the platform and the number of consumers who wish to consume their product. The number of willing consumers is a content creator's audience, and is central to the analysis conducted below.
 
-Audience evolution is another key difference between a streaming economy and traditional market structures. Of course, consumers can seek out content directly if they know that a creator exists, but that does not fully describe consumer-creator matching on a platform. A central component of streaming markets is the *algorithm*. A platform's algorithm can take multiple forms, but I will use it mean a platform's way of analyzing a release by a content creator and deciding which consumers will be shown that release. In some markets, like an outdoor farmer's market, the algorithm is nonexistent. Consumers are required to self-select products they wish to purchase. However, platforms use their algorithm to show content to consumers content they may not have ex ante knowledge.
+Audience evolution is another key difference between a streaming economy and traditional market structures. Of course, consumers can seek out content directly if they know that a creator exists, but that does not fully describe consumer-creator matching on a platform. A central component of streaming markets is the *algorithm*. By algorithm, I mean a platform's way of analyzing a release by a content creator and deciding which consumers will be shown that release. In some markets, like an outdoor farmer's market, the algorithm is nonexistent. Consumers are required to self-select products they wish to purchase. However, platforms use their algorithm to show content to consumers they may not have initially been aware of. Algorithms are also a way of encoding a content creator's reputation over time. An algorithm looks at a subset of a content creator's history of releases when deciding who will see an artists new releases. These past releases serve as a reputation even when a consumer has not yet been exposed to a creator. A consumer might think, "I don't know what this video will be, but if the algorithm is recommending it, I will probably enjoy it."
 
-Content creators have both celebrated algorithms as a way of gaining exposure that would have been impossible in a pre-internet economy. Others have maligned the algorithm for its unpredictability and bias towards content that appeals to the lowest common denominator. However, all successful content creators must acknowledge the importance of a platform's algorithm and adapt to its changes.
-
-A useful anecdote comes from Stevie Wynne Levine, Chief Creative Officer of Mythical. Mythical is a YouTube video conglomerate with over 75 million subscriber across its channels and 25 billion total views on its videos. In reference to how their team analyzes the algorithm, Wynne Levine reveals:
+All successful content creators must acknowledge the importance of a platform's algorithm and adapt to its changes. A useful anecdote comes from Stevie Wynne Levine, Chief Creative Officer of Mythical. Mythical is a YouTube conglomerate with over 75 million subscribers across its channels and 25 billion total views on its videos. In reference to how their team analyzes the algorithm, Wynne Levine reveals:
 
 > It's something that we do not only every day, but three, four times a day. We analyze each video that we've put out for that day and how we can improve impressions and views. So definitely not something that we set it and forget it, because it's constantly evolving. (para. 12)
 
 The above discussion reveals that content creators have a unique economic problem that is worthy of study. Recent literature has focused on the optimal behavior of consumer and platforms, but content creators have been mostly omitted in the literature of streaming platforms. Work that has tackled artist's optimal behavior has primarily considered fine art in non-digital markets. The analysis below explores whether or not streaming platforms create conditions that mirror fine art markets by concentrating revenue in a small minority of the total number of producers.
 
-In this paper, I will explore how content creators must balance the inherent quantity-quality trade-off present in making content for platform. A higher number of releases offers a content creator more opportunities for the random component of the algorithm to make their content viral. However, investing in greater quality encourages consumers who do know about an artist's content to stream that content more.
+In this paper, I will explore how content creators must balance the inherent quantity-quality trade-off present in making content for platform. A higher number of releases offers a content creator more opportunities for the random component of the algorithm to make their content viral. However, investing in greater quality encourages consumers who do know about an artist's content to stream that content more. Again using YouTube as an example, their "Creator Academy" which is intended to teach content creators how to make more effective content, acknowledges but does not provide clear guidance on this quality-quantity tradeoff. Simon Whistler, a popular content creator hired to present these videos says that "... if you have more videos out there, chances are your watch time overall is going to be higher" @youtubecreatorsWhatIdealVideo2018. Watch time, in this context, is the cumulative time that viewers have watched your content divided by the number of unique viewers and is an important predictor of algorithmic success
 
 I construct a model of artist/content creator behavior in which artists must decide a quantity and quality of art to release in every period. Their quantity choice affords them a number of chances at algorithmic exposure. Additionally, the algorithm will also factor in how many times past audience members consumed an artist's work when deciding audience size. An artist's underlying talent (ability to produce the same quality/quantity at a lower cost) will govern optimal production, and I will show how the distribution of talent relates to the distribution of revenue in successful artists.
 
@@ -179,12 +178,12 @@ I_up=.75*A_0+m+m*1.1
 I_down=.75*A_0+m-m*1.1
 I_mid=.75*A_0+m
 
-d <- 
+q <- 
   tibble::tibble(m,I_up,I_down,I_mid)
 
 library(ggplot2)
 library(latex2exp)
-ggplot(d)+
+ggplot(q)+
   geom_line(aes(m,I_mid,color="Expected Audience"),size=1.1)+
   geom_ribbon(aes(m,ymin=I_down,ymax=I_up,color="Range of Audience"),alpha=.2,fill="#211030")+
   theme_bw()+
@@ -333,29 +332,108 @@ E[V(\overline z\to\overline z)]&=r\left((1-\delta)A_{0}+I_0\right)n(\overline{z}
 
 The optimal strategy is the maximum of the four strategies listed in \ref{eq:two_period_choices}, but the conditions under which certain strategies are preferred are hard to characterize. I will use numerical simulation to describe the conditions that produce certain optimal strategies.
 
-In order to simulate the possible conditions, I generate sample values for each of the variables in \ref{eq:two_period_choices}. Absent a more informed prior, I sample each variable in a reasonable range of values. I summarize these ranges below:
+In order to simulate the possible conditions, I generate sample values for each of the variables in \ref{eq:two_period_choices}. Absent a more informed prior, I uniformly sample each variable in a reasonable range of values. I summarize these ranges below:
 
-+---------------------------------------------+----------------------+------------------------+------------------------+
 | Variable                                    | Symbol               | Minimal Possible Value | Maximal Possible Value |
-+=============================================+======================+========================+========================+
-| Streams per capita, high quality            | $n(\overline z)$     | $0$                    |                        |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Streams per capita, low quality             | $n(\underline z)$    | $0$                    |                        |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Starting audience                           | $A_0$                | $0$                    |                        |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Discount factor                             | $\beta$              | $0$                    |                        |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Audience depreciation rate                  | $\delta$             | $0$                    |                        |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Expected impressions per song, high quality | $I(n(\overline z))$  | $0$                    |                        |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Expected impression per song, low quality   | $I(n(\underline z))$ | $0$                    |                        |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Initial expected impressions                | $I_0$                | $0$                    |                        |
-+---------------------------------------------+----------------------+------------------------+------------------------+
+|---------------------------------------------|----------------------|------------------------|------------------------|
+| Streams per capita, high quality            | $n(\overline z)$     | $0$                    | $10$                   |
+| Streams per capita, low quality             | $n(\underline z)$    | $0$                    | $10^*$                 |
+| Starting audience                           | $A_0$                | $0$                    | $100$                  |
+| Discount factor                             | $\beta$              | $0$                    | $1$                    |
+| Audience depreciation rate                  | $\delta$             | $0$                    | $1$                    |
+| Expected impressions per song, high quality | $I(n(\overline z))$  | $0$                    | $100$                  |
+| Expected impression per song, low quality   | $I(n(\underline z))$ | $0$                    | $100^*$                |
+| Initial expected impressions                | $I_0$                | $0$                    | $100^*$                |
 
-: Sample range for simulated parameter values
+: Sample range for simulated parameter values. $^*$Indicates that the maximal value is limited by the high quality alternative
+
+The values above are primarily aimed at describing the behavior of new artists, where the algorithm will not show their content to more than $100$ new consumers per release. Furthermore, this assumes that consumers will stream an artist's portfolio no more than $10$ times, an assumption that reflects more durable entertainment like a YouTube video instead of a song. Additionally, I filter out any realization of the random variable in which $I_0$ or $I(n(\underline z))$ are greater than $I(n(\overline z))$ because these are cases in which the algorithm rewards new and low quality art more than high quality art. If the algorithm is to be meaningful, then it should prioritize high quality content. Similarly, I filter out any cases when $n(\underline{z})\geq n(\overline{z})$ because high quality work should be streamed more than low quality alternatives.
+
+With that, I generate a simulation dataset consisting of a realization of each of the eight variables in the table above.[^5] I use $9908$ samples from the eight-dimensional parameter space. For each of these sets of parameters, I compute the discounted two-period profit from each of the four strategies. I then rank each of the strategies according to their discounted profit to determine which strategy the agent will choose. The following table computes the median value of each of the parameters conditional on a given strategy being optimal.
+
+[^5]: The data and manipulations can be fully reproduced with the following Python Notebook: <https://colab.research.google.com/drive/1vQz0UHOiQwL6Ed7m9Q7mZeuVhMo8FB0-?usp=sharing>
+
+```{r CleanSimulationData}
+d <- read.csv("../inputs/SimulationData.csv")
+
+library(ggplot2)
+library(dplyr)
+
+d <- 
+  d %>% 
+mutate(premium=nu/nd-1)
+
+d_sum <- 
+  d %>% 
+  group_by(winner) %>% 
+  summarise(across(c(nu:I0,premium),median))
+
+d_sum <- 
+  d_sum %>% select(-c(winner,premium))
+
+rownames(d_sum) <- 
+  c("$\\underline{z}\\to\\underline{z}$","$\\overline{z}\\to\\underline{z}$","$\\underline{z}\\to\\overline{z}$","$\\overline{z}\\to\\overline{z}$")
+
+knitr::kable(d_sum,
+             digits=1,
+             col.names = c("$n(\\overline{z})$","$n(\\underline{z})$","$A_0$","$\\beta$","$\\delta$","$I(n(\\overline{z}))$","$I(n(\\underline{z}))$","$I_0$"),caption="Median value of sampled parameters conditional on a given strategy being optimal",
+             row.names = TRUE,escape=F,label="MedianSim")
+
+```
+
+There are many important insights that we can draw from the table above. To do so, we can compare each of the values in the table to the unconditional median of that parameter. For example, the overall median of $\delta$ is approximately $.5$, but in the $\delta$ column of the $\underline{z}\to\overline{z}$ row, the median value of $\delta$ is $0.30$, much lower than the overall median. This means that when the low quality, then high quality strategy is optimal, we expect there to be relatively low audience depreciation relative to when other strategies are optimal.
+
+I will now briefly characterize the profile of parameters that produces each of the winning outcomes. First, if $\underline{z}\to\underline{z}$ is optimal, then there is probably, relatively little difference between the number of streams per capita of high and low quality art. Additionally, there is relatively little expected algorithmic benefit from high quality products. As $\underline{z}\to\underline{z}$ is the most pessimistic of the possible strategies, it is not surprising that this strategy arises when both the consumer and the algorithm are not very discerning.
+
+For $\overline{z}\to\underline{z}$ to be optimal, then consumers should not be very picky, but the algorithm should. The algorithm should make it hard to new artists to gain exposure (small $I_0$). Additionally, the artist should have a stronger-than-average concern for the future $\beta=.6$, and a relatively high audience depreciation, $\delta=.6$. This description is consistent with intuition. If consumers are not very picky between high and low quality, but initial impressions are hard to come by, the artist will prioritize using more releases to grow their audience instead of relying on the algorithm.
+
+The $\underline{z}\to\overline{z}$ is very rare among the points sampled, and it requires a unique mix of parameters to be optimal. Consumers should be moderately discerning, and the algorithm should punish low quality content, however, the algorithm also needs to favor new artists ($I_0$) more than low quality content $I(n(\underline z))$. Additionally greater present bias, and high audience retention benefit this strategy. This result, albeit rare, has important implications for how a streaming platform should treat its new artists. If the platform wishes to incentivize future high quality production from artists who start low quality, they should algorithmically favor new content.
+
+The final case $\overline{z}\to\overline{z}$, is essentially the opposite of $\underline{z}\to\underline{z}$. For the high-quality only strategy to exist, both consumers and the algorithm should be very discerning of high quality content, those two conditions alone are usually sufficient to result in $\overline{z}\to\overline{z}$ as the optimal strategy as evidenced by the other variables being near their medians. This again has important implications for the streaming platform, if they wish to establish an environment where high quality content thrives, they should ensure that their algorithm rewards high quality content, but the platform also relies on its consumers to be equally discerning.
+
+Discussion of the table above that the discerningness of the consumer and the algorithm are important predictor of an artist's optimal behavior. As crude measures of discerningness, let $\nu=n(\overline{z})/n(\overline{z})-1$ and $\iota=I(n(\overline{z})I/I(n(\overline{z}))-1$. These variables are the percentage difference between the high and low quality versions of streams per capita and expected impressions per release. Using these two
+
+```{r DiscernPlot,fig.cap="\\label{fig:DiscernPlot} Consumer and Algorithmic Discerningness on Optimal Strategy"}
+d <- 
+  d %>% 
+  mutate(con_dis=nu/nd-1,
+         alg_dis=Iu/Id-1)
+
+cols <- c("A"="#211030", "B"="#255059","C"="#FFBA3D","D"="#8C2730")
+strats <- c(expression(underline(z) %->% underline(z)), expression(bar(z) %->% underline(z)),expression(underline(z) %->% bar(z)),expression(bar(z) %->% bar(z)))
+
+ggplot(d)+
+  geom_point(aes(x=log(con_dis),y=log(alg_dis),color=winner),alpha=.1)+
+  scale_color_manual(values = cols, labels = unname(strats) )+
+  theme_bw()+
+  guides(colour = guide_legend(override.aes = list(alpha = 1)))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+      panel.background = element_blank(), axis.line = element_line(colour = "black"))+theme(text=element_text(family="serif"),legend.title = element_blank())+
+  xlab(TeX("Log Consumer Discerningness, $\\ln(\\iota)$"))+
+  ylab(TeX("Log Algorithm Discerningness, $\\ln(\\nu)$"))
+```
+
+(I KNOW THE LEGEND IS MESSED UP THERE, BUT I'LL FIX IT LATER BECAUSE I WANT TO GET TO THE INSIGHTS)
+
+Figure 2 (FIX LINK) shows that while there is some overlap between the optimal strategies, the regions are mostly distinct and contiguous. For example, whenever $\ln(\nu)>0$ (high consumer discerningness, almost no other parameters matter and we are essentially guaranteed that the $\overline{z}\to\overline{z}$ is the ideal strategy. On the contrary when $\ln(\nu),\ln(\iota)<0$ the ideal strategy is almost always $\underline{z}\to\underline{z}$. It's really quadrant II where $\ln(\iota)>0$, but $\ln(\nu)<0$, that the ideal strategy is least clear. Since high algorithmic discernment, and low consumer discernment push in opposite directions, it makes sense that quadrant II is ambiguous. What is less clear is why quadrant IV is not equally ambiguous. This seems to indicate that high consumer discernment outweighs low algorithmic discernment, but the inverse is not always true.
+
+## Notes on random reputation shocks
+
+-   Made shock large enough so about 10% switched strategies
+
+-   If a person initially choosing a high quality period two, then a positive shock will never make them choose to switch to low quality
+
+-   Similarly, if a person was planning for a low quality period two, then a negative shock never causes them to switch to high quality
+
+-   Anecdotally, state $A$, which is $\underline{z}\to\underline{z}$ is the least sensitive to shocks (even large ones). This is a notable result because it's not like $A$ is the most common result, that's $D$. But it's hard to say whether or not I've just built the parameters so that the worst bad case is way worse than the best good case
+
+# Next Steps, again
+
+1.  In that numerical simulation, see which strategy produces the biggest audiences for a given set of parameters
+
+2.  Do the sensitivity analysis of how shocks affect behavior
+
+3.  Get a better structure for the results section (though that may only come once I've narrowed down the results that are worth including).
 
 \newpage
 
