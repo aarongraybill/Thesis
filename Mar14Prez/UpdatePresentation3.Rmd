@@ -1,0 +1,101 @@
+---
+title: "Update Presentation, Curvy Conundrums"
+#subtitle: "Aristic Production and Algorithmic Uncertainty in Streaming Markets"
+author: "Aaron Graybill"
+date: "π-Day 2022"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    includes:
+      in_header:
+    css: [xaringan-themer.css, bullets.css]
+biblio-style: apalike
+csl: ../Inputs/apa.csl
+bibliography: ../RunningBib.bib
+---
+```{r setup, include=FALSE}
+options(htmltools.dir.version = T)
+knitr::opts_chunk$set(fig.width=10,fig.height = 6)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#8C2730",
+  secondary_color= "#D8E6F2",
+  black_color = "#13091C",
+  title_slide_background_image = "image (3).jpg",
+  #title_slide_background_size = "contain",
+  header_font_google = google_font("Playfair Display"),
+  text_font_google   = google_font("Average", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  text_font_size = "1.5rem",
+  footnote_position_bottom = "10px"
+)
+```
+
+
+# Outline
+
+1.    Review The Current Iteration of the Model
+2.    Discuss where and how curvature can be implemented
+3.    Suggested Functional Forms
+4.    Value function iteration?
+
+
+---
+class: left
+# Review The Current Iteration of the Model
+The model as it stands forces linearity of aglorithmic shocks
+$$V(m,z)=\max_{m,z}\left\{E\left[rA_tn(z)-C(m,z;\kappa)\right]  \ \textrm{s.t.} \ \\ A_t=(1-\delta)A_{t-1}+mI(n_{t-1})+\sum_{i=1}^m\varepsilon_{it}\right\}$$
+---
+class: left
+# Proposed More Flexible Model for this application:
+
+$$V(m,z)=\max_{m,z}\left\{E\left[rA_tn(z)\right]  \ \textrm{s.t.} \ \\ A_t=(1-\delta)A_{t-1}+I(n_{t-1},m,\varepsilon), \\ f(m,z)=\kappa\right\}$$
+
+---
+class: left
+## Problems with that model
+
+- We need a functional form for:
+  - $n(z)$, streams per quality after exposure (choosing good units might help)
+  - $I(n_{t-1},m,\varepsilon)$, impressions per past quality, units this period, and random shock
+  - $f(m,z)$, the production/time constraint (Cobb-Douglas??)
+  
+---
+class: left
+## Upsides of that system
+
+- We can collapse the expectation component to:
+ - $E[I(n_{t-1},m,\varepsilon)|n_{t-1},m]$
+ - Allows curvature on $\varepsilon$ but minimal influence elsewhere
+- Good choices of functional forms should allow for Dynamic Programming
+
+---
+class: left
+## Proposed Functional Forms
+- $I(n_{t-1},m,\varepsilon)=\ln\left(n_{t-1}^{\alpha} m^{\beta}\varepsilon^{\gamma}\right)$ with $\ln(\varepsilon)\sim N(0,\sigma^2)$
+  - Nice Consequence that $E(I)=\alpha\ln(n_{t-1})+\beta\ln(m)+0$
+  - We could do a taylor approach 
+- $n(z)=z$ or $n(z)=cz$ just give units of quality such that one quality means one more stream per exposure
+- $f(m,z)=(m/\overline{m})^q(z/\overline{z})^{1-q}$ where those are some normalizing constants. Basically Cobb-Douglas.
+
+---
+class: left
+
+# A nice result:
+
+- Astonishingly, we can actually solve the one period model in closed form if we use those assumptions.
+- The biggest problem is that if we set $n(z)=z$, then cobb-douglas on $f$ probably doesn't make sense
+- But if we ignore that, does that mean we can recursively solve the multiperiod case?
+  - Well no, this period's choice of $z$ and $m$ affect next period's $n_{t-1}$ and $A_t-1$ respectively
+- But dynamic programming?
+
+
+
+  
