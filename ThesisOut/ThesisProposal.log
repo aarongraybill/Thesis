@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.1.22)  19 FEB 2022 11:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.20)  20 MAR 2022 10:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **ThesisProposal.tex
 (./ThesisProposal.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-01-21> (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
+L3 programming layer <2022-02-24> (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
@@ -123,7 +123,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2020/03/06 v1.0d TeX engine tests
+Package: iftex 2022/02/03 v1.0f TeX engine tests
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 112.
@@ -160,7 +160,7 @@ File: svgnam.def 2021/10/31 v2.13 Predefined colors according to SVG 1.1 (UK)
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/xcolor/x11nam.def
 File: x11nam.def 2021/10/31 v2.13 Predefined colors according to Unix/X11 (UK)
 )) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
+Package: hyperref 2022-02-21 v7.00n Hypertext links for LaTeX
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
@@ -193,11 +193,9 @@ Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 \Hy@linkcounter=\count272
 \Hy@pagecounter=\count273
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2022-02-21 v7.00n Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def
-File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel languages
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
@@ -205,24 +203,24 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count274
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2022-02-21 v7.00n Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `unicode' set `true' on input line 4073.
-Package hyperref Info: Hyper figures OFF on input line 4192.
-Package hyperref Info: Link nesting OFF on input line 4197.
-Package hyperref Info: Hyper index ON on input line 4200.
-Package hyperref Info: Plain pages OFF on input line 4207.
-Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Option `unicode' set `true' on input line 4018.
+Package hyperref Info: Hyper figures OFF on input line 4137.
+Package hyperref Info: Link nesting OFF on input line 4142.
+Package hyperref Info: Hyper index ON on input line 4145.
+Package hyperref Info: Plain pages OFF on input line 4152.
+Package hyperref Info: Backreferencing OFF on input line 4157.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4445.
+Package hyperref Info: Bookmarks ON on input line 4390.
 \c@Hy@tempcnt=\count275
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4804.
+LaTeX Info: Redefining \url on input line 4749.
 \XeTeXLinkMargin=\dimen149
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -232,15 +230,15 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 \Fld@menulength=\count276
 \Field@Width=\dimen150
 \Fld@charsize=\dimen151
-Package hyperref Info: Hyper figures OFF on input line 6076.
-Package hyperref Info: Link nesting OFF on input line 6081.
-Package hyperref Info: Hyper index ON on input line 6084.
-Package hyperref Info: backreferencing OFF on input line 6091.
-Package hyperref Info: Link coloring OFF on input line 6096.
-Package hyperref Info: Link coloring with OCG OFF on input line 6101.
-Package hyperref Info: PDF/A mode OFF on input line 6106.
-LaTeX Info: Redefining \ref on input line 6146.
-LaTeX Info: Redefining \pageref on input line 6150.
+Package hyperref Info: Hyper figures OFF on input line 6027.
+Package hyperref Info: Link nesting OFF on input line 6032.
+Package hyperref Info: Hyper index ON on input line 6035.
+Package hyperref Info: backreferencing OFF on input line 6042.
+Package hyperref Info: Link coloring OFF on input line 6047.
+Package hyperref Info: Link coloring with OCG OFF on input line 6052.
+Package hyperref Info: PDF/A mode OFF on input line 6057.
+LaTeX Info: Redefining \ref on input line 6097.
+LaTeX Info: Redefining \pageref on input line 6101.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
@@ -251,7 +249,7 @@ package with kernel methods
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
+File: hpdftex.def 2022-02-21 v7.00n Hyperref driver for pdfTeX
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
@@ -267,7 +265,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 )
 \Hy@SectionHShift=\skip52
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 50.
+Package hyperref Info: Option `colorlinks' set `true' on input line 49.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
@@ -1331,8 +1329,8 @@ Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
 \XKV@depth=\count325
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/newtxmath.sty
-Package: newtxmath 2021/12/18 v1.7
-`newtxmath' v1.7, 2021/12/18 Math macros based originally on txfonts (msharpe) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: newtxmath 2022/01/16 v1.71
+`newtxmath' v1.71, 2022/01/16 Math macros based originally on txfonts (msharpe) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
 Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifluatex.sty
 Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
@@ -1347,113 +1345,113 @@ Package: centernot 2016/05/16 v1.4 Centers the not symbol horizontally (HO)
 \tx@tB=\toks46
 \tx@su=\read3
 amsthm NOT loaded
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 373.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 376.
 LaTeX Font Info:    Encoding `OT1' has changed to `T1' for symbol font
-(Font)              `operators' in the math version `normal' on input line 373.
+(Font)              `operators' in the math version `normal' on input line 376.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> T1/Heuristica-TLF/m/n on input line 373.
+(Font)                  OT1/lmr/m/n --> T1/Heuristica-TLF/m/n on input line 376.
 LaTeX Font Info:    Encoding `OT1' has changed to `T1' for symbol font
-(Font)              `operators' in the math version `bold' on input line 373.
+(Font)              `operators' in the math version `bold' on input line 376.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/Heuristica-TLF/m/n on input line 373.
+(Font)                  OT1/lmr/bx/n --> T1/Heuristica-TLF/m/n on input line 376.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  T1/Heuristica-TLF/m/n --> T1/Heuristica-TLF/b/n on input line 374.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 380.
+(Font)                  T1/Heuristica-TLF/m/n --> T1/Heuristica-TLF/b/n on input line 377.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 383.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 380.
+(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 383.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 380.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 381.
+(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 383.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 384.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> T1/Heuristica-TLF/m/it on input line 381.
+(Font)                  OT1/lmr/m/it --> T1/Heuristica-TLF/m/it on input line 384.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/bx/it --> T1/Heuristica-TLF/m/it on input line 381.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 382.
+(Font)                  OT1/lmr/bx/it --> T1/Heuristica-TLF/m/it on input line 384.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 385.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 382.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 385.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 382.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 384.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 385.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 387.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> T1/Heuristica-TLF/b/n on input line 384.
+(Font)                  OT1/lmr/bx/n --> T1/Heuristica-TLF/b/n on input line 387.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/Heuristica-TLF/b/n on input line 384.
+(Font)                  OT1/lmr/bx/n --> T1/Heuristica-TLF/b/n on input line 387.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/Heuristica-TLF/m/it --> T1/Heuristica-TLF/b/it on input line 385.
+(Font)                  T1/Heuristica-TLF/m/it --> T1/Heuristica-TLF/b/it on input line 388.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 386.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 389.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 387.
-LaTeX Font Info:    Redeclaring symbol font `letters' on input line 428.
+(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 390.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 431.
 LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
-(Font)                  OML/lmm/m/it --> OML/zutmi/m/it on input line 428.
+(Font)                  OML/lmm/m/it --> OML/zutmi/m/it on input line 431.
 LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
-(Font)                  OML/lmm/b/it --> OML/zutmi/m/it on input line 428.
+(Font)                  OML/lmm/b/it --> OML/zutmi/m/it on input line 431.
 LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
-(Font)                  OML/zutmi/m/it --> OML/zutmi/b/it on input line 429.
+(Font)                  OML/zutmi/m/it --> OML/zutmi/b/it on input line 432.
 \symlettersA=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `lettersA' in version `bold'
-(Font)                  U/ntxmia/m/it --> U/ntxmia/b/it on input line 544.
-LaTeX Font Info:    Redeclaring math alphabet \mathfrak on input line 546.
+(Font)                  U/ntxmia/m/it --> U/ntxmia/b/it on input line 547.
+LaTeX Font Info:    Redeclaring math alphabet \mathfrak on input line 549.
 Now handling font encoding LMS ...
 ... no UTF-8 mapping file for font encoding LMS
-LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 565.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 568.
 LaTeX Font Info:    Encoding `OMS' has changed to `LMS' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 565.
+(Font)              `symbols' in the math version `normal' on input line 568.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/lmsy/m/n --> LMS/ntxsy/m/n on input line 565.
+(Font)                  OMS/lmsy/m/n --> LMS/ntxsy/m/n on input line 568.
 LaTeX Font Info:    Encoding `OMS' has changed to `LMS' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 565.
+(Font)              `symbols' in the math version `bold' on input line 568.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/lmsy/b/n --> LMS/ntxsy/m/n on input line 565.
+(Font)                  OMS/lmsy/b/n --> LMS/ntxsy/m/n on input line 568.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  LMS/ntxsy/m/n --> LMS/ntxsy/b/n on input line 566.
+(Font)                  LMS/ntxsy/m/n --> LMS/ntxsy/b/n on input line 569.
 \symAMSm=\mathgroup7
 LaTeX Font Info:    Overwriting symbol font `AMSm' in version `bold'
-(Font)                  U/ntxsym/m/n --> U/ntxsym/b/n on input line 591.
+(Font)                  U/ntxsym/m/n --> U/ntxsym/b/n on input line 594.
 \symsymbolsC=\mathgroup8
 LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `bold'
-(Font)                  U/ntxsyc/m/n --> U/ntxsyc/b/n on input line 612.
+(Font)                  U/ntxsyc/m/n --> U/ntxsyc/b/n on input line 615.
 Now handling font encoding LMX ...
 ... no UTF-8 mapping file for font encoding LMX
-LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 625.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 628.
 LaTeX Font Info:    Encoding `OMX' has changed to `LMX' for symbol font
-(Font)              `largesymbols' in the math version `normal' on input line 625.
+(Font)              `largesymbols' in the math version `normal' on input line 628.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/lmex/m/n --> LMX/ntxexx/m/n on input line 625.
+(Font)                  OMX/lmex/m/n --> LMX/ntxexx/m/n on input line 628.
 LaTeX Font Info:    Encoding `OMX' has changed to `LMX' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 625.
+(Font)              `largesymbols' in the math version `bold' on input line 628.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/lmex/m/n --> LMX/ntxexx/m/n on input line 625.
+(Font)                  OMX/lmex/m/n --> LMX/ntxexx/m/n on input line 628.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  LMX/ntxexx/m/n --> LMX/ntxexx/b/n on input line 626.
+(Font)                  LMX/ntxexx/m/n --> LMX/ntxexx/b/n on input line 629.
 \symlargesymbolsTXA=\mathgroup9
 LaTeX Font Info:    Overwriting symbol font `largesymbolsTXA' in version `bold'
-(Font)                  U/ntxexa/m/n --> U/ntxexa/b/n on input line 640.
+(Font)                  U/ntxexa/m/n --> U/ntxexa/b/n on input line 643.
 \tx@sbptoks=\toks47
-LaTeX Font Info:    Redeclaring math delimiter \lfloor on input line 863.
-LaTeX Font Info:    Redeclaring math delimiter \rfloor on input line 864.
-LaTeX Font Info:    Redeclaring math delimiter \lceil on input line 865.
-LaTeX Font Info:    Redeclaring math delimiter \rceil on input line 866.
-LaTeX Font Info:    Redeclaring math delimiter \lbrace on input line 867.
-LaTeX Font Info:    Redeclaring math delimiter \rbrace on input line 868.
-LaTeX Font Info:    Redeclaring math delimiter \langle on input line 869.
-LaTeX Font Info:    Redeclaring math delimiter \rangle on input line 871.
-LaTeX Font Info:    Redeclaring math delimiter \arrowvert on input line 875.
-LaTeX Font Info:    Redeclaring math delimiter \vert on input line 876.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 947.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 948.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 964.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 965.
-LaTeX Font Info:    Redeclaring math accent \check on input line 966.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 967.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 968.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 969.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 970.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 971.
-LaTeX Font Info:    Redeclaring math accent \vec on input line 2017.
-LaTeX Info: Redefining \Bbbk on input line 2807.
-LaTeX Info: Redefining \not on input line 2956.
+LaTeX Font Info:    Redeclaring math delimiter \lfloor on input line 866.
+LaTeX Font Info:    Redeclaring math delimiter \rfloor on input line 867.
+LaTeX Font Info:    Redeclaring math delimiter \lceil on input line 868.
+LaTeX Font Info:    Redeclaring math delimiter \rceil on input line 869.
+LaTeX Font Info:    Redeclaring math delimiter \lbrace on input line 870.
+LaTeX Font Info:    Redeclaring math delimiter \rbrace on input line 871.
+LaTeX Font Info:    Redeclaring math delimiter \langle on input line 872.
+LaTeX Font Info:    Redeclaring math delimiter \rangle on input line 874.
+LaTeX Font Info:    Redeclaring math delimiter \arrowvert on input line 878.
+LaTeX Font Info:    Redeclaring math delimiter \vert on input line 879.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 950.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 951.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 967.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 968.
+LaTeX Font Info:    Redeclaring math accent \check on input line 969.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 970.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 971.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 972.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 973.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 974.
+LaTeX Font Info:    Redeclaring math accent \vec on input line 2020.
+LaTeX Info: Redefining \Bbbk on input line 2810.
+LaTeX Info: Redefining \not on input line 2959.
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+Heuristica-TLF on input line 112.
@@ -1476,82 +1474,95 @@ Package: amsthm 2020/05/29 v2.20.6
 LaTeX Info: Redefining \textsquare on input line 427.
 )
 \c@prop=\count329
+\c@theorem=\count330
+\c@lemma=\count331
+\c@corollary=\count332
+\c@proposition=\count333
+\c@conjecture=\count334
+\c@definition=\count335
+\c@example=\count336
+\c@exercise=\count337
+\c@hypothesis=\count338
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count330
+File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count339
 \l__pdf_internal_box=\box72
-) (./ThesisProposal.aux)
+) (./ThesisProposal.aux
+
+LaTeX Warning: Label `fig:DiscernPlot' multiply defined.
+
+)
 \openout1 = `ThesisProposal.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/zutmi/m/it on input line 122.
-LaTeX Font Info:    Trying to load font information for OML+zutmi on input line 122.
+LaTeX Font Info:    Checking defaults for OML/zutmi/m/it on input line 138.
+LaTeX Font Info:    Trying to load font information for OML+zutmi on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/omlzutmi.fd
 File: omlzutmi.fd 2014/04/14 Fontinst v1.933 font definitions for OML/zutmi.
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 122.
-LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 122.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 138.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 138.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 138.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 138.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 138.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 138.
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 122.
-LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 122.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 138.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 138.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 138.
+LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/cyrillic/t2acmr.fd
 File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for T2B/cmr/m/n on input line 122.
-LaTeX Font Info:    Trying to load font information for T2B+cmr on input line 122.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for T2B/cmr/m/n on input line 138.
+LaTeX Font Info:    Trying to load font information for T2B+cmr on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/cyrillic/t2bcmr.fd
 File: t2bcmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for T2C/cmr/m/n on input line 122.
-LaTeX Font Info:    Trying to load font information for T2C+cmr on input line 122.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for T2C/cmr/m/n on input line 138.
+LaTeX Font Info:    Trying to load font information for T2C+cmr on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/cyrillic/t2ccmr.fd
 File: t2ccmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 122.
-LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 122.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 138.
+LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/ly1/ly1ptm.fd
 File: ly1ptm.fd 2001/02/01 font definitions for LY1/ptm using Berry names.
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 122.
-LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 122.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 138.
+LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 122.
-LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 122.
+LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 138.
+LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    ... okay on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 122.
+Package hyperref Info: Link coloring ON on input line 138.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1559,11 +1570,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count331
+\c@section@level=\count340
 )
-LaTeX Info: Redefining \ref on input line 122.
-LaTeX Info: Redefining \pageref on input line 122.
-LaTeX Info: Redefining \nameref on input line 122.
+LaTeX Info: Redefining \ref on input line 138.
+LaTeX Info: Redefining \pageref on input line 138.
+LaTeX Info: Redefining \nameref on input line 138.
 (./ThesisProposal.out) (./ThesisProposal.out)
 \@outlinefile=\write4
 \openout4 = `ThesisProposal.out'.
@@ -1604,42 +1615,42 @@ LaTeX Info: Redefining \nameref on input line 122.
 
 
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into your preamble.
- on input line 122.
+ on input line 138.
 
-\c@mv@tabular=\count332
-\c@mv@boldtabular=\count333
+\c@mv@tabular=\count341
+\c@mv@boldtabular=\count342
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 124.
+(Font)              scaled to size 17.28pt on input line 140.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 124.
+(Font)              scaled to size 12.0pt on input line 140.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 8.8pt on input line 124.
+(Font)              scaled to size 8.8pt on input line 140.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 6.6pt on input line 124.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 124.
+(Font)              scaled to size 6.6pt on input line 140.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 140.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 124.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 140.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 124.
+LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 140.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 124.
+LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 140.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 124.
+LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 140.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 128.
+(Font)              scaled to size 14.4pt on input line 144.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 128.
+(Font)              scaled to size 14.4pt on input line 144.
 (./ThesisProposal.toc
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
 (Font)              scaled to size 10.0pt on input line 1.
@@ -1652,11 +1663,11 @@ LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
 \openout5 = `ThesisProposal.toc'.
 
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 136.
+(Font)              scaled to size 8.0pt on input line 150.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 6.2pt on input line 136.
+(Font)              scaled to size 6.2pt on input line 150.
 
-Underfull \hbox (badness 10000) in paragraph at lines 139--139
+Underfull \hbox (badness 10000) in paragraph at lines 150--150
 [][][]\T1/Heuristica-TLF/m/n/8 Available on page 5 at [][]$https : / / s22 . q4cdn . com / 540910603 / ^^[les / doc _ ^^[nancials / 2020 / ar / 4e770a8c -[] ee99 -[] 49a8 -[] 9f9e -[]
  []
 
@@ -1664,105 +1675,53 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--139
 
 {/Users/aarongraybill/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 148.
+(Font)              scaled to size 10.0pt on input line 152.
 [2] [3]
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 279.
-[4] [5] [6] [7] [8] [9] [10] [11]
-<ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf, id=242, 469.755pt x 325.215pt>
-File: ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf Graphic file (type pdf)
-<use ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf>
-Package pdftex.def Info: ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf  used on input line 766.
+(Font)              scaled to size 12.0pt on input line 180.
+[4] [5] [6] [7] [8] [9] [10] [11] [12]
+<ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf, id=248, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf  used on input line 288.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[12 <./ThesisProposal_files/figure-latex/Visualize Audience Development-1.pdf>] [13] [14] [15]
-Overfull \hbox (8.84445pt too wide) in alignment at lines 1011--1018
- [] [] [] [] 
- []
-
-
-Overfull \hbox (8.84445pt too wide) in alignment at lines 1018--1022
- [] [] [] [] 
- []
-
-
-Overfull \hbox (8.84445pt too wide) in alignment at lines 1022--1036
- [] [] [] [] 
- []
-
-[16]
-Overfull \hbox (3.60228pt too wide) in paragraph at lines 1119--1119
- []|\T1/Heuristica-TLF/m/n/10 44.0|
- []
-
-
-Overfull \hbox (3.60228pt too wide) in paragraph at lines 1120--1121
- []|\T1/Heuristica-TLF/m/n/10 46.9|
- []
-
-
-Overfull \hbox (3.60228pt too wide) in paragraph at lines 1121--1121
- []|\T1/Heuristica-TLF/m/n/10 47.0|
- []
-
-
-Overfull \hbox (3.60228pt too wide) in paragraph at lines 1122--1123
- []|\T1/Heuristica-TLF/m/n/10 18.7|
- []
-
-
-Overfull \hbox (3.60228pt too wide) in paragraph at lines 1123--1123
- []|\T1/Heuristica-TLF/m/n/10 40.3|
- []
-
-
-Overfull \hbox (3.60228pt too wide) in paragraph at lines 1124--1125
- []|\T1/Heuristica-TLF/m/n/10 61.4|
- []
-
-
-Overfull \hbox (3.60228pt too wide) in paragraph at lines 1125--1125
- []|\T1/Heuristica-TLF/m/n/10 51.8|
- []
-
-
-Overfull \hbox (3.60228pt too wide) in paragraph at lines 1126--1127
- []|\T1/Heuristica-TLF/m/n/10 34.0|
- []
-
-[17]
-<ThesisProposal_files/figure-latex/DiscernPlot-1.pdf, id=306, 469.755pt x 325.215pt>
+[13 <./ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf>] [14] [15] [16] [17] [18] [19]
+<ThesisProposal_files/figure-latex/DiscernPlot-1.pdf, id=316, 469.755pt x 325.215pt>
 File: ThesisProposal_files/figure-latex/DiscernPlot-1.pdf Graphic file (type pdf)
 <use ThesisProposal_files/figure-latex/DiscernPlot-1.pdf>
-Package pdftex.def Info: ThesisProposal_files/figure-latex/DiscernPlot-1.pdf  used on input line 1194.
+Package pdftex.def Info: ThesisProposal_files/figure-latex/DiscernPlot-1.pdf  used on input line 521.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[18] [19 <./ThesisProposal_files/figure-latex/DiscernPlot-1.pdf>]
-<ThesisProposal_files/figure-latex/shock sense table and readin-1.pdf, id=330, 469.755pt x 325.215pt>
-File: ThesisProposal_files/figure-latex/shock sense table and readin-1.pdf Graphic file (type pdf)
-<use ThesisProposal_files/figure-latex/shock sense table and readin-1.pdf>
-Package pdftex.def Info: ThesisProposal_files/figure-latex/shock sense table and readin-1.pdf  used on input line 1276.
+[20] [21 <./ThesisProposal_files/figure-latex/DiscernPlot-1.pdf>]
+<ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf, id=340, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf  used on input line 569.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[20] [21 <./ThesisProposal_files/figure-latex/shock sense table and readin-1.pdf>] [22] [23] [24]
-Underfull \hbox (badness 10000) in paragraph at lines 1502--1508
+[22] [23 <./ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf>] [24] [25] [26]
+Underfull \hbox (badness 10000) in paragraph at lines 700--702
 \T1/Heuristica-TLF/m/n/10 link -[] explain -[] how -[] algorithm -[] changes -[] supercharged -[] their -[] business -[] to -[] an -[] estimated -[] 17 -[] 5 -[] million -[]
  []
 
-[25] (./ThesisProposal.aux)
+[27] (./ThesisProposal.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `ThesisProposal.out' has not changed.
 (rerunfilecheck)             Checksum: A53FF84B9462CC3BA30795F7CDD2CE46;3527.
  ) 
 Here is how much of TeX's memory you used:
- 35548 strings out of 480247
- 798550 string characters out of 5894637
- 1190185 words of memory out of 5000000
- 52721 multiletter control sequences out of 15000+600000
+ 35767 strings out of 480236
+ 804108 string characters out of 5894377
+ 1187292 words of memory out of 5000000
+ 52952 multiletter control sequences out of 15000+600000
  540772 words of font info for 143 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 84i,16n,80p,732b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,16n,80p,2286b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/enc/dvips/heuristica/zut_geqeyh.enc}</Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/heuristica/Heuristica-Bold.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/heuristica/Heuristica-Italic.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/heuristica/Heuristica-Regular.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/erewhon/erewMI.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txexs.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txmiaSTbb.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on ThesisProposal.pdf (25 pages, 1089974 bytes).
+Output written on ThesisProposal.pdf (27 pages, 1093060 bytes).
 PDF statistics:
- 469 PDF objects out of 1000 (max. 8388607)
- 413 compressed objects within 5 object streams
- 114 named destinations out of 1000 (max. 500000)
+ 481 PDF objects out of 1000 (max. 8388607)
+ 423 compressed objects within 5 object streams
+ 116 named destinations out of 1000 (max. 500000)
  188 words of extra memory for PDF output out of 10000 (max. 10000000)
 
