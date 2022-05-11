@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Exposure Doesn’t Pay the Bills:</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Aaron Graybill" />
+    <meta name="date" content="2022-05-03" />
+    <script src="libs/header-attrs-2.13/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="bullets.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Exposure Doesn’t Pay the Bills:
+]
+.subtitle[
+## .small[Aristic Production under Algorithmic Uncertainty in Streaming Markets]
+]
+.author[
+### Aaron Graybill
+]
+.date[
+### 03 May 2022
+]
+
+---
+
+
+
+
+
+
+
+# Outline
+
+1.    Intro and Motivation
+1.    *Brief* literature review
+1.    One Period Model &amp; Initial Results
+1.    Dynamic Model &amp; Main Results
+1.    Conclusions &amp; Implication
+1.    Questions
+---
+class: left
+
+# Intro and Motivation
+-   YouTube's 2021 Ad Revenue is $28.8 Billion&lt;sup&gt;1&lt;/sup&gt; 
+  - Larger than Starbucks, Kraft Heinz, and Visa&lt;sup&gt;2&lt;/sup&gt;
+-   Streaming Platforms are driven by **content creators**
+-   Content creation can be a full time job
+
+.footnote[
+[1] [Source, Alphabet Investor Report](https://abc.xyz/investor/static/pdf/2021Q3_alphabet_earnings_release.pdf)
+
+[2] [Source, Fortune Measures](https://fortune.com/fortune500/)
+]
+
+---
+# My Motivation
+
+- Content creators rely on a platform's **algorithm** to find viewers
+- Creators face algorithmic uncertainty
+  - Algorithm might show one release alot or very little
+- How does this randomness affect optimal strategy &amp; lifetime revenue?
+
+
+---
+
+class: center, middle
+background-image: url("image (3).jpg")
+
+# .white[Literature Review]
+---
+class: left
+
+# Three related strands of literature
+1. Branding
+2. Superstar
+3. Streaming
+
+---
+class: left
+
+# The branding literature:
+
+### What we've learned:
+- Branding can be a worthwhile signal (Klein &amp; Leffler 1981)
+- Reputation from branding is fragile (Shapiro 1983)
+
+### How it's relevant
+- Reputation evolution
+
+---
+class: left
+
+# The superstar literature:
+
+### What we've learned:
+- In art markets, small changes in talent lead to large changes in revenue (Rosen 1981)
+- Results hold even when talent is uncertain (MacDonald 1988)
+
+### How it's relevant
+- Revenue concentration on streaming platforms
+
+---
+class: left
+
+# The streaming literature:
+
+### What we've learned:
+- Streaming platforms are modeled as two-sided marketplaces (Thomes 2013)
+- Established artists behave differently than new artists (Bender et al. 2021)
+
+### How it's relevant
+- Same modeling context, but coming from a new angle
+
+---
+class: left
+
+# What I'm contributing
+
+- Streaming literature has not focused on artist's problem
+- Development of audience over time
+  - Apply branding and superstar to streaming
+- Role of algorithmic uncertainty in optimal strategy &amp; revenue
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+# .white[One-Period Model]
+
+---
+
+## What should a model describe?
+
+.lesspaced[
+### Consumer Behavior:
+-   Creator discovery (algorithm)
+-   Consumption based on quality
+
+### Artist/Content Creator:
+-   Maximize royalties from streams
+-   Quality-quantity trade-off under audience uncertainty
+
+### Streaming Platform:
+- Algorithmic consumer-artist matching
+- Useful but imperfect matching 
+]
+
+---
+
+# More on consumer behavior
+
+- A consumer can either be exposed to an artist or not
+- If consumer is exposed, they consume quantity `\(n\)` of an artist's work every period
+- Quantity consumed depends on quality, `\(n=\nu(z)\)`
+- Consumer behavior is identical, nonrivalrous, and independent
+- A fraction `\(\delta\)` of the audience is lost every period
+
+---
+
+# More on algorithmic behavior
+
+- Algorithm doesn't observe quality directly, can only look at last period's engagement per exposed consumer, `\(n_{-1}\)`
+  - I treat this last period streams per capita, `\(n_{-1}\)` as reputation
+- For every release, the algorithm must decide how many new people to expose the artist to
+- Every release, algorithm shows the content to `\(I(n_{-1})+\varepsilon\)`
+  - This is the source of algorithmic unpredictability
+
+---
+# Additonal notes on algorithmic uncertainty
+
+- Assume `\(\varepsilon\)`'s mean zero
+  - Creators are on average correct about the algorithm
+  - Creator's talent uncorrelated with `\(\varepsilon\)` by no arbitrage
+- Across multiple releases, shocks are independent
+  - Algorithm has already assessed meaningful characteristics, so correlation captured in `\(I(n_{-1})\)`
+- Shocks independent across time
+
+---
+
+# More on artist behavior
+- Artist chooses a quantity `\(m\)` and quality `\(z\)` in every period.
+  - Quantity increases chances at exposures this period
+  - Quality increases consumption per consumer and future reputation
+- Takes reputation &amp; past audience as given, `\(n_{-1},A_{-1}\)`
+- Production constrained by talent, `\(f(m,z)=\kappa\)`
+---
+
+# Putting the pieces together:
+
+### Audience this period: 
+#### `\(A=(1-\delta)A_{-1}+mI(n_{-1})+\sum_{i=1}^m\varepsilon_i\)`
+
+### Total Revenue:
+
+#### `\(A\cdot \nu(z)\cdot r\)`
+
+---
+# The complete statement of the artist's one-period problem:
+
+$$
+`\begin{gather*}
+\max_{m,z}\left\{E[A\nu(z)r]\right\} \\
+s.t.\\
+f(m,z)=\kappa \\ 
+A=(1-\delta)A_{-1}+mI(n_{-1})+\sum_{i=1}^m\varepsilon_i
+\end{gather*}`
+$$
+
+---
+
+# A brief binary-choice one period model
+
+- Produce low quality `\(z_l\)` or high quality `\(z_h\)` 
+- Talent allows quantity `\(m_l(\kappa)\)` or `\(m_h(\kappa)\)`
+  - `\(m_l(\kappa)&gt;m_h(\kappa)\)`
+  - Comes from `\(f(m,z)=\kappa\)`
+  
+---
+
+## Agent chooses low quality whenever:
+
+$$
+\frac{\nu(z\_h)}{\nu(z\_l)}&lt;1+\frac{I(n\_{-1})[m\_{l}(\kappa)-m\_{h}(\kappa)]}{m\_{h}(\kappa)I(n\_{-1})+(1-\delta)A\_{-1}}
+$$
+## Which is the same as:
+
+`\begin{gather*}
+\text{% additional demand for high quality}\\
+&lt; \\
+\text{% additional expected audience for low quality}
+\end{gather*}`
+
+---
+
+## Additonal Interpretation of The Binary Choice Model
+- Increasing `\(A_{-1}\)` will eventually flip the agent to produce high-quality
+- Increasing reputation, `\(n_{-1}\)` less obvious
+  - Decreases effect of algorithm and audience
+  - Choice then only depends on whether demand premium greater than *quantity* premium
+  
+---
+
+## A final note about the binary choice model
+
+The low-quality strategy gains utility relative to high quality whenever:
+
+$$
+\frac{\partial \ln(m_l(\kappa))}{\partial\kappa}&gt;\frac{\partial \ln(m_h(\kappa))}{\partial\kappa}
+$$
+
+---
+## Relevant insights from this toy model
+- Increasing initial audience causes a strategy shift
+- Increasing initial reputation less predictive
+- The semielasticity condition will hold later, so provides insight into quality strategy in talent
+  - However, this doesn't use functional forms
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+# .white[Dynamic Model &amp; Main Results]
+
+---
+class: middle, center
+## Question: If an artist's choices now affect their future audience and reputation, how will their optimal behavior change? 
+
+---
+class: middle, center
+
+## Solution: Dynamic Programming!
+
+---
+
+## What we want:
+
+- Describe the lifetime discounted expected utility for a creator
+- Optimized value function (lifetime utility), `\(V(n_{-1},A_{-1})\)`
+- Optimized per-period policy function `\(m^*(n_{-1},A_{-1})\)`
+---
+
+## What we need for value function iteration:
+
+- Bounded state variables
+- Functional form assumptions
+- Discrete approximation of expected values
+
+---
+
+## A tweaked model that solves these problems
+
+- Remove `\(A=(1-\delta)A_{-1}+mI(n_{-1})+\sum_{i=1}^m\varepsilon_i\)`
+- Replace with: `\(A=\mathcal{A}(m,n_{-1},A_{-1},\varepsilon)\)`
+
+---
+
+## Stating the dynamic program
+
+`\begin{gather*}
+\\
+\\
+V(n_{-1},A_{-1})=\max_{m,z}\left\{E[A\nu(z)r+\rho V(n,A)]\right\}\\
+s.t. \\
+A=\mathcal{A}(m,n_{-1},A_{-1},\varepsilon), \ \text{Audience Evolution}\\
+n=\nu(z), \ \text{Demand/Reputation Evolution} \\
+f(m,z)=\kappa, \ \text{Production Constraint}
+\end{gather*}`
+
+---
+
+## Functional Forms
+.morespaced[
+`\begin{gather}
+\mathcal{A}(m,n_{-1},A_{-1},\varepsilon)=\frac{\overline{A}}{1+ce^{-\alpha n-\beta m-\gamma\varepsilon}}\\
+c=\frac{\overline{A}-(1-\delta)A_{-1}}{(1-\delta)A_{-1}}\\
+\\
+f(m,z)=mz=\kappa\\
+\\
+\nu(z)=\overline{n}(1-e^{-\lambda z})\\
+\\
+\varepsilon \sim N(0,\sigma^2)
+\end{gather}`
+]
+
+---
+## Model Calibration
+
+- On YouTube there are many different types of artists producing different qualities and quantities
+- Therefore, calibrate to prevent exclusively corner solutions
+- I vary these parameters later, but I first establish a baseline
+- Baseline results are not sensitive to small changes in parameters
+
+---
+class: center, middle, inverse
+background-image: url("image (3).jpg")
+
+&lt;/br&gt;
+&lt;/br&gt;
+# .white[Results]
+
+---
+
+## Effect of initial audience and reputation on quantity strategy
+&lt;img src="GraybillThesisPrizePresentation_files/figure-html/unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+## Notes on optimal strategy
+
+- Three stages, *hobbyist*, *budding creator*, *superstar*
+- Budding creator focuses most on quantity
+- Policy discontinuity
+
+---
+## Audience depreciation on median optimal quantity
+&lt;img src="GraybillThesisPrizePresentation_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+## Convexity of profit in talent, à la Superstar Literature 
+&lt;img src="GraybillThesisPrizePresentation_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+## Simulating 1000 careers, each starting with nothing
+&lt;img src="GraybillThesisPrizePresentation_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+## Insights from 1000 careers
+- Volatility hurts a creator on average
+- Quality does not predict audience size
+- Talent filters some out of the market
+- Creators who start small eventually produce high quality work
+- Still see a three phase strategy
+- Low talent creators cannot "fake it 'til they make it" if they are given a high initial reputation
+
+---
+
+## Conclusion &amp; Implications
+
+.lesspaced[
+- Multiple quality strategies may exist in equilibrium
+]
+.lesspaced[
+- Successful artists shift from lower to higher quality
+  - After they "go viral"
+]
+.lesspaced[
+- Talent can filter out artists
+]
+.lessspaced[
+- Consumer loyalty induces high quality production
+]
+.lesspaced[
+- Future research: 
+  - Focus more on optimal algorithm design
+  - Allow for producers to compete with one another
+  - Fit with data
+]
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+&lt;/br&gt;
+&lt;/br&gt;
+# .white[Thanks, Questions?]
+
+---
+
+
+.tiny[
+&lt;p&gt;&lt;cite&gt;Aguiar, L. and J. Waldfogel
+(2018).
+&amp;ldquo;Quality Predictability and the Welfare Benefits from New Products: Evidence from the Digitization of Recorded Music&amp;rdquo;.
+In: &lt;em&gt;Journal of Political Economy&lt;/em&gt; 126.2. &lt;a href="http://www.journals.uchicago.edu/doi/full/10.1086/696229"&gt;http://www.journals.uchicago.edu/doi/full/10.1086/696229&lt;/a&gt;, pp. 492&amp;ndash;524.
+ISSN: 0022-3808.
+DOI: &lt;a href="https://doi.org/10.1086/696229"&gt;10.1086/696229&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;cite&gt;Bender, M., E. Gal-Or, and T. Geylani
+(2021).
+&amp;ldquo;Attracting Artists to Music Streaming Platforms&amp;rdquo;.
+In: &lt;em&gt;European Journal of Operational Research&lt;/em&gt; 290.3. &lt;a href="https://linkinghub.elsevier.com/retrieve/pii/S0377221720307621"&gt;https://linkinghub.elsevier.com/retrieve/pii/S0377221720307621&lt;/a&gt;, pp. 1083&amp;ndash;1097.
+ISSN: 03772217.
+DOI: &lt;a href="https://doi.org/10.1016/j.ejor.2020.08.049"&gt;10.1016/j.ejor.2020.08.049&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;cite&gt;Klein, B. and K. Leffler
+(1981).
+&amp;ldquo;The Role of Market Forces in Assuring Contractual Performance&amp;rdquo;.
+In: &lt;em&gt;The Journal of Political Economy&lt;/em&gt;.&lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;cite&gt;MacDonald, G. M.
+(1988).
+&amp;ldquo;The Economics of Rising Stars&amp;rdquo;.
+In: &lt;em&gt;The American Economic Review&lt;/em&gt; 78.1. &lt;a href="https://www.jstor.org/stable/1814704"&gt;https://www.jstor.org/stable/1814704&lt;/a&gt;, pp. 155&amp;ndash;166.
+ISSN: 0002-8282.&lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;cite&gt;Shapiro, C.
+(1983).
+&amp;ldquo;Premiums for High Quality Products as Returns to Reputations&amp;rdquo;.
+In: &lt;em&gt;The Quarterly Journal of Economics&lt;/em&gt; 98.4. &lt;a href="https://www.jstor.org/stable/1881782"&gt;https://www.jstor.org/stable/1881782&lt;/a&gt;, pp. 659&amp;ndash;679.
+ISSN: 0033-5533.
+DOI: &lt;a href="https://doi.org/10.2307/1881782"&gt;10.2307/1881782&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
+]
+---
+### Expected Per Period Views in Quantity
+
+[Desmos](https://www.desmos.com/calculator/n5ojrpaqas)
+
+---
+
+### State Variables on Lifetime Utility
+
+&lt;img src="GraybillThesisPrizePresentation_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+---
+
+### Discontinuity Conditions
+
+&lt;img src="GraybillThesisPrizePresentation_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Talent on Optimal Strategy
+&lt;img src="GraybillThesisPrizePresentation_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Effect Of Unpredictability
+
+&lt;img src="GraybillThesisPrizePresentation_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### High Initial Reputation Simulation
+
+&lt;img src="GraybillThesisPrizePresentation_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

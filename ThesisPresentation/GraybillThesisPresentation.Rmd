@@ -1,0 +1,770 @@
+---
+title: "Exposure Doesn't Pay the Bills:"
+subtitle: .small[Aristic Production under Algorithmic Uncertainty in Streaming Markets]
+author: "Aaron Graybill"
+date: "05 April 2022"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    includes:
+      in_header:
+    css: [xaringan-themer.css, bullets.css]
+biblio-style: apalike
+csl: ../Inputs/apa.csl
+bibliography: ../Inputs/RunningBib.bib
+---
+```{r setup, include=FALSE}
+options(htmltools.dir.version = T)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+library(ggplot2)
+style_duo_accent(
+  primary_color = "#8C2730",
+  secondary_color= "#D8E6F2",
+  black_color = "#13091C",
+  title_slide_background_image = "image (3).jpg",
+  #title_slide_background_size = "contain",
+  header_font_google = google_font("Playfair Display"),
+  text_font_google   = google_font("Average", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  text_font_size = "1.5rem",
+  footnote_position_bottom = "10px"
+  
+)
+```
+
+
+# Outline
+
+1.    Intro and Motivation
+1.    Model
+1.    Findings
+1.    Questions
+---
+class: left
+
+# Intro and Motivation
+-   YouTube's 2021 Q3 Ad Revenue is $7.2B<sup>1</sup> 
+-   Streaming Platforms are driven by **content creators**
+-   Content creation can be a full time job
+-   Creators make content, but algorithm decides who sees it
+
+.footnote[
+[1] [Source](https://abc.xyz/investor/static/pdf/2021Q3_alphabet_earnings_release.pdf)
+]
+
+---
+# Motivation, continued. My Niche in the Literature
+
+-   Artist's problem on streaming platforms
+  - Choose ideal quantity and quality each period
+-   Role of algorithmic uncertainty on producers
+-   Effect of time on quality
+
+
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+# .white[The Model]
+
+---
+
+## What should a model describe?
+
+.lesspaced[
+### Consumer Behavior:
+-   Artist discovery
+-   Consumption based on quality
+
+### Artist/Content Creator:
+-   Maximize royalties from streams
+-   Quality-quantity trade-off under audience uncertainty
+
+### Streaming Platform:
+- Algorithmic consumer-artist matching
+- Useful but imperfect matching 
+]
+
+---
+
+# Putting the pieces together
+
+### Audience Evolution
+#### $\mathcal{A}(m,n,A,\varepsilon)$
+
+### Consumer demand
+#### $\nu(z)$
+
+---
+
+# Putting the pieces together:
+
+### Per-period revenue: 
+#### $\mathcal{A}(m,n,A,\varepsilon)\nu(z)r$
+
+### Subject to:
+
+#### $f(m,z)=\kappa$
+
+---
+
+## Insights from a binary-choice one period model
+
+- There is a strategy cutoff dependent on $A$:
+  - Established artists choose high quality, new artists choose more exposure
+- If algorithm is very favorable to new artists, both may choose high quality
+- *This doesn't rely on functional form assumptions*
+
+---
+
+class: center, middle, inverse
+background-image: url("image (3).jpg")
+
+</br>
+</br>
+# .white[Dynamic Problem and Main Results]
+
+---
+## Solving Dynamically Using Recursion:
+
+\begin{gather*}
+V(n_{-1},A_{-1})=\max_{m,z}\left\{E[Anr+\rho V(n,A)]\right\} \\
+s.t. \\
+A=\mathcal{A}(m,n_{-1},A_{-1},\varepsilon), \ \text{Audience Evolution} \\
+n=\nu(z), \ \text{Consumer Demand}  \\
+f(m,z)=\kappa, \ \text{Tradeoff}
+\end{gather*}
+
+---
+
+## Solving for $V$ and optimal $m,z$:
+
+\begin{gather*}
+V(n_{-1},A_{-1})=\max_{m,z}\left\{E[Anr+\rho V(n,A)]\right\}
+\end{gather*}
+
+- In this form, we have preexisting solving techniques!
+- Solutions computed numerically
+- Calibrated baseline for boundedness, interior solutions
+  - Should not interpret magnitude of numbers, only differences from baseline
+---
+
+## Three variations from the baseline:
+
+```{r,echo=F,warning=F,message=F,fig.asp = 1/1.8, fig.align = 'center', echo = FALSE, out.width = "110%", dpi= 300, warning = FALSE,message=FALSE}
+library(dplyr)
+d30 <- 
+  read.csv("../VFI_Data/SimulationData/sim_d30.csv")
+k20 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k20.csv")
+k10 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k10.csv")
+sd5 <- 
+  read.csv("../VFI_Data/SimulationData/sim_sd5.csv")
+
+
+d30 <- 
+  d30 %>% 
+  mutate(sim="d30") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k20 <- 
+  k20 %>% 
+  mutate(sim="k20") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k10 <- 
+  k10 %>% 
+  mutate(sim="k10") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+sd5 <- 
+  sd5 %>% 
+  mutate(sim="sd5") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+
+d <- 
+  d30 %>% 
+  full_join(k20) %>% 
+  full_join(k10) %>% 
+  full_join(sd5) %>% 
+  mutate(z=case_when(sim=="k10"~10/m,
+                     T~20/m))
+
+d <- 
+  d %>% 
+  filter(ids<100) %>% 
+  filter(t!=0 & t!=99)
+
+d_roll <- 
+  d %>% 
+  select(sim,t,A,ids) %>% 
+  group_by(sim,t) %>% 
+  summarize(A=mean(A))
+
+  
+
+p_z <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=z,group=interaction(ids,sim),col=sim),alpha=.1)+
+  guides(colour = guide_legend(override.aes = list(alpha = 1,size=5)))+
+  xaringanthemer::theme_xaringan(text_font_size=13,title_font_size = 13)+
+  ylab("Quality")+
+  xlab("Time")+
+  scale_color_manual(values = c("#8C2730","#F28D9F","#255059","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())
+
+p_A <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=A,group=interaction(ids,sim),col=sim),alpha=.1)+
+  geom_line(data=d_roll,aes(x=t,y=A,col=sim))+
+  scale_color_manual(values = c("#8C2730","#F28D9F","#255059","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())+
+  scale_y_continuous(position = "right")+
+  ylab("Audience")+
+  xlab("Time")+
+  xaringanthemer::theme_xaringan(text_font_size=13,title_font_size = 13)
+
+ggpubr::ggarrange(p_z,p_A, ncol=2, nrow=1, common.legend = TRUE, legend="bottom")
+```
+
+---
+## Conclusion
+.lesspaced[
+- Quality does not determine audience
+]
+.lesspaced[
+- Successful artists shift from lower to higher quality
+  - After they "go viral"
+]
+.lesspaced[
+- Agents who do not understand the algorithm will not maintain audience
+]
+.lesspaced[
+- Talent can also filter out artists
+]
+.lesspaced[
+- Future research: 
+  - How does talent influence distribution of revenue
+  - Fit with data
+]
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+</br>
+</br>
+# .white[Thanks, Questions?]
+
+---
+
+```{r, load_refs, echo=FALSE,message=F}
+library(RefManageR)
+bib <- ReadBib("../RunningBib.bib", check = FALSE)
+#ui <- "- "
+```
+.tiny[
+```{r, print_refs, results='asis', echo=FALSE, warning=FALSE, message=FALSE}
+#writeLines(ui)?
+print(bib[key = c("aguiarQualityPredictabilityWelfare2018","kleinRoleMarketForces1981","shapiroPremiumsHighQuality1983","thomesEconomicAnalysisOnline2013","macdonaldEconomicsRisingStars1988","shapiroPremiumsHighQuality1983")], 
+  .opts = list(check.entries = FALSE, 
+               style = "html", 
+               bib.style = "authoryear"))
+```
+]
+---
+
+
+## Visualizing Audience Uncertainty:
+
+```{r Audience Uncertanity, fig.asp = 1, fig.align = 'center', echo = FALSE, out.width = "65%", dpi= 300, warning = FALSE,message=FALSE}
+library(extrafont)
+m=seq(0,10,.001)
+A_0=4
+I_up=.75*A_0+m+m*1.1
+I_down=.75*A_0+m-m*1.1
+I_mid=.75*A_0+m
+
+q <- 
+  tibble::tibble(m,I_up,I_down,I_mid)
+
+library(ggplot2)
+library(latex2exp)
+ggplot(q)+
+  geom_line(aes(m,I_mid,color="Expected Audience"),size=1.1)+
+  theme(axis.text.y = element_text(angle = 45))+
+  geom_ribbon(aes(m,ymin=I_down,ymax=I_up,color="Range of Audience"),alpha=.2,fill="#211030")+
+  theme_bw()+
+  annotate("text", x = 0.5, y = 1, label = "(1-δ)A",family="sans",size=7)+
+  ylab(TeX("\nAudience at time $t$, $A$"))+
+  xlab(TeX("Number of Releases, $m$"))+
+  xlim(0,10)+
+  ylim(0,25)+
+  scale_color_manual(values=c("#8C2730","#211030"))+
+  theme(legend.title=element_blank())+
+  # scale_y_continuous(breaks = c(3),
+  #                    labels = c(TeX("$(1-\\delta)A_{t-1}$")))+
+  # scale_x_continuous(breaks = c(0),
+  #                    labels = c(0))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))+
+  theme(legend.position="bottom")+
+    theme(axis.text.x=element_blank(), #remove x axis labels
+        axis.ticks.x=element_blank(), #remove x axis ticks
+        axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank()  #remove y axis ticks
+        )+
+  xaringanthemer::theme_xaringan(text_font_size=17,title_font_size = 17)
+```
+ 
+---
+
+
+## Functional Forms
+.small[
+\begin{gather}
+\mathcal{A}(m,n,A,\varepsilon)=\frac{\overline{A}}{1+ce^{-\alpha n-\beta m-\gamma\varepsilon}}, c=\frac{\overline{A}-(1-\delta)A}{(1-\delta)A}\\
+f(m,z)=mz\\
+n(z)=\overline{n}(1-e^{-\lambda z})\\
+\varepsilon \sim N(0,\sigma^2)
+\end{gather}
+]
+
+---
+
+
+```{r, fig.asp = 3/4, fig.align = 'center', echo = FALSE, out.width = "110%", dpi= 300, warning = FALSE,message=FALSE}
+v=read.csv("../VFI_Data/v.csv",header=F)
+m=read.csv("../VFI_Data/m.csv",header=F)
+nn=read.csv("../VFI_Data/nn.csv",header=F)
+AA=read.csv("../VFI_Data/AA.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+d <- 
+  data.frame(v=v,m=m,nn=nn,AA=AA)
+
+library(ggplot2)
+
+ggplot(d %>% filter(m>.5)) +
+  geom_point(aes(x = AA, y = m, col = nn)) +
+  ylab(TeX("Optimal Quantity of Releases, $m$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_gradient(low = "#211030", high = "#FFBA3D",name="Initial Streams\nPer Capita, n") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black"),
+    #axis.ticks = element_blank(),
+    #axis.text = element_blank()
+    #legend.position = "bottom"
+  )+
+  xaringanthemer::theme_xaringan(text_font_size=17,title_font_size = 17)
+
+
+# TWO cases of kappa
+# show the 
+
+```
+
+---
+
+
+```{r, fig.asp = 3/4, fig.align = 'center', echo = FALSE, out.width = "110%", dpi= 300, warning = FALSE,message=FALSE}
+library(ggplot2)
+library(extrafont)
+
+
+ggplot(d) +
+  geom_point(aes(x = AA, y = v, col = nn)) +
+  ylab(TeX("Expected Discounted Lifetime Optimized Revenue, $V(n,A)$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_gradient(low = "#211030", high = "#FFBA3D",name="Initial Streams\nPer Capita, n") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black"),
+    #axis.ticks = element_blank(),
+    #axis.text = element_blank()
+    #legend.position = "bottom"
+  )+
+  xaringanthemer::theme_xaringan(text_font_size=17,title_font_size = 17)
+```
+---
+
+
+```{r plot of n,fig.align = 'center', echo = FALSE, out.width = "110%", dpi= 300, warning = FALSE,message=FALSE,fig.asp = 3/4, fig.align = 'center',}
+library(extrafont)
+z=seq(0,12,.001)
+n=5*(1-exp(-z))
+
+q <- 
+  tibble::tibble(z,n)
+
+library(ggplot2)
+library(latex2exp)
+ggplot(q)+
+  geom_line(aes(z,n),size=1.1,color="#211030")+
+  xaringanthemer::theme_xaringan(text_font_size=17,title_font_size = 17)+
+  scale_color_manual(values=c("#255059","#8C2730","#FFBA3D","#F28D9F"),name="Case")+
+  geom_vline(aes(xintercept=10,color="High Loyalty"))+
+  geom_vline(aes(xintercept=7.5,color="High Volatility"))+
+  geom_vline(aes(xintercept=4,color="Low Talent"))+
+  geom_vline(aes(xintercept=1,color="Baseline"))+
+  ylab("Streams Per Capita")+
+  xlab("Quality")
+  
+
+
+#   annotate("text", x = 0.5, y = 1, label = "(1-δ)A",family="sans",size=7)+
+#   ylab(TeX("\nAudience at time $t$, $A$"))+
+#   xlab(TeX("Number of Releases, $m$"))+
+#   xlim(0,10)+
+#   ylim(0,25)+
+#   scale_color_manual(values=c("#8C2730","#211030"))+
+#   theme(legend.title=element_blank())+
+#   # scale_y_continuous(breaks = c(3),
+#   #                    labels = c(TeX("$(1-\\delta)A_{t-1}$")))+
+#   # scale_x_continuous(breaks = c(0),
+#   #                    labels = c(0))+
+#   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+# panel.background = element_blank(), axis.line = element_line(colour = "black"))+
+#   theme(legend.position="bottom")+
+#     theme(axis.text.x=element_blank(), #remove x axis labels
+#         axis.ticks.x=element_blank(), #remove x axis ticks
+#         axis.text.y=element_blank(),  #remove y axis labels
+#         axis.ticks.y=element_blank()  #remove y axis ticks
+#         )+
+#   xaringanthemer::theme_xaringan(text_font_size=17,title_font_size = 17)
+```
+
+---
+
+
+```{r, fig.asp = 3/4, fig.align = 'center', echo = FALSE, out.width = "110%", dpi= 300, warning = FALSE,message=FALSE}
+library(dplyr)
+d_10 <- 
+  d %>% 
+  mutate(k="10")
+
+v=read.csv("../VFI_Data/v_k15.csv",header=F)
+m=read.csv("../VFI_Data/m_k15.csv",header=F)
+nn=read.csv("../VFI_Data/nn_k15.csv",header=F)
+AA=read.csv("../VFI_Data/AA_k15.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+d_15 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(k="15")
+
+v=read.csv("../VFI_Data/v_k5.csv",header=F)
+m=read.csv("../VFI_Data/m_k5.csv",header=F)
+nn=read.csv("../VFI_Data/nn_k5.csv",header=F)
+AA=read.csv("../VFI_Data/AA_k5.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+d_5 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(k="5")
+
+library(tidyr)
+d_k <- 
+  full_join(d_15,d_10) %>% 
+  full_join(d_5)# %>% 
+  #pivot_longer(cols=c(m,v))
+
+d_k$k <- factor(d_k$k, levels = c("5", "10", "15"))
+d_k <- 
+  d_k %>% 
+  mutate(z=as.numeric(as.character(k))/m)
+
+# ggplot(d_k %>% 
+#          filter(m > .5)) +
+#   geom_point(aes(
+#     x = AA,
+#     y = m,
+#     col = nn,
+#     shape = k
+#   )) +
+#   ylab(TeX("Optimal Quantity, $m$")) +
+#   xlab(TeX("Initial Audience Size, $A$")) +
+#   scale_color_gradient(low = "#211030", high = "#FFBA3D", name = "Initial Streams\nPer Capita, n") +
+#   scale_shape(name=TeX("Talent, $\\kappa$"))+
+#   theme(text = element_text(family = "Tahoma")) +
+#   theme(legend.title = element_text(hjust = .5)) +
+#   theme(
+#     panel.grid.major = element_blank(),
+#     panel.grid.minor = element_blank(),
+#     panel.background = element_blank(),
+#     axis.line = element_line(colour = "black")
+#   )+
+  # guides(shape = guide_legend(override.aes = list(color = "#211030")))
+
+m=seq(.5,10,.001)
+
+z_up=15/m
+z_mid=10/m
+z_down=5/m
+
+library(dplyr)
+
+q <- 
+  tibble::tibble(m,z_up,z_down,z_mid) %>%
+  select(z_down,z_mid,z_up,m) %>% 
+    rename(`High Talent`=z_up,
+         `Middle Talent`=z_mid,
+         `Low Talent`=z_down) %>% 
+  tidyr::pivot_longer(cols=c(`High Talent`:`Low Talent`))
+
+
+ggplot(q %>% filter(m<10 & value<10))+
+  geom_line(aes(m,value,size=name,color=name))+
+  ylim(0,10)+
+  xlim(0,10)+
+  ylab(TeX("\nAvailable Quality, $z$"))+
+  xlab(TeX("Number of Releases, $m$"))+
+  scale_color_manual(values=c("#8C2730","#211030","#255059"))+
+  scale_size_manual(values=c(.5,1,1.5))+
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title=element_blank())+
+  # scale_y_continuous(breaks = c(3),
+  #                    labels = c(TeX("$(1-\\delta)A_{t-1}$")))+
+  # scale_x_continuous(breaks = c(0),
+  #                    labels = c(0))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+axis.ticks=element_blank(),
+axis.text = element_blank())+
+  geom_point(data=d_k,aes(x=m,y=z),color="#FFBA3D",alpha=.5,shape=0)+
+  xaringanthemer::theme_xaringan(text_font_size=17,title_font_size = 17)
+```
+
+---
+
+
+```{r, fig.asp = 3/4, fig.align = 'center', echo = FALSE, out.width = "110%", dpi= 300, warning = FALSE,message=FALSE}
+d_10 <- 
+  d %>% 
+  mutate(g="0.10")
+
+v=read.csv("../VFI_Data/v_g15.csv",header=F)
+m=read.csv("../VFI_Data/m_g15.csv",header=F)
+nn=read.csv("../VFI_Data/nn.csv",header=F)
+AA=read.csv("../VFI_Data/AA.csv",header=F)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_one <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(g="1.0")
+
+v=read.csv("../VFI_Data/v_g0.csv",header=F)
+m=read.csv("../VFI_Data/m_g0.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_0 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(g="0.0")
+
+v=read.csv("../VFI_Data/v_gten.csv",header=F)
+m=read.csv("../VFI_Data/m_gten.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_ten <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(g="10")
+
+d_g <- d_10 %>% 
+  full_join(d_one) %>% 
+  full_join(d_0) %>% 
+  full_join(d_ten)# %>% 
+  #pivot_longer(cols=c(m,v))
+
+d_g_wide <- 
+  d_g %>% 
+  select(-m) %>% 
+  pivot_wider(names_from = g,values_from = v) %>% 
+  group_by(AA,nn) %>% 
+  summarize(across(everything(),mean)) %>% 
+  mutate(across(`1.0`:`10`,~(.x-`0.10`)/(`0.10`))) %>% 
+  select(-`0.10`) %>% 
+  pivot_longer(`1.0`:`10`,values_to = "v",names_to = "g")%>% 
+  ungroup()
+
+d_g_sum <- 
+  d_g %>% 
+  group_by(g,AA) %>% 
+  summarize(across(v:nn,median)) %>% 
+  mutate(g=as.character(g)) 
+
+ggplot(d_g_wide %>% 
+         filter(AA>min(AA))) +
+  geom_point(aes(
+    x = AA,
+    y = v,
+    shape = g,
+    color = g
+  )) +
+  ylab(TeX("% Difference from Baseline Optimized Lifetime Utility, $V$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  #scale_color_gradient(low = "#211030", high = "#FFBA3D", name = "Initial Streams\nPer Capita, n") +
+  scale_color_manual(values=c("#8C2730","#211030","#255059"),
+                     name=TeX("Algorithmic Uncertainty, $\\gamma$"))+
+  scale_shape(name=TeX("Algorithmic Uncertainty, $\\gamma$"))+
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )+
+guides(shape = guide_legend(override.aes = list(color = "#211030")))+
+  xaringanthemer::theme_xaringan(text_font_size=17,title_font_size = 17)
+```
+
+---
+
+
+```{r, fig.asp =3/4, fig.align = 'center', echo = FALSE, out.width = "110%", dpi= 300, warning = FALSE,message=FALSE}
+d_70 <- 
+  d %>% 
+  mutate(d="0.70")
+
+v=read.csv("../VFI_Data/v_d85.csv",header=F)
+m=read.csv("../VFI_Data/m_d85.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_85 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(d="0.85")
+
+v=read.csv("../VFI_Data/v_d1.csv",header=F)
+m=read.csv("../VFI_Data/m_d1.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_10 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(d="0.1")
+
+d_d <- 
+  full_join(d_10,d_70) %>% 
+  full_join(d_85) %>% 
+  full_join(d_10)
+  #pivot_longer(cols=c(m,v))
+
+d_d_sum <- 
+  d_d %>% 
+  group_by(d,AA) %>% 
+  summarize(across(v:nn,median))
+
+
+ggplot(d_d_sum %>%
+         filter(m > .5)) +
+  geom_point(aes(
+    x = AA,
+    y = 10 / m,
+    col = d,
+    #col = nn,
+    shape = d,
+    group = d
+  ), alpha = 1) +
+    geom_line(aes(
+    x = AA,
+    y = 10 / m,
+    col = d), alpha = 1) +
+  ylab(TeX("Median Optimal Quality, $z$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_manual(
+    name = TeX("Audience Depreciation, $\\delta$"),
+    values = c("#8C2730", "#211030", "#255059"),
+    labels =c("Low, .1","Baseline, .7", "High, .85")
+  ) +
+  scale_shape_manual(name = TeX("Audience Depreciation, $\\delta$"),
+    labels =c("Low, .1","Baseline, .7", "High, .85"),
+    values = c(0,1,2)) +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  ) +
+  guides(shape = guide_legend(override.aes = list(alpha = 1)))+
+  xaringanthemer::theme_xaringan(text_font_size=17,title_font_size = 17)
+
+```

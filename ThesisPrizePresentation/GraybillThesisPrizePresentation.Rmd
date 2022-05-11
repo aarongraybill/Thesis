@@ -1,0 +1,1066 @@
+---
+title: "Exposure Doesn't Pay the Bills:"
+subtitle: .small[Aristic Production under Algorithmic Uncertainty in Streaming Markets]
+author: "Aaron Graybill"
+date: "03 May 2022"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    includes:
+      in_header:
+    css: [xaringan-themer.css, bullets.css]
+biblio-style: apalike
+csl: ../Inputs/apa.csl
+bibliography: ../Inputs/RunningBib.bib
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = T)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+library(ggplot2)
+style_duo_accent(
+  primary_color = "#8C2730",
+  secondary_color= "#D8E6F2",
+  black_color = "#13091C",
+  title_slide_background_image = "image (3).jpg",
+  #title_slide_background_size = "contain",
+  header_font_google = google_font("Playfair Display"),
+  text_font_google   = google_font("Average", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  text_font_size = "1.5rem",
+  footnote_position_bottom = "10px"
+  
+)
+```
+
+
+# Outline
+
+1.    Intro and Motivation
+1.    *Brief* literature review
+1.    One Period Model & Initial Results
+1.    Dynamic Model & Main Results
+1.    Conclusions & Implication
+1.    Questions
+---
+class: left
+
+# Intro and Motivation
+-   YouTube's 2021 Ad Revenue is $28.8 Billion<sup>1</sup> 
+  - Larger than Starbucks, Kraft Heinz, and Visa<sup>2</sup>
+-   Streaming Platforms are driven by **content creators**
+-   Content creation can be a full time job
+
+.footnote[
+[1] [Source, Alphabet Investor Report](https://abc.xyz/investor/static/pdf/2021Q3_alphabet_earnings_release.pdf)
+
+[2] [Source, Fortune Measures](https://fortune.com/fortune500/)
+]
+
+---
+# My Motivation
+
+- Content creators rely on a platform's **algorithm** to find viewers
+- Creators face algorithmic uncertainty
+  - Algorithm might show one release alot or very little
+- How does this randomness affect optimal strategy & lifetime revenue?
+
+
+---
+
+class: center, middle
+background-image: url("image (3).jpg")
+
+# .white[Literature Review]
+---
+class: left
+
+# Three related strands of literature
+1. Branding
+2. Superstar
+3. Streaming
+
+---
+class: left
+
+# The branding literature:
+
+### What we've learned:
+- Branding can be a worthwhile signal (Klein & Leffler 1981)
+- Reputation from branding is fragile (Shapiro 1983)
+
+### How it's relevant
+- Reputation evolution
+
+---
+class: left
+
+# The superstar literature:
+
+### What we've learned:
+- In art markets, small changes in talent lead to large changes in revenue (Rosen 1981)
+- Results hold even when talent is uncertain (MacDonald 1988)
+
+### How it's relevant
+- Revenue concentration on streaming platforms
+
+---
+class: left
+
+# The streaming literature:
+
+### What we've learned:
+- Streaming platforms are modeled as two-sided marketplaces (Thomes 2013)
+- Established artists behave differently than new artists (Bender et al. 2021)
+
+### How it's relevant
+- Same modeling context, but coming from a new angle
+
+---
+class: left
+
+# What I'm contributing
+
+- Streaming literature has not focused on artist's problem
+- Development of audience over time
+  - Apply branding and superstar to streaming
+- Role of algorithmic uncertainty in optimal strategy & revenue
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+# .white[One-Period Model]
+
+---
+
+## What should a model describe?
+
+.lesspaced[
+### Consumer Behavior:
+-   Creator discovery (algorithm)
+-   Consumption based on quality
+
+### Artist/Content Creator:
+-   Maximize royalties from streams
+-   Quality-quantity trade-off under audience uncertainty
+
+### Streaming Platform:
+- Algorithmic consumer-artist matching
+- Useful but imperfect matching 
+]
+
+---
+
+# More on consumer behavior
+
+- A consumer can either be exposed to an artist or not
+- If consumer is exposed, they consume quantity $n$ of an artist's work every period
+- Quantity consumed depends on quality, $n=\nu(z)$
+- Consumer behavior is identical, nonrivalrous, and independent
+- A fraction $\delta$ of the audience is lost every period
+
+---
+
+# More on algorithmic behavior
+
+- Algorithm doesn't observe quality directly, can only look at last period's engagement per exposed consumer, $n_{-1}$
+  - I treat this last period streams per capita, $n_{-1}$ as reputation
+- For every release, the algorithm must decide how many new people to expose the artist to
+- Every release, algorithm shows the content to $I(n_{-1})+\varepsilon$
+  - This is the source of algorithmic unpredictability
+
+---
+# Additonal notes on algorithmic uncertainty
+
+- Assume $\varepsilon$'s mean zero
+  - Creators are on average correct about the algorithm
+  - Creator's talent uncorrelated with $\varepsilon$ by no arbitrage
+- Across multiple releases, shocks are independent
+  - Algorithm has already assessed meaningful characteristics, so correlation captured in $I(n_{-1})$
+- Shocks independent across time
+
+---
+
+# More on artist behavior
+- Artist chooses a quantity $m$ and quality $z$ in every period.
+  - Quantity increases chances at exposures this period
+  - Quality increases consumption per consumer and future reputation
+- Takes reputation & past audience as given, $n_{-1},A_{-1}$
+- Production constrained by talent, $f(m,z)=\kappa$
+---
+
+# Putting the pieces together:
+
+### Audience this period: 
+#### $A=(1-\delta)A_{-1}+mI(n_{-1})+\sum_{i=1}^m\varepsilon_i$
+
+### Total Revenue:
+
+#### $A\cdot \nu(z)\cdot r$
+
+---
+# The complete statement of the artist's one-period problem:
+
+$$
+\begin{gather*}
+\max_{m,z}\left\{E[A\nu(z)r]\right\} \\
+s.t.\\
+f(m,z)=\kappa \\ 
+A=(1-\delta)A_{-1}+mI(n_{-1})+\sum_{i=1}^m\varepsilon_i
+\end{gather*}
+$$
+
+---
+
+# A brief binary-choice one period model
+
+- Produce low quality $z_l$ or high quality $z_h$ 
+- Talent allows quantity $m_l(\kappa)$ or $m_h(\kappa)$
+  - $m_l(\kappa)>m_h(\kappa)$
+  - Comes from $f(m,z)=\kappa$
+  
+---
+
+## Agent chooses low quality whenever:
+
+$$
+\frac{\nu(z\_h)}{\nu(z\_l)}<1+\frac{I(n\_{-1})[m\_{l}(\kappa)-m\_{h}(\kappa)]}{m\_{h}(\kappa)I(n\_{-1})+(1-\delta)A\_{-1}}
+$$
+## Which is the same as:
+
+\begin{gather*}
+\text{% additional demand for high quality}\\
+< \\
+\text{% additional expected audience for low quality}
+\end{gather*}
+
+---
+
+## Additonal Interpretation of The Binary Choice Model
+- Increasing $A_{-1}$ will eventually flip the agent to produce high-quality
+- Increasing reputation, $n_{-1}$ less obvious
+  - Decreases effect of algorithm and audience
+  - Choice then only depends on whether demand premium greater than *quantity* premium
+  
+---
+
+## A final note about the binary choice model
+
+The low-quality strategy gains utility relative to high quality whenever:
+
+$$
+\frac{\partial \ln(m_l(\kappa))}{\partial\kappa}>\frac{\partial \ln(m_h(\kappa))}{\partial\kappa}
+$$
+
+---
+## Relevant insights from this toy model
+- Increasing initial audience causes a strategy shift
+- Increasing initial reputation less predictive
+- The semielasticity condition will hold later, so provides insight into quality strategy in talent
+  - However, this doesn't use functional forms
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+# .white[Dynamic Model & Main Results]
+
+---
+class: middle, center
+## Question: If an artist's choices now affect their future audience and reputation, how will their optimal behavior change? 
+
+---
+class: middle, center
+
+## Solution: Dynamic Programming!
+
+---
+
+## What we want:
+
+- Describe the lifetime discounted expected utility for a creator
+- Optimized value function (lifetime utility), $V(n_{-1},A_{-1})$
+- Optimized per-period policy function $m^*(n_{-1},A_{-1})$
+---
+
+## What we need for value function iteration:
+
+- Bounded state variables
+- Functional form assumptions
+- Discrete approximation of expected values
+
+---
+
+## A tweaked model that solves these problems
+
+- Remove $A=(1-\delta)A_{-1}+mI(n_{-1})+\sum_{i=1}^m\varepsilon_i$
+- Replace with: $A=\mathcal{A}(m,n_{-1},A_{-1},\varepsilon)$
+
+---
+
+## Stating the dynamic program
+
+\begin{gather*}
+\\
+\\
+V(n_{-1},A_{-1})=\max_{m,z}\left\{E[A\nu(z)r+\rho V(n,A)]\right\}\\
+s.t. \\
+A=\mathcal{A}(m,n_{-1},A_{-1},\varepsilon), \ \text{Audience Evolution}\\
+n=\nu(z), \ \text{Demand/Reputation Evolution} \\
+f(m,z)=\kappa, \ \text{Production Constraint}
+\end{gather*}
+
+---
+
+## Functional Forms
+.morespaced[
+\begin{gather}
+\mathcal{A}(m,n_{-1},A_{-1},\varepsilon)=\frac{\overline{A}}{1+ce^{-\alpha n-\beta m-\gamma\varepsilon}}\\
+c=\frac{\overline{A}-(1-\delta)A_{-1}}{(1-\delta)A_{-1}}\\
+\\
+f(m,z)=mz=\kappa\\
+\\
+\nu(z)=\overline{n}(1-e^{-\lambda z})\\
+\\
+\varepsilon \sim N(0,\sigma^2)
+\end{gather}
+]
+
+---
+## Model Calibration
+
+- On YouTube there are many different types of artists producing different qualities and quantities
+- Therefore, calibrate to prevent exclusively corner solutions
+- I vary these parameters later, but I first establish a baseline
+- Baseline results are not sensitive to small changes in parameters
+
+---
+class: center, middle, inverse
+background-image: url("image (3).jpg")
+
+</br>
+</br>
+# .white[Results]
+
+---
+
+## Effect of initial audience and reputation on quantity strategy
+```{r, fig.asp = 3/5, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, warning = FALSE,message=FALSE}
+library(dplyr)
+global_size=16
+
+v = read.csv("../VFI_Data/BigData/v_data/v_max.csv", header = F)
+m = read.csv("../VFI_Data/BigData/m_data/m_max.csv", header = F)
+nn = read.csv("../VFI_Data/BigData/nn.csv", header = F)
+AA = read.csv("../VFI_Data/BigData/AA.csv", header = F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+d <-
+  data.frame(v = v,
+             m = m,
+             nn = nn,
+             AA = AA)
+
+library(ggplot2)
+library(latex2exp)
+ggplot(d %>% filter(m > .5)
+       ) +
+  geom_point(aes(x = AA, y = m, col = nn)) +
+  ylab(TeX("Optimal Quantity of Releases, $m$")) +
+  xlab(TeX("Initial Audience Size, $A_{-1}$")) +
+  scale_color_gradient(low = "#211030", high = "#FFBA3D", name = "Initial\nReputation, n-1") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )+
+  theme(text = element_text(size=global_size))
+```
+
+---
+## Notes on optimal strategy
+
+- Three stages, *hobbyist*, *budding creator*, *superstar*
+- Budding creator focuses most on quantity
+- Policy discontinuity
+
+---
+## Audience depreciation on median optimal quantity
+```{r, fig.asp = 3/5, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, warning = FALSE,message=FALSE}
+v = read.csv("../VFI_Data/Variations_From_Baseline/v.csv", header = F)
+m = read.csv("../VFI_Data/Variations_From_Baseline/m.csv", header = F)
+nn = read.csv("../VFI_Data/Variations_From_Baseline/nn.csv", header = F)
+AA = read.csv("../VFI_Data/Variations_From_Baseline/AA.csv", header = F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+d <-
+  data.frame(v = v,
+             m = m,
+             nn = nn,
+             AA = AA)
+
+d_70 <- 
+  d %>% 
+  mutate(d="0.70")
+
+v=read.csv("../VFI_Data/Variations_From_Baseline/v_d85.csv",header=F)
+m=read.csv("../VFI_Data/Variations_From_Baseline/m_d85.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_85 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(d="0.85")
+
+v=read.csv("../VFI_Data/Variations_From_Baseline/v_d35.csv",header=F)
+m=read.csv("../VFI_Data/Variations_From_Baseline/m_d35.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_35 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(d="0.35")
+
+d_d <- 
+  full_join(d_35,d_70) %>% 
+  full_join(d_85)
+  #pivot_longer(cols=c(m,v))
+
+d_d_sum <- 
+  d_d %>% 
+  group_by(d,AA) %>% 
+  summarize(across(v:nn,median))
+
+
+ggplot(d_d_sum# %>%
+         #filter(10/m<3)
+         ) +
+  geom_point(aes(
+    x = AA,
+    y = m,
+    col = d,
+    #col = nn,
+    shape = d,
+    group = d
+  ), alpha = 1) +
+    geom_line(aes(
+    x = AA,
+    y = m,
+    col = d), alpha = 1) +
+  ylab(TeX("Median Optimal Quantity, $m$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_manual(
+    name = TeX("Audience Depreciation, $\\delta$"),
+    values = c("#8C2730", "#211030", "#255059"),
+    labels =c("Low, .35","Baseline, .7", "High, .85")
+  ) +
+  scale_shape_manual(name = TeX("Audience Depreciation, $\\delta$"),
+    labels =c("Low, .35","Baseline, .7", "High, .85"),
+    values = c(0,1,2)) +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  ) +
+  guides(shape = guide_legend(override.aes = list(alpha = 1)))+
+  theme(text = element_text(size=global_size))
+```
+
+---
+## Convexity of profit in talent, à la Superstar Literature 
+```{r, fig.asp = 3/5, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, warning = FALSE,message=FALSE}
+k <- read.csv("../VFI_Data/kappa_tests/k_data.csv")
+
+k_sum_nn <-
+  k %>%
+  group_by(k,AA) %>%
+  summarize(v = median(v))
+
+ggplot(k_sum_nn) +
+  geom_line(aes(
+    x = k,
+    y = v,
+    col = AA,
+    group = AA
+  )) +
+  geom_vline(aes(xintercept=20),linetype="dashed",alpha=.4)+
+xlab(TeX("Talent, $\\kappa$")) +
+  ylab(TeX("Median Discounted Lifetme Utility, $V$")) +
+  scale_color_gradient(low = "#211030", high = "#FFBA3D", name = "Starting Audience\nSize, A") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(#panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black"))+
+  annotate("text",label="Baseline Talent",x=29,y=18000,family = "Tahoma",alpha=.4,size=3)+
+  theme(text = element_text(size=global_size))
+```
+
+---
+## Simulating 1000 careers, each starting with nothing
+```{r, fig.asp = 3/5, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, warning = FALSE,message=FALSE}
+library(dplyr)
+d30 <- 
+  read.csv("../VFI_Data/SimulationData/sim_d30.csv")
+k20 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k20.csv")
+k10 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k10.csv")
+sd5 <- 
+  read.csv("../VFI_Data/SimulationData/sim_sd5.csv")
+
+
+d30 <- 
+  d30 %>% 
+  mutate(sim="d30") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k20 <- 
+  k20 %>% 
+  mutate(sim="k20") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k10 <- 
+  k10 %>% 
+  mutate(sim="k10") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+sd5 <- 
+  sd5 %>% 
+  mutate(sim="sd5") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+
+d <- 
+  d30 %>% 
+  full_join(k20) %>% 
+  full_join(k10) %>% 
+  full_join(sd5) %>% 
+  mutate(z=case_when(sim=="k10"~10/m,
+                     T~20/m))
+
+d <- 
+  d %>% 
+  #filter(ids<100) %>% 
+  #filter(t!=0) %>% 
+  filter(t!=99)
+
+d_roll <- 
+  d %>% 
+  select(sim,t,A,ids) %>% 
+  group_by(sim,t) %>% 
+  summarize(A=mean(A))
+
+d <- 
+  d %>% 
+  filter(ids<100)
+  
+
+p_z <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=z,group=interaction(ids,sim),col=sim),alpha=.05, size=.4)+
+  guides(colour = guide_legend(override.aes = list(alpha = 1,size=5)))+
+  ylab("Quality")+
+  xlab("Time")+
+  scale_color_manual(values = c("#8C2730","#C36477","#211030","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    #panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )+
+  coord_cartesian(ylim=c(1.5,5))+
+  theme(text = element_text(size=global_size))
+
+p_A <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=A,group=interaction(ids,sim),col=sim),alpha=.05, size=.4)+
+  geom_line(data=d_roll,aes(x=t,y=A,col=sim),size=1)+
+  scale_color_manual(values = c("#8C2730","#C36477","#211030","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())+
+  scale_y_continuous(position = "right")+
+  ylab("Audience")+
+  xlab("Time")+
+    theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    #panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )+
+  theme(text = element_text(size=global_size))
+  
+
+ggpubr::ggarrange(p_z,p_A, ncol=2, nrow=1, common.legend = TRUE, legend="bottom")+
+  theme(text = element_text(size=global_size))
+```
+
+---
+## Insights from 1000 careers
+- Volatility hurts a creator on average
+- Quality does not predict audience size
+- Talent filters some out of the market
+- Creators who start small eventually produce high quality work
+- Still see a three phase strategy
+- Low talent creators cannot "fake it 'til they make it" if they are given a high initial reputation
+
+---
+
+## Conclusion & Implications
+
+.lesspaced[
+- Multiple quality strategies may exist in equilibrium
+]
+.lesspaced[
+- Successful artists shift from lower to higher quality
+  - After they "go viral"
+]
+.lesspaced[
+- Talent can filter out artists
+]
+.lessspaced[
+- Consumer loyalty induces high quality production
+]
+.lesspaced[
+- Future research: 
+  - Focus more on optimal algorithm design
+  - Allow for producers to compete with one another
+  - Fit with data
+]
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+</br>
+</br>
+# .white[Thanks, Questions?]
+
+---
+
+```{r, load_refs, echo=FALSE,message=F}
+library(RefManageR)
+bib <- ReadBib("../Inputs/RunningBib.bib", check = FALSE)
+#ui <- "- "
+```
+.tiny[
+```{r, print_refs, results='asis', echo=FALSE, warning=FALSE, message=FALSE}
+#writeLines(ui)?
+print(bib[key = c("aguiarQualityPredictabilityWelfare2018","kleinRoleMarketForces1981","shapiroPremiumsHighQuality1983","benderAttractingArtistsMusic2021","macdonaldEconomicsRisingStars1988","shapiroPremiumsHighQuality1983")], 
+  .opts = list(check.entries = FALSE, 
+               style = "html", 
+               bib.style = "authoryear"))
+```
+]
+---
+### Expected Per Period Views in Quantity
+
+[Desmos](https://www.desmos.com/calculator/n5ojrpaqas)
+
+---
+
+### State Variables on Lifetime Utility
+
+```{r, fig.asp = 3/5, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, warning = FALSE,message=FALSE}
+v = read.csv("../VFI_Data/BigData/v_data/v_max.csv", header = F)
+m = read.csv("../VFI_Data/BigData/m_data/m_max.csv", header = F)
+nn = read.csv("../VFI_Data/BigData/nn.csv", header = F)
+AA = read.csv("../VFI_Data/BigData/AA.csv", header = F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+d <-
+  data.frame(v = v,
+             m = m,
+             nn = nn,
+             AA = AA)
+
+
+library(ggplot2)
+library(extrafont)
+
+
+ggplot(d) +
+  geom_point(aes(x = AA, y = v, col = nn)) +
+  ylab(TeX("Expected Discounted Lifetime Optimized Revenue, $V(n,A)$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_gradient(low = "#211030", high = "#FFBA3D",name="Initial Reputation\nPer Capita, n") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black"),
+    #axis.ticks = element_blank(),
+    #axis.text = element_blank()
+    #legend.position = "bottom"
+  )
+```
+---
+
+### Discontinuity Conditions
+
+```{r, fig.asp = 3/5, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, warning = FALSE,message=FALSE}
+ggplot(d, aes(AA, nn, fill= m)) + 
+  geom_tile(height=1.01)+
+    xlab(TeX("Initial Audience Size, $A$")) +
+    ylab(TeX("Initial Reputation, $n$"))+
+  scale_fill_gradient(low = "#211030", high = "#FFBA3D",name="Optimal\nQuantity, m") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black"),
+    #axis.ticks = element_blank(),
+    #axis.text = element_blank()
+    #legend.position = "bottom"
+  )
+```
+
+---
+
+### Talent on Optimal Strategy
+```{r, fig.asp = 3/5, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, warning = FALSE,message=FALSE}
+v = read.csv("../VFI_Data/Variations_From_Baseline/v.csv", header = F)
+m = read.csv("../VFI_Data/Variations_From_Baseline/m.csv", header = F)
+nn = read.csv("../VFI_Data/Variations_From_Baseline/nn.csv", header = F)
+AA = read.csv("../VFI_Data/Variations_From_Baseline/AA.csv", header = F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+d <-
+  data.frame(v = v,
+             m = m,
+             nn = nn,
+             AA = AA)
+
+library(dplyr)
+d_20 <- 
+  d %>% 
+  mutate(k="20")
+
+v=read.csv("../VFI_Data/Variations_From_Baseline/v_k30.csv",header=F)
+m=read.csv("../VFI_Data/Variations_From_Baseline/m_k30.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_30 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(k="30")
+
+v=read.csv("../VFI_Data/Variations_From_Baseline/v_k10.csv",header=F)
+m=read.csv("../VFI_Data/Variations_From_Baseline/m_k10.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_10 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(k="10")
+
+library(tidyr)
+d_k <- 
+  full_join(d_20,d_30) %>% 
+  full_join(d_10)# %>% 
+  #pivot_longer(cols=c(m,v))
+
+d_k$k <- factor(d_k$k, levels = c("10", "20", "30"))
+d_k <- 
+  d_k %>% 
+  mutate(z=as.numeric(as.character(k))/m)
+
+
+m=seq(.5,60,.001)
+
+z_up=30/m
+z_mid=20/m
+z_down=10/m
+
+library(dplyr)
+
+q <- 
+  tibble::tibble(m,z_up,z_down,z_mid) %>%
+  select(z_down,z_mid,z_up,m) %>% 
+    rename(`High Talent`=z_up,
+         `Baseline`=z_mid,
+         `Low Talent`=z_down) %>% 
+  tidyr::pivot_longer(cols=c(`High Talent`:`Low Talent`)) %>% 
+  mutate(name=as.factor(name))
+
+q$name <- factor(q$name, levels=c('Low Talent', 'Baseline', 'High Talent'))
+
+
+ggplot(q %>% filter(m<60 & value<20))+
+  geom_line(aes(m,value,size=name,color=name))+
+  ylim(0,10)+
+  xlim(0,60)+
+  ylab(TeX("\nQuality, $z$"))+
+  xlab(TeX("Number of Releases, $m$"))+
+  scale_color_manual(values=c("#8C2730","#211030","#255059"),name=TeX("Talent, $\\kappa$"))+
+  scale_size_manual(values=c(.5,1,1.5),name=TeX("Talent, $\\kappa$"))+
+  theme(text = element_text(family = "Tahoma")) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+axis.ticks=element_blank(),
+axis.text = element_blank())+
+  geom_point(data=d_k,aes(x=m,y=z),color="#FFBA3D",alpha=.5,shape=0)
+
+```
+
+---
+
+### Effect Of Unpredictability
+
+```{r, fig.asp = 3/5, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, warning = FALSE,message=FALSE}
+d_one <-
+  d %>%
+  mutate(sd = "1.0")
+
+v = read.csv("../VFI_Data/Variations_From_Baseline/v_sd5.csv", header =
+               F)
+m = read.csv("../VFI_Data/Variations_From_Baseline/m_sd5.csv", header =
+               F)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_5 <- data_frame(v = v,
+                  m = m,
+                  nn = nn,
+                  AA = AA) %>%
+  mutate(sd = "5")
+
+v = read.csv("../VFI_Data/Variations_From_Baseline/v_sdp2.csv", header =
+               F)
+m = read.csv("../VFI_Data/Variations_From_Baseline/m_sdp2.csv", header =
+               F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_p2 <-
+  data_frame(v = v,
+             m = m,
+             nn = nn,
+             AA = AA) %>%
+  mutate(sd = "0.2")
+
+d_sd <-
+  d_one %>%
+  full_join(d_5) %>%
+  full_join(d_p2)# %>%
+  #pivot_longer(cols = c(m, v))
+
+d_sd_sum <- 
+  d_sd %>% 
+  group_by(sd,AA) %>% 
+  summarize(v=median(v))
+
+ggplot(d_sd_sum) +
+  geom_line(
+    aes(
+    x = AA,
+    y = v,
+    linetype = sd,
+    color = sd
+  )) +
+  ylab(TeX("Median Optimized Lifetime Utility, $V$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_manual(
+    values = c("#8C2730", "#211030", "#FFBA3D"),
+    name = TeX("Standard Deviation\nof Algorithmic Shock")
+  ) +
+  scale_linetype(name = TeX("Standard Deviation\nof Algorithmic Shock")) +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  ) +
+  guides(shape = guide_legend(override.aes = list(color = "#211030"))) +
+  guides(color = guide_legend(override.aes = list(alpha = 1)))
+```
+
+---
+
+### High Initial Reputation Simulation
+
+```{r, fig.asp = 3/5, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, warning = FALSE,message=FALSE}
+library(dplyr)
+d30 <- 
+  read.csv("../VFI_Data/SimulationData/sim_d30_n5.csv")
+k20 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k20_n5.csv")
+k10 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k10_n5.csv")
+sd5 <- 
+  read.csv("../VFI_Data/SimulationData/sim_sd5_n5.csv")
+
+
+d30 <- 
+  d30 %>% 
+  mutate(sim="d30") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k20 <- 
+  k20 %>% 
+  mutate(sim="k20") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k10 <- 
+  k10 %>% 
+  mutate(sim="k10") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+sd5 <- 
+  sd5 %>% 
+  mutate(sim="sd5") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+
+d <- 
+  d30 %>% 
+  full_join(k20) %>% 
+  full_join(k10) %>% 
+  full_join(sd5) %>% 
+  mutate(z=case_when(sim=="k10"~10/m,
+                     T~20/m))
+
+d <- 
+  d %>% 
+  #filter(ids<100) %>% 
+  #filter(t!=0) %>% 
+  filter(t!=99)
+
+d_roll <- 
+  d %>% 
+  select(sim,t,A,ids) %>% 
+  group_by(sim,t) %>% 
+  summarize(A=mean(A))
+
+d <- 
+  d %>% 
+  filter(ids<100)
+
+  
+
+p_z <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=z,group=interaction(ids,sim),col=sim),alpha=.05, size=.4)+
+  guides(colour = guide_legend(override.aes = list(alpha = 1,size=5)))+
+  ylab("Quality")+
+  xlab("Time")+
+  scale_color_manual(values = c("#8C2730","#C36477","#211030","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    #panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )+
+  coord_cartesian(ylim=c(1.5,5))
+
+p_A <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=A,group=interaction(ids,sim),col=sim),alpha=.05, size=.4)+
+  geom_line(data=d_roll,aes(x=t,y=A,col=sim),size=1)+
+  scale_color_manual(values = c("#8C2730","#C36477","#211030","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())+
+  scale_y_continuous(position = "right")+
+  ylab("Audience")+
+  xlab("Time")+
+    theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    #panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )
+  
+
+ggpubr::ggarrange(p_z,p_A, ncol=2, nrow=1, common.legend = TRUE, legend="bottom")
+```
+

@@ -4,14 +4,17 @@ subtitle: "Artistic Production on Streaming Platforms Under Algorithmically-Indu
 author: "Aaron Graybill"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
-  bookdown::pdf_document2: default
+  bookdown::pdf_document2: 
+    extra_dependencies: ["float"]
   pdf_document: 
     number_sections: true
+    extra_dependencies: ["float"]
   word_document: default
   html_document: default
 biblio-style: apalike
 csl: ../Inputs/apa.csl
 bibliography: ../Inputs/RunningBib.bib
+abstract: "Content streaming platforms like YouTube and TikTok play an important part in the lives of many. This paper contributes to existing literature by exploring the optimal quality-quantity tradeoff of a content creator on a streaming platform. This paper creates a model of how a creator's revenue evolves when audience size is determined by an unpredictable algorithm. Solving this model using dynamic programming predicts the emergence of a three-phase quality strategy. Small creators who are unlikely to be discovered choose high quality, budding creators choose low quality to quickly grow a following, and established creators return to high quality. This paper contributes to the growing streaming literature by focusing on what drives the content creator's decisions over time under audience uncertainty."
 linestretch: 1.5
 indent: true
 urlcolor: myBlue
@@ -28,6 +31,7 @@ header-includes:
 - \let\openbox\relax
 - \usepackage{amsthm}
 - \usepackage{amssymb}
+- \usepackage{float}
 - \renewcommand*\oldstylenums[1]{\textosf{#1}}
 - \definecolor{myBlue}{HTML}{255059}
 - \definecolor{myRed}{HTML}{8C2730}
@@ -35,134 +39,130 @@ header-includes:
 - \interfootnotelinepenalty=10000
 - \newtheorem{prop}{Proposition}
 fig_caption: yes
-
-nocite: |
- @YouTubeStarsRhett2020
+nocite: '@*'
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo=F,message=F,warning=F)
+knitr::opts_chunk$set(echo=F,message=F,warning=F, out.extra = "")
 ```
+
+\newpage
 
 # Introduction
 
-YouTube, the video streaming giant, reported 19.7 Billion dollars in ad revenue during 2020.[^1] Spotify, the music streaming platform, posted a similarly giant 7.8 Billion dollars in revenue from 2020.[^2] Comparing revenues to nominal GDP, this would put YouTube at a similar size to the nation of Afghanistan.[^3] Revenue numbers like these cannot be ignored.
+YouTube, the video streaming giant, reported 28.8 billion dollars in ad revenue in 2021.[^1] YouTube's ad revenue alone is greater than Visa, Kraft Heinz, and Starbucks.[^2]
 
-[^1]: Available on page 27 at <https://abc.xyz/investor/static/pdf/2020_alphabet_annual_report.pdf?cache=8e972d2>
+[^1]: Compiled from the 2021 reports available [here](https://abc.xyz/investor/)
 
-[^2]: Available on page 5 at <https://s22.q4cdn.com/540910603/files/doc_financials/2020/ar/4e770a8c-ee99-49a8-9f9e-dcc191807b56.pdf>
+[^2]: Data were taken from *Fortune*, available [here](https://fortune.com/fortune500/)
 
-[^3]: [\<https://en.wikipedia.org/wiki/List_of_countries_by_GDP\_(nominal>)](https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)) I need a source that isn't wikipedia, but maybe this is stupid anyway.
+YouTube and Spotify, among their industry peers like Instagram and TikTok, lie at the intersection of two burgeoning markets: streaming platforms and social media. Services like YouTube, Spotify, Instagram, and TikTok, which I will refer to as *platforms*, provide a rich opportunity for economic analysis. For this analysis, a platform will mean any online service that connects individuals media creators to media consumers.
 
-YouTube and Spotify, among their industry peers like Instagram, TikTok, lie at the intersection of two burgeoning markets: streaming platforms and social media. Services like YouTube, Spotify, Instagram, and TikTok, which I will refer to as *platforms*, provide a rich opportunity for economic analysis.
+Platforms are fundamentally a marketplace. *Content creators*, firms, are given an opportunity to connect with consumers who wish to consume their products. In this way, streaming economies are *two-sided markets*, markets in which both the buyer and sellers connect through a third party. In our case, the streaming platform serves as the point of connection. One key distinction between a physical marketplace and a digital platform is that consumption is usually nonrivalrous. One consumer's decision to listen to an artist's newest release on Spotify has no negative impact on another consumer's ability to consume that product. However, one consumer's choices do indeed affect others. We expect that a platform's algorithm measures one user's engagement and uses that and other factors to decide whether or not to show a product to a different consumer. Different from many other markets, a consumer may not know what kind of content they wish to consume and use the platform as a content discovery tool. Furthermore, a content creator's inventory is limited only by the bandwidth of the platform and the number of consumers who wish to consume their product. The number of willing consumers is a content creator's audience and is central to the analysis conducted below.
 
-Platforms are fundamentally a marketplace. *Content creators*, firms, are given an opportunity to connect with consumers who wish to consume their product. However, platforms provide a marketplace unlike anything that has been previously seen. In this way, streaming economies are *two-sided markets*, markets in which both the buyer and sellers connect through a third party. In our case, the streaming platform serves as the point of connection. One key distinction between a physical marketplace and a digital platform is that consumption is usually nonrivalrous. One consumer's decision to listen to an artist's newest release on Spotify has no negative impact on another consumer's ability to consume that product. However, one consumer's choices do indeed have an effect on others. We expect that a platform's algorithm measures one user's engagement and uses that and other factors to decide whether or not to show a product to a different consumer. Furthermore, a content creator's inventory is limited only by the bandwidth of the platform and the number of consumers who wish to consume their product. The number of willing consumers is a content creator's audience, and is central to the analysis conducted below.
+Audience evolution is another key component of streaming markets. Of course, consumers can seek out content directly if they know that a creator exists, but that does not fully describe consumer-creator matching on a platform. A central component of streaming markets is the *algorithm*. By algorithm, I mean a platform's way of analyzing a release by a content creator and deciding which consumers will be shown that release. Consumers are required to self-select products they wish to purchase. However, platforms use their algorithm to show content to consumers they may not have initially been aware of. Algorithms are also a way of encoding a content creator's reputation over time. When deciding whom to show a content creator's work to, an algorithm looks at a subset of a creator's history of releases. These past releases serve as a reputation even when a consumer has not yet been exposed to a creator. A consumer might think, "I don't know what this video will be, but if the algorithm is recommending it, I will probably enjoy it." Many platforms market their algorithmically selected content in that way. TikTok's "For You Page" is where a user can find algorithmically selected content that TikTok suspects will be good *for you*.
 
-Audience evolution is another key difference between a streaming economy and traditional market structures. Of course, consumers can seek out content directly if they know that a creator exists, but that does not fully describe consumer-creator matching on a platform. A central component of streaming markets is the *algorithm*. By algorithm, I mean a platform's way of analyzing a release by a content creator and deciding which consumers will be shown that release. In some markets, like an outdoor farmer's market, the algorithm is nonexistent. Consumers are required to self-select products they wish to purchase. However, platforms use their algorithm to show content to consumers they may not have initially been aware of. Algorithms are also a way of encoding a content creator's reputation over time. An algorithm looks at a subset of a content creator's history of releases when deciding who will see an artists new releases. These past releases serve as a reputation even when a consumer has not yet been exposed to a creator. A consumer might think, "I don't know what this video will be, but if the algorithm is recommending it, I will probably enjoy it."
+All successful content creators must acknowledge the importance of a platform's algorithm and adapt to its changes. A useful anecdote comes from Stevie Wynne Levine, Chief Creative Officer of Mythical. Mythical is a YouTube conglomerate with over 75 million subscribers across its channels and 25 billion total views on its videos. In reference to how their team analyzes the algorithm, Wynne Levine tells Business Insider:
 
-All successful content creators must acknowledge the importance of a platform's algorithm and adapt to its changes. A useful anecdote comes from Stevie Wynne Levine, Chief Creative Officer of Mythical. Mythical is a YouTube conglomerate with over 75 million subscribers across its channels and 25 billion total views on its videos. In reference to how their team analyzes the algorithm, Wynne Levine reveals:
+> It's something that we do not only every day, but three, four times a day. We analyze each video that we've put out for that day and how we can improve impressions and views. So definitely not something that we set it and forget it, because it's constantly evolving. (@whateleyYouTubeStarsRhett2020, para 12)
 
-> It's something that we do not only every day, but three, four times a day. We analyze each video that we've put out for that day and how we can improve impressions and views. So definitely not something that we set it and forget it, because it's constantly evolving. (para. 12)
+The above discussion reveals that content creators have a unique economic problem that is worthy of study. Recent literature has focused on the optimal behavior of consumers and platforms, but content creators have been mostly omitted in the literature on streaming platforms. Work that has tackled artists' optimal behavior has focused on fine art in non-digital markets.
 
-The above discussion reveals that content creators have a unique economic problem that is worthy of study. Recent literature has focused on the optimal behavior of consumer and platforms, but content creators have been mostly omitted in the literature of streaming platforms. Work that has tackled artist's optimal behavior has primarily considered fine art in non-digital markets. The analysis below explores whether or not streaming platforms create conditions that mirror fine art markets by concentrating revenue in a small minority of the total number of producers.
+In this paper, I will explore how content creators must balance the inherent quantity-quality tradeoff present in making content for a platform. A higher number of releases offers a content creator more opportunities for the random component of the algorithm to make their content viral. However, investing in greater quality encourages consumers who do know about an artist's content to stream that content more. Again using YouTube as an example, their "Creator Academy" which is intended to teach content creators how to make more effective content, acknowledges but does not provide clear guidance on this quality-quantity tradeoff. Simon Whistler, a popular content creator and the presenter of this video says that "... if you have more videos out there, chances are your watch time overall is going to be higher" @youtubecreatorsWhatIdealVideo2018. Watch time, in this context, is the cumulative time that viewers have watched your content divided by the number of unique viewers and is an important predictor of algorithmic success.
 
-In this paper, I will explore how content creators must balance the inherent quantity-quality trade-off present in making content for platform. A higher number of releases offers a content creator more opportunities for the random component of the algorithm to make their content viral. However, investing in greater quality encourages consumers who do know about an artist's content to stream that content more. Again using YouTube as an example, their "Creator Academy" which is intended to teach content creators how to make more effective content, acknowledges but does not provide clear guidance on this quality-quantity tradeoff. Simon Whistler, a popular content creator and presenter of this videos says that "... if you have more videos out there, chances are your watch time overall is going to be higher" @youtubecreatorsWhatIdealVideo2018. Watch time, in this context, is the cumulative time that viewers have watched your content divided by the number of unique viewers and is an important predictor of algorithmic success.
+I construct a model of artist/content creator behavior in which artists must decide on a quantity and quality of art to release in every period. Their quantity choice affords them some number of chances at algorithmic exposure. Additionally, the algorithm will also factor in how many times past audience members consumed an artist's work when deciding audience size. An artist's underlying talent (ability to produce the same quality/quantity at a lower cost) will govern optimal production, and I will show how revenue and quality develop over time.
 
-I construct a model of artist/content creator behavior in which artists must decide a quantity and quality of art to release in every period. Their quantity choice affords them a number of chances at algorithmic exposure. Additionally, the algorithm will also factor in how many times past audience members consumed an artist's work when deciding audience size. An artist's underlying talent (ability to produce the same quality/quantity at a lower cost) will govern optimal production, and I will show how the distribution of talent relates to the distribution of revenue in successful artists.
+I hypothesize that artists early in their career, where new audience members make up a large share of their total audience, are more likely to produce low-quality content, and then switch to a low-volume, high-quality strategy later in their career. The interaction of artist decisions in the streaming economy and algorithmic uncertainty is novel to this paper. Additionally, I will show that a three-stage quantity strategy is employed by an agent. Upon simulating results, I will see that sufficiently small initial talent prevents audience accumulation over time.
 
-I hypothesize that artists early in their career, where new audience members make up a large share of their total audience, are more likely to produce low quality content, and then switch to a low-volume, high-quality strategy later in their career. The interaction of artist decisions in the streaming economy and algorithmic uncertainty is novel to this paper.
-
-The remainder of this paper is broken into (SOME NUMBER) of sections. In the [literature review] I discuss how related literature has informed the construction of the model. In [the model] section, I hypothesize results based on the literature, and present the primary model used in this analysis. In the (REST OF SECTIONS GO HERE)...
+The remainder of this paper is broken into seven sections. In the [Literature Review], I discuss how related literature has informed the construction of the model. The [Relevant Institutional Characteristics] section discusses YouTube in more depth and how it informs the modeling decisions in this paper. In [The Model] section, I discuss assumptions about the properties of consumers, producers, and algorithms, and assemble the primary model used throughout. In [The Artist's One-Period Maximization Problem], I analyze the simplest implementation of the model in one period to gather preliminary results. In the [Dynamic Programming Model] section, I reframe the established model as a recursive dynamic programming problem which will allow for multi-period analysis. I also discuss the necessary assumptions and calibrations in this section. The [Dynamic Programming Results] contains the main results of the paper. The [Conclusion] summarizes and discusses future avenues for research.
 
 # Literature Review
 
-The branding literature provides tools to analyze how the information that a firm communicated, its brand, affects consumers' decisions. In this analysis, firms must build a reputation even if that doesn't take the form of a traditional brand, logos, typography, and other factors. In this analysis reputation is developed through the number of streams per capita which is a function of the quality of a release. The superstar literature analyzes how market concentration can develop, particularly in art markets. I will analyze how the introduction of an algorithm influences the distribution of talent in an art market using the superstar literature as a pre-digitization baseline. Finally, the streaming literature models the incentives and optimal behavior of streaming platforms and end users. The model below supplements the streaming literature by analyzing the artist's problem taking the properties of streaming platform and the end user as given.
-
 ## Branding Literature
 
-An artist concerned with growing their audience faces many similar incentives to a new firm trying to develop a brand. One can view a brand as a set of signals about the quality of a firm's product. Branding becomes an important consideration when consumers do not have ex ante knowledge about the quality of the product they are purchasing. As such, consumers rely on the signals presented by a firm's brand to inform their consumption decisions. The branding literature begins with the signalling literature pioneered in @spenceJobMarketSignaling1973. In this paper, Spence finds that observable characteristics, both impactful and superficial, can have substantial effects on the hiring decisions of a potential employer. More directly, @kleinRoleMarketForces1981 presents a simple model that identifies key characteristics that a market must possess in order for firms to invest in branding and selling a high quality product. Central to their model is consumer reputation formation. They propose a rather draconian baseline in which consumers' trust can never be regained upon a firm choosing to deceive them. A key finding is that with sufficient differentiation between high and low quality products, some firms may choose to invest in their reputation into perpetuity. This provides evidence that even when a firm's brand offers no intrinsic consumer utility, the information for consumers contained in branding makes it worthwhile for both the firm to invest in and the consumer a premium for branding. @shapiroPremiumsHighQuality1983 generalizes the model proposed by Klein and Leffler to a case where reputation can exist on a continuum of values and can evolve in a less austere manner. Shapiro confirms the results of Klein and Leffler while expanding on the fragility of branding. Shapiro finds that even when a firm is able to charge more for a branded product than an unbranded alternative, there is no market power earned, only a higher price.
-
-The application of the branding literature to the problem posed in this paper lies in the way that streaming platforms' algorithms reveal information and content to consumers. Generally streaming platforms allow users to choose their own content, but many platforms like YouTube, Spotify, and Apple Music also algorithmically provide content based on the consumer's history of the content they have consumed and how they have consumed it (number of times, shares, etc.). When this content is previously unknown to the consumer, we can view the platform as relying on its branding to present desirable content to the user. I will extend the branding literature by exploring the context in which reputation is subject to uncontrollable shocks that can positively or negatively influence next period's reputation.
+An artist concerned with growing their audience faces many similar incentives to a new firm trying to develop a brand. One can view a brand as a set of signals about the quality of a firm's product. Branding becomes an important consideration when consumers do not have ex-ante knowledge about the quality of the product they are purchasing. As such, consumers rely on the signals presented by a firm's brand to inform their consumption decisions. The branding literature begins with the signaling literature pioneered in @spenceJobMarketSignaling1973. In this paper, Spence finds that observable characteristics, both impactful and superficial, can have substantial effects on the hiring decisions of a potential employer. More directly, @kleinRoleMarketForces1981 presents a simple model that identifies the market characteristics that incentivize firms to invest in branding and selling a high-quality product. Central to their model is consumer reputation formation. They propose a rather draconian baseline in which consumers' trust can never be regained upon a firm choosing to deceive them. A key finding is that with sufficient differentiation between high and low-quality products, some firms may choose to invest in their reputation into perpetuity. Their model provides evidence that even when a firm's brand offers no intrinsic consumer utility, the information contained in branding makes it worthwhile for both firms to invest in and consumers to pay a premium for branding. @shapiroPremiumsHighQuality1983 generalizes the model proposed by Klein and Leffler to a case where reputation can exist on a continuum of values and can evolve in a less austere manner. Shapiro confirms the results of Klein and Leffler while expanding on the fragility of branding. Shapiro finds that even when a firm can charge more for a branded product than an unbranded alternative, there is no market power earned, only a higher price.
 
 ## Superstar Literature
 
-The branding literature is related to the "superstar" literature. The superstar literature, however, lies closer towards cultural economics because it focuses primarily on markets for art and entertainment. Rosen, the preeminent author the superstar literature, characterizes a superstar market as having a: "relatively small numbers of people \[who\] earn enormous amounts of money and dominate the activities in which they engage", \[@rosenEconomicsSuperstars1981a, p. 845\]. In his paper, he presents a model where consumers can perfectly observe talent ex ante. In this framework, Rosen finds that small increases in underlying artistic talent can have disproportionately large increases in resultant revenue in market equilibrium. This leads to revenues being concentrated among only a few artists. Art market concentration is further explored in @macdonaldEconomicsRisingStars1988 which takes an alternate modeling approach and introduces uncertainty in the talent of an artist. This uncertainty is market-wide where neither the consumer nor the artist knows their talent until they have performed. This model also intersects with the branding literature because it explores how an artist's perceived talent evolves over multiple periods based on the quality of their performance.
-
-The superstar literature is important to this analysis because it emphasizes the artist's production decisions and how they affect market revenues. As I will discuss later, much of the recent literature on streaming economies has focused on the streaming platform and the end consumers, so the superstar literature gives a more nuanced view of how artistic production can be modeled and optimized. However, I add to the artitic side of the superstar literature by modernizing the analysis and seeing if the same patterns emerge under a digitally-based economy. In particular, I will provide further insight into how the distribution of underlying talent may or may not be reflected in the realized distribution of talent in successful artists.
+The branding literature is related to the "superstar" literature. The superstar literature, however, lies closer to cultural economics because it focuses primarily on markets for art and entertainment. Rosen, the preeminent author in the superstar literature, characterizes a superstar market as having a: "relatively small numbers of people (who) earn enormous amounts of money and dominate the activities in which they engage" (@rosenEconomicsSuperstars1981a, p. 845). In his paper, he presents a model where consumers can perfectly observe talent ex-ante. In this framework, Rosen finds that small increases in underlying artistic talent can have disproportionately large increases in resultant revenue in market equilibrium. This leads to revenues being concentrated among only a few artists. Art market concentration is further explored in @macdonaldEconomicsRisingStars1988 which takes an alternate modeling approach and introduces uncertainty in the talent of an artist. This uncertainty is market-wide where neither the consumer nor the artist knows their talent until they have performed. This model also intersects with the branding literature because it explores how an artist's perceived talent evolves over multiple periods based on the quality of their performance.
 
 ## Streaming Literature
 
-The third and most closely related field of study is the streaming literature. The advent of streaming has garnered considerable attention from both theoretical and empirical angles. Streaming platforms can take many forms, but I will follow the characterization given in @thomesEconomicAnalysisOnline2013. He characterizes a streaming economy as an internet-based two-sided media marketplace. The streaming platform is in the middle of this two sided marketplace. The first side of the marketplace is the streaming platform accepting media from content creators. The other side of this marketplace is the streaming service delivering this content to consumers. Usually money is changed hands on both sides of this market. Researchers have focused on various aspects of the streaming economy as it has evolved. I will begin by giving an overview of some of the key topics addressed by theoretical papers. After discussing theory, I will mention some relevant empirical studies that analyze how digitization has affected the distribution of artist popularity---a central question of the research at hand.
+The third and most closely related field of study is the streaming literature. The advent of streaming has garnered considerable attention from both theoretical and empirical angles. Streaming platforms can take many forms, but I will follow the characterization given in @thomesEconomicAnalysisOnline2013. He characterizes a streaming economy as an internet-based two-sided media marketplace. The streaming platform is in the middle of this two-sided marketplace. The first side of the marketplace is the streaming platform accepting media from content creators. The other side of this marketplace is the streaming service delivering this content to consumers. Usually, money changes hands on both sides of this market. Researchers have focused on various aspects of the streaming economy as it has evolved.
 
 Early papers in the streaming literature investigate how streaming may curb pirating, the (usually free) illegal download of unlicensed music, like on Napster. One such early paper is @thomesEconomicAnalysisOnline2013 which takes the perspective of the music streaming platform when deciding how to price its paid subscription service relative to its free-with-ads alternative. This paper takes the artist's behavior as given, and does not tackle the conditions under which artists will choose to produce content for the platform.
 
-Another more recent paper that takes the streaming platform's perspective is @benderAttractingArtistsMusic2021. This paper analyzes competition between permanent digital MP3 sales and streaming platforms. It analyzes consumer demand, and how the platform should optimally set its royalty to attract artists to the platform. The authors find that it is the most popular artists that might choose to hold out and sell their work only via permanent download, a result seen anecdotally with the Beatles who kept their music off of streaming services for a famously long time.[^4] The analysis below examines how artists should optimally produce once they have already committed to making content for a streaming platform.
+Another more recent paper that takes the streaming platform's perspective is @benderAttractingArtistsMusic2021. This paper analyzes competition between permanent digital MP3 sales and streaming platforms. It analyzes consumer demand, and how the platform should optimally set its royalty to attract artists to the platform. The authors find that it is the most popular artists that might choose to hold out and sell their work only via permanent download, a result seen anecdotally with the Beatles who kept their music off of streaming services for a famously long time.[^3] The analysis below examines how artists should optimally produce once they have already committed to making content for a streaming platform.
 
-[^4]: A discussion of the Beatles decision to stream their music is available here: <https://www.fastcompany.com/3054965/its-official-the-beatles-are-coming-to-spotify-apple-music-and-more>
+[^3]: A discussion of the Beatles' decision to stream their music is available here: <https://www.fastcompany.com/3054965/its-official-the-beatles-are-coming-to-spotify-apple-music-and-more>
 
-@hillerRiseStreamingMusic2017 incorporates elements from both @thomesEconomicAnalysisOnline2013 and @benderAttractingArtistsMusic2021 by modelling an economy with digital purchases in addition to free and paid subscriptions on a streaming service. The authors investigate the artist's decision to produce one high-quality piece of art versus multiple comparatively lower-quality pieces. The authors find that the streaming economy fosters an environment in which profit-maximizing artists focus on generating high-quality singles instead of lower-quality albums. I will examine this quantity-quality trade-off will below, but with the key difference of uncertain audience size. The proceeding analysis acknowledges the fact that releasing more content may increase an artist's chance of reaching a larger audience.
-
-Another driving question of this research pertains to the debate of whether or not streaming platforms have created a "long tail" of products. I will now summarize some empirical work that analyzes this topic.
-
-The term long tail was popularized in @andersonLongTailWhy2006. The principle of the long tail is that digitization of commerce allows consumers access to a wider variety of products---far more than a brick-and-mortar store could ever stock. The greater variety of products allows consumers to pinpoint the product that best suits their preferences. A diverse product set results in many products having a small number consumers. As such, the distribution of consumers per product should have much longer tail than pre-digitization. The streaming economy is an excellent example of where this long tail might exist as Spotify can stock hundreds of times more songs into a server than a vinyl record store could ever stock in-store. The long tail hypothesis would suggest a diffusion of revenues across many artists. However, @rosenEconomicsSuperstars1981a, finds that revenue should be concentrated among only a few artists. These factors are not necessarily at odds, we may have most of the revenue while still having a long tail, but this paper will examine whether or not we have a long thick tail, or an initial bump with a long thin tail afterwards.
-
-That being said, opinions are mixed as to whether or not the long tail hypothesis holds empirically. @elberseShouldYouInvest2008 initially pushed back against the idea of a long tail. She cites data from Quickflix (a now-defunct Australian pay-per-view movie streaming platform) which showed that a small number of DVDs comprised a large portion of sales. However, it is hard to know how the distribution of sales on Quickflix compared to the pre-digitization market. The proceeding analysis in this paper will model a different type of streaming platform, one in which customers have unlimited access to content either for free or for a monthly subscription fee.
-
-A more recent alternate perspective on the long tail, @aguiarQualityPredictabilityWelfare2018, posits digitization substantially lowers the entry cost of new firms. Lower entry costs allow firms with lower expected profit into the market, increasing the diversity of sellers. The authors robustly show that consumers value having a variety of producers when it is difficult to forecast an artist's talent before purchasing. They argue that the value of variety provides further justification that there exists a long tail of producers. I will examine whether or not producers naturally form a long tail even under uncertainty about the number of consumers that they will be able to reach with their product.
+@hillerRiseStreamingMusic2017 has elements from @thomesEconomicAnalysisOnline2013 and @benderAttractingArtistsMusic2021 by modeling an economy with digital purchases in addition to free and paid subscriptions on a streaming service. The authors investigate the artist's decision to produce one high-quality piece of art versus multiple comparatively lower-quality pieces. The authors find that the streaming economy fosters an environment in which profit-maximizing artists focus on generating high-quality singles instead of lower-quality albums. I will examine this quantity-quality tradeoff below, but with the key difference of uncertain audience size.
 
 ## This Paper's Contribution to the Literature
 
-The preceding discussion reveals a few key unexplored area that this paper will investigate. One, previous literature has focused on behavior of the streaming platform and the end-user. This analysis contributes to the comparatively-understudied role of the artist in the streaming economy. Two, this paper will endogenize audience development, a similarity to the branding and superstar literature not yet applied to the streaming literature. Third, this paper will contribute the debate of the long tail in the streaming literature by exploring the equilibrium distribution of artist talent and how that relates the distrirbution of artist revenue. Finally, This paper will also contribute to the presently-unexplored role of unpredictable algorithms on streaming platforms in shaping an artist's career and optimal behavior.
+The preceding discussion reveals a few unexplored areas that this paper will investigate. One, previous literature has focused on the behavior of the streaming platform and the end-user. This analysis contributes to the comparatively-understudied role of the artist in the streaming economy. Two, this paper will endogenize audience development, a similarity to the branding and superstar literature not yet applied to the streaming literature. Finally, This paper will also contribute to the presently-unexplored role of unpredictable algorithms on streaming platforms in shaping an artist's career and optimal behavior.
+
+In particular, this paper seeks to answer a few key questions informed by related literature but unique to a streaming environment. First following the work of @rosenEconomicsSuperstars1981a I will explore how a streaming market influences the convexity of profits in talent. I will explore whether or not a platform with high unpredictability has more or less convexity of revenue in talent.
+
+Additionally, following the work of @benderAttractingArtistsMusic2021, I will explore whether or not the introduction of a multi-period model allows artists with small initial followings to pursue a high-quality strategy, unlike Bender's one-period model.
+
+# Relevant Institutional Characteristics
+
+The model constructed below is based most closely on YouTube, and I will now discuss some aspects of YouTube's structure that I used to ground the model. The two most relevant parts of the YouTube streaming environment are the algorithm and the way that artists get paid per stream.
+
+First, the algorithm. The content consumer has three primary ways of discovering content: direct search, the subscriptions page, and the "home" page. Using direct search, consumers can search for a style of video or the name of a creator if they already know what they are looking for. On the subscription page, a consumer sees all of the videos from the content creators they are "subscribed" to. Subscription is free and simple and allows a consumer to stay up to date on a content creator's newest releases. That being said, YouTube has pushed users towards the final option, the "home" page. This page, now the default when you open YouTube on mobile or desktop shows an algorithmic amalgam of the content creators you've subscribed to and new creators. There can be videos you have finished before, videos you have started but not finished, or videos you have never seen. The content is unpredictable but responsive to the media you have recently viewed.[^4]
+
+[^4]: A discussion of how content is placed on a user's YouTube home page is available here: <https://www.youtube.com/watch?v=69tpVNunQEU>
+
+The "home" page motivates the analysis conducted below. There is some cohort of your audience that may remember you, and seek out your content directly. However, the rest of your viewership may come and go depending on how frequently the algorithm shows your content. There exists endless online discussion of how to optimize your content for "the algorithm." Various methods exist like catchy thumbnail images, adequate video length for the genre, upload time, etc.
+
+In addition to the algorithm and consumer content discovery, there is the matter of monetization. YouTube does not widely publish the rates at which they compensate their content creators, but prevailing wisdom indicates that content creators make well less than fifty cents for every time a viewer watches an ad during their video. There is little available information on when YouTube shows a viewer an ad before or during a video. I will assume that there is a linear relationship between the number of views and the advertisement revenue generated from content.[^5] Creators do not have much control over which advertisements are shown on their videos. YouTube shows ads based on characteristics it has compiled on the viewer.[^6] Since creators can't control the ads, they instead must focus on the algorithm that gets their videos to viewers.
+
+[^5]: Some additional explanations for variations in revenue per stream are given in the "Why is my CPM Changing?" tab [here](https://support.google.com/youtube/answer/9314357?hl=en#zippy=%2Cwhy-is-my-cpm-changing).
+
+[^6]: Google operates ad placement on YouTube, a brief discussion of which ads a viewer might see is here: <https://support.google.com/youtube/answer/7403255?hl=en#:~:text=The%20ads%20you%20see%20may,Google%20services%2C%20like%20Google%20Ads>
+
+YouTube monetization is a complex concept that depends on whether or not copyright-protected content is used in a video. Creators may also experience "demonetization" if YouTube automatically flags content as inappropriate for children. Partially because of demonetization, many YouTube content creators opt to seek out sponsors directly and advertise during the body of their video. Further still, many creators opt to use services like YouTube's "Channel Memberships," Patreon, or Paypal to allow viewers to pay for their services directly, often in exchange for additional or personalized content. All of these characteristics are ignored in the proceeding analysis so that attention is focused on the interaction of the content creator and the algorithm
+
+Finally, I will note that many other platforms have similar characteristics, but YouTube's size and structure make it a good base for a model.
 
 # The Model
 
-The streaming economy has three primary actors: the end consumer, the streaming platform, and the artist. For the purposes of this analysis, I will assume that the behavior of the consumer and the streaming platform are exogenous. I will limit attention to the artist who must choose a quality, $z_t$ and quantity, $m_t$ of art to produce in every period. The streaming platform's algorithm is driven by consumer engagement (number of streams per viewer) last period, $n_{t-1}$. The algorithm combines past user engagement with the number of new releases to decide the number of new consumers to show an artist's work to. I will assume that consumers have no ex ante knowledge of an artist and require the algorithm to reveal an artist to them. I will call these algorithmic revelations, impressions and denote them $I_t$. Once a consumer has received an impression, their number of streams will depend on the quality of the art that the artist released in that period. If a consumer has received an impression, they are under no obligation to stream, the number of streams is fully determined by the quality of the art. Impressions only serve as a way for a consumer to be made aware of an artist's portfolio. After the consumer decides to stream, the algorithm observes the streams per impression and uses this to decide how many times to show the artist's work next period.
+The streaming market has three primary actors: the end consumer, the streaming platform, and the artist. For this analysis, I will assume that the behaviors of the consumer and the streaming platform are exogenous. I will limit attention to the artist who must choose a quality, $z_t$, and quantity, $m_t$, of releases to produce in every period. The streaming platform's algorithm is driven by consumer engagement (number of streams per viewer) last period, $n_{t-1}$. The algorithm combines past user engagement with the number of new releases to decide the number of new consumers to show an artist's work to. I will assume that consumers have no ex-ante knowledge of an artist and require the algorithm to reveal an artist to them. I will call these algorithmic revelations *impressions* and denote them $I_t$. The term impression comes from the language that YouTube uses when defining a meaningful exposure to content.[^7] Once a consumer has received an impression, their number of streams will depend on the quality of the art that the artist released in that period. If a consumer has received an impression, they are under no obligation to stream, the number of streams is fully determined by the quality of the art. Impressions only serve as a way for a consumer to be made aware of an artist's portfolio. After the consumer decides to stream, the algorithm observes the streams per impression and uses this to decide how many times to show the artist's work next period.
 
-The artist earns a royalty every time a song is streamed, and the artist tries to maximize this discounted flow of royalties. The trade-off between quantity of releases and the quality of those releases will be central to their maximization problem. Increases to quality ensure that once a consumer receives an artist's work, they will consume that product more. Increasing quality also has the inter-temporal benefit of encouraging next period's algorithm to show the art to more consumers. On the other hand, the artist can increase their quantity at the expense of quality. The algorithm will have more pieces to show to consumers (increasing the probability that a given consumer discovers an artist), but it also leaves audience size more up to the random component of the algorithm. I will not model the algorithm in any more detail than the components above. The algorithm, in this analysis, will serve only to map the number of impressions this period to the number of impressions given in the next period.
+[^7]: Detailed definition available [here](https://support.google.com/youtube/answer/9314486?hl=en#:~:text=How%20many%20times%20your%20thumbnails,video%20after%20seeing%20a%20thumbnail.)
 
-## Hypotheses
-
-Before describing the model in detail, I will first lay out hypothesized results based on the literature presented above. The first hypothesis pertains to the "long tail" theory described in @aguiarQualityPredictabilityWelfare2018. Following @rosenEconomicsSuperstars1981a, I will measure the long tail of outcomes by examining the convexity of the expected profit function in an artist's underlying talent. I will find optimized expected revenues as a function of talent and derive concavity of this relationship. I suspect that the imperfect information present on streaming platforms will make it harder for consumers to find and stay with artists that best fit their preference which may weaken the market power of the most talented artists. I pose the following:
-
-> *Hypothesis 1: Unpredictability of a streaming platform's content matching algorithm will decrease the convexity of profits in talent.*
-
-The second hypothesis relates to audience development. Similar to the work of @benderAttractingArtistsMusic2021, I will examine how the choices of established artists differ from artists with smaller starting audiences. In a one period model, smaller artists do not carry a large audience from the previous period, so a high quality product does not get shown to enough consumers to justify a high quality strategy. As such, I propose:
-
-> *Hypothesis 2: Artists with smaller initial audiences are more likely to choose a low-quality, high-quantity strategy relative to established artists.*
-
-The final hypothesis pertains to how the previous hypothesis is affected by time. When there are multiple periods, a relatively new artist can rely on producing a high quality product knowing that the future benefits of high quality products will outweigh the short lived and uncertain benefits of a low quality product. I propose:
-
-> *Hypothesis 3: Artists will prioritize quality more in a multi-period setting than they will in a one-period environment.*
+The artist earns a royalty every time a video is streamed, and the artist tries to maximize this discounted flow of royalties. The tradeoff between the quantity of releases and the quality of those releases will be central to their maximization problem. Increases to quality ensure that once a consumer receives an artist's work, they will consume that product more. Increasing quality also has the intertemporal benefit of encouraging next period's algorithm to show the art to more consumers. The artist will reach a larger audience next period because the algorithm rewards creators whose content is frequently engaged with. On the other hand, the artist can increase their quantity at the expense of quality. The algorithm will have more pieces to show to consumers (increasing the probability that a given consumer discovers an artist), but it also leaves audience size more up to the random component of the algorithm. The algorithm, in this analysis, will serve only to map the number of impressions during this period to the number of impressions given in the next period.
 
 ## Consumer Behavior
 
-I assume there is an infinitely large market of consumers with identical preferences on a streaming platform. This assumption does not fully depict the consumer-base of a streaming platform. However, for an emerging artist in an established genre, this assumption is more realistic. To a new artist, the number of potentially-accessible consumers can be almost limitless. Further, if an artist enters an existing genre, there is a clear sense of what is successful across the entire market, so there is some observable homogeneity in consumer preferences.
+I assume there is a large market of consumers with identical preferences on a streaming platform. Preferences are not themselves important, but I will assume that each consumer has the same demand function in terms of quality. This assumption does not fully depict the consumer base of a streaming platform. However, for an emerging artist in an established genre, this assumption is more realistic. To a new artist, the number of potentially-accessible consumers can seem almost limitless. Further, if an artist enters an existing genre, there is a clear sense of what is successful across the entire market, so there is some observable homogeneity in consumer preferences.
 
-Ex ante, consumers have no knowledge of a given artist and require the algorithm to reveal an artist to them. Upon receiving an impression of an artist, the consumer gains knowledge of all of an artist's work from that period, not just the piece they were exposed to. I will assume that after an impression a consumer will stream the artist's work $n(z)$ times, where $z$ is the quality of the art. I will assume that $n_z>0$ and $n_{zz}<0$, so increases to quality always increase demand, but at a lessening rate. A notable assumption in the above modelling decision is that the quantity of releases has no influence on the amount of streams by a given consumer. Consumers see the quality and might choose to stream one song all $n$ times, or they might spread their consumption across multiple pieces of art.
+ex-ante, consumers do not know of a given artist and require the algorithm to reveal an artist to them. Upon receiving an impression of an artist, the consumer gains knowledge of all of an artist's work from that period, not just the piece they were exposed to. I will assume that after an impression a consumer will stream the artist's work $n=\nu(z)$ times, where $z$ is the quality of the art. I will assume that $\nu_z>0$ and $\nu_{zz}<0$, so increases to quality always increase demand, but at a lessening rate. A notable assumption in the above modeling decision is that the quantity of releases has no influence on the number of streams by a given consumer. Consumers see the quality and might choose to stream one release all $n$ times, or they might spread their consumption across multiple pieces of art.
 
 ## Artist Behavior
 
-The artist's problem is to maximize their discounted stream of profits over multiple periods. The artist generates revenues from per-stream royalties and faces a cost accordinig to their quality and quantity. In particular, I will assume that each stream earns the artist an amount $r$, so the total revenue in each period is the total number of streams time $r$. The artist chooses to produce $m$ pieces at the same quality $z$. I will assume that the artist's combination of $m$ and $z$ incurs cost $C(m,z;\kappa)$ where $\kappa$ is the artist's underlying talent that makes production easier. I will impose some standard assumptions on $C$. Namely, I will assume $C_m>0,C_z>0,C_{mm}>0,C_{zz}>0,C_{z\kappa}<0,C_{m\kappa}<0$. The assumptions say that increases to quality or quantity also increase cost, and increased quantity of quality are more costly than the previous. The cross partial derivatives say that increasing talent decrease the marginal cost in each of the inputs. In order for $\kappa$ to be meaningful as a talent parameter, we should require that at every input, an additional unit of talent makes the next unit of production less costly. I will further assume $C_\kappa<0$ and $C_{\kappa\kappa}<0$, so increases to underlying talent lower costs, but additional increases to talent are less and less impactful. The only sign without an immediate sign choice is the quantity-quality cross partial derivative, $C_{mz}=C_{zm}$. A positive cross partial derivative says that a one unit increase in quality increases the marginal cost of an additional unit of quantity. We can also interpret this as a one unit increase in quantity increases the marginal cost of an additional unit of quality. More broadly, the sign of this partial derivative determines whether or not the quality and quantity are complementary. For this analysis, I will assume that $C_{mz}\geq 0$. This assumption is reasonable considering that an artist only has finite time in every period, so every minute they spend on using more of one, decreases the time they have for the other.
+The artist's problem is to maximize their discounted stream of profits over multiple periods. The artist generates revenues from per-stream royalties and faces a cost according to their quality and quantity. In particular, I will assume that each stream earns the artist an amount, $r$, so the total revenue in each period is the total number of streams times $r$. The artist chooses to produce $m$ pieces at the same quality, $z$. I will assume that the artist's combination of $m$ and $z$ incurs cost $C(m,z;\kappa)$ where $\kappa$ is the artist's underlying talent that makes production easier. I will impose some standard assumptions on $C$. Namely, I will assume $C_m>0,C_z>0,C_{mm}>0,C_{zz}>0,C_{z\kappa}<0,C_{m\kappa}<0$. The assumptions say that increases to quality or quantity increase cost and additional units of quantity or quality are more costly than the previous. The cross partial derivatives say that increasing talent decreases the marginal cost in each of the inputs. For $\kappa$ to be meaningful as a talent parameter, we should require that at every input, an additional unit of talent makes the next unit of production less costly. I will further assume $C_\kappa<0$ and $C_{\kappa\kappa}<0$, so increases to underlying talent lower costs, but additional increases to talent are less and less impactful. The only partial derivative without an immediate sign choice is the quantity-quality cross partial derivative, $C_{mz}=C_{zm}$. A positive cross partial derivative says that a one-unit increase in quality increases the marginal cost of an additional unit of quantity. We can also interpret this as a one-unit increase in quantity increases the marginal cost of an additional unit of quality. More broadly, the sign of this partial derivative determines whether or not the quality and quantity are complementary. For this analysis, I will assume that $C_{mz}\geq 0$. This assumption is reasonable considering that an artist only has finite time in every period, so every minute they spend using more of one, decreases the time they have for the other.
 
 ## Audience Evolution and Algorithmic Behavior
 
-First, a distinction between audience and streams. For the purposes of this analysis, an artist's audience at time $t$, $A_t$, is the number of consumers who are aware of an artist's work. Again, these audience members are under no obligation to stream, but they will be able to observe an artists quality to inform their consumption decisions.
+First, a distinction between audience and streams. For this analysis, an artist's audience at time $t$, $A_t$, is the number of consumers who are aware of an artist's work. Again, these audience members are under no obligation to stream, but they will be able to observe an artist's quality to inform their consumption decisions.
 
-I impose three heuristics on how an artist's audience evolves over time. First, some proportion of last period's audience should be retained between periods. Second, a streaming platform should have an algorithm to determine the number of new audience members that an artist has. Finally, there is some unforecastable random noise present in how the algorithm behaves, at least in the eyes of the artist.
+I impose three heuristics on how an artist's audience evolves. First, some proportion of last period's audience should be retained between periods. Second, a streaming platform should have an algorithm to determine the number of new audience members that an artist has. Finally, there is some unforecastable random noise present in how the algorithm behaves, at least in the eyes of the artist.
 
-I will first assume that every period, a fraction $\delta$ of the audience "forgets" about an artist and needs reimpression in order to consume an artist's work again. As such, the share of last period's audience that endures is $(1-\delta)$. We can think of $1-\delta$ as the share of audience members who naturally remember an artist or as the fraction of consumers who are forced to remember an artist from reminders by the streaming platform. On different platforms, $\delta$ might be very different. Low bonding interactions, like buyers sellers on eBay, might have a higher $\delta$ as people do not have any personal connection to the seller who sold them a product. On the other end of the spectrum, certain content creators form close connections with their audience, something that consumes would not soon forget. In this case $\delta$ might be low. That discussion reveals one limitation of the model presented in this paper: good content may be more memorable. As stated the model does not factor the quality of a release into the fraction of the audience that is retained into next period. While this effect is not included directly, the effect is captured in the impressions function which I will define later.
+I first assume that every period, a fraction $\delta$ of the audience "forgets" about an artist and needs reimpression to consume an artist's work again. As such, the share of last period's audience that endures is $(1-\delta)$. We can think of $(1-\delta)$ as the share of audience members who naturally remember an artist or as the fraction of consumers who are forced to remember an artist from reminders by the streaming platform. On different platforms, $\delta$ might be very different. Low bonding interactions, like buyers and sellers on eBay, might have a higher $\delta$ as people do not have any personal connection to the seller who sold them a product. On the other end of the spectrum, certain content creators form close connections with their audience, something that consumers would not soon forget. In this case, $\delta$ might be small. That discussion reveals one limitation of the model presented in this paper: good content may be more memorable. As stated the model does not factor the quality of a release into the fraction of the audience that is retained into next period. While this effect is not included directly, the effect is captured in the impressions function which I will define later.
 
-Now I will characterize how new consumers can be added to an artist's audience. I assume that the streaming platform's algorithm governs the number of new impressions for each song released by an artist. For the algorithm to be a meaningful tool, it should not be entirely random. It should use some measure of engagement to dictate how many impressions in the next period. For the purposes of this model, the algorithm will use last period's number of streams per audience member as the measure of engagement. By construction, at time $t$, the algorithm will use $n(z_{t-1})$, so the algorithm is indirectly incorporating quality.
+Now I will characterize how new consumers can be added to an artist's audience. I assume that the streaming platform's algorithm governs the number of new impressions for each release by an artist. For the algorithm to be a meaningful tool, it should not be entirely random. It should use some measure of engagement to dictate the number of impressions in the next period. For this model, the algorithm uses last period's number of streams per audience member as the measure of engagement. By construction, at time $t$, the algorithm will use $\nu(z_{t-1})$, so the algorithm is indirectly incorporating quality.
 
 There are multiple ways to interpret the uncertainty in the algorithm. One such way is to interpret a streaming platform's algorithm as an imperfect instrument that measures talent. An alternate way to interpret algorithmic uncertainty is in the context of producer uncertainty. In this case, the artist understands the average effects of the algorithm, but the streaming platform intentionally or inadvertently obfuscates exactly how the algorithm behaves so there is always some artist uncertainty about the true number of impressions in the next period.
 
 @tomscottWhyYouTubeAlgorithm2017 gives an engaging look into why YouTube's algorithm is unpredictable. He notes that when a streaming platform reveals information about its algorithm, get-rich-quick content creators produce inferior content that is only intended to exploit these trends. He also notes that many algorithms are constructed using machine learning with huge training data sets that have too many inputs to be easily understood.
 
-An additional concern when modeling an uncertain algorithm is that artists with higher talent may correlated with the unforecastable boosts from the algorithm. However, most artists, at least for professional content creators, can observe any information in the algorithm that might benefit them when making their product. By definition, the most algorithmically favored products are shown the most. As such, I will assume that artists have ample opportunity to analyze successful content and arbitrage away any useful information. This assumption says that there are no frictions in obtaining information about the algorithm. Certainly dedicated media teams have a better ability to spot algorithmic trends than single producers, but this relationship is outside the scope of this paper. Further analyses could explore this relationship in more detail, but this model will assume that talent and algorithmic uncertainty are independent.
+An additional concern when modeling an uncertain algorithm is that artists with higher talent may be correlated with the unforecastable boosts from the algorithm. However, most artists, at least professional content creators, can observe any information in the algorithm that might benefit them when making their product. By definition, the most algorithmically favored products are shown the most. As such, I will assume that artists have ample opportunity to analyze successful content and arbitrage away any useful information. This assumption says that there are no frictions in obtaining information about the algorithm. Certainly, dedicated media teams have a better ability to spot algorithmic trends than single producers, but this relationship is outside the scope of this paper. Further analyses could explore this relationship in more detail, but this model will assume that talent and algorithmic uncertainty are independent.
 
-With the aforementioned assumption, I construct the algorithm as follows. First denote the impression algorithm for an artist's $i$th art piece in period $t$ as $I(n_{t-1})+\varepsilon_{it}$ where $\varepsilon_{it}$ is a mean zero independent identically distributed random variable. Both $I$ and $\varepsilon$ have units of number of additional people in audience. Assuming the algorithm is a useful, if imperfect, measure of quality, I will assume that $I_n>0$. So increases to engagement increase the expected number of impressions per release.
+With the aforementioned assumptions, I construct the algorithm as follows. First, denote the impression algorithm for an artist's $i$th art piece in period $t$ as $I(n_{t-1})+\varepsilon_{it}$ where $\varepsilon_{it}$ is a mean zero independent identically distributed random variable. Both $I$ and $\varepsilon$ have units of the number of additional people in the audience. Assuming the algorithm is a useful, if imperfect, measure of quality, I will assume that $I_n>0$. So increases to engagement increase the expected number of impressions per release. In this construction I am assuming that errors are independent within artists across time, so an artist does not have a bias on how they expect the algorithm to treat their releases.
 
-For each art piece that an artist produces in the present period, they must submit this work through the algorithm which is subject to random noise. If the artist releases $m$ pieces in a given period, the total number of impressions from the audience is then given by $mI(n_{t-1})+\sum_{i=1}^m \varepsilon_{it}$. As such, the expected number of impressions is simply $mI(n_{t-1})$ with variance $m\textrm{Var}(\varepsilon)$. Increasing the number of releases increases the expected audience, but equally increases the variance of outcomes. Putting all of these pieces together, the equation of motion for audience size at time $t$, $A_t$, is given by:
+For each art piece that an artist produces in the present period, they must submit this work through the algorithm which is subject to random noise. If the artist releases $m$ pieces in a given period, the total number of impressions from the audience is then given by $mI(n_{t-1})+\sum_{i=1}^m \varepsilon_{it}$. As such, the expected number of impressions is simply $mI(n_{t-1})$ with variance $m\textrm{Var}(\varepsilon)$. Increasing the number of releases increases the expected audience, but also increases the variance of outcomes. Putting all of these pieces together, the equation of motion for audience size at time $t$, $A_t$, is given by:
 
 ```{=tex}
 \begin{equation} \label{eq:eqn_of_motion}
@@ -173,7 +173,8 @@ A_t=(1-\delta)A_{t-1}+mI(n_{t-1})+\sum_{i=1}^m\varepsilon_{it}
 
 We can visualize audience development as follows:
 
-```{r VisualizeAudienceDevelopment, fig.cap="Increases to quantity produced increase expected audience and variance of outcomes",fig.align='center'}
+```{r VisualizeAudienceDevelopment, fig.cap="\\textit{Increases to quantity produced increase expected audience and variance of outcomes}",fig.align='center'}
+library(extrafont)
 m=seq(0,10,.001)
 A_0=4
 I_up=.75*A_0+m+m*1.1
@@ -195,7 +196,7 @@ ggplot(q)+
   xlim(0,10)+
   ylim(0,25)+
   scale_color_manual(values=c("#8C2730","#211030"))+
-  theme(text=element_text(family="serif"))+
+  theme(text = element_text(family = "Tahoma")) +
   theme(legend.title=element_blank())+
   scale_y_continuous(breaks = c(3),
                      labels = c(TeX("$(1-\\delta)A_{t-1}$")))+
@@ -206,30 +207,30 @@ panel.background = element_blank(), axis.line = element_line(colour = "black"))#
 #opts(axis.title.x = theme_text(vjust=-0.5))
 ```
 
-Figure \@ref(fig:VisualizeAudienceDevelopment) shows that an artist if an artist chooses to release no art in a given period, they can guarantee that they receive the depreciated audience they had last period. However, the more releases by an artist, the higher expected audience size this period, but this comes with more and more risk.
+Figure \@ref(fig:VisualizeAudienceDevelopment) shows that if an artist chooses to release no art in a given period, they can guarantee that they receive the depreciated audience they had last period. However, the more releases by an artist, the higher expected audience size this period, but this comes with more and more risk. Figure \@ref(fig:VisualizeAudienceDevelopment) shows that a creator's audience may decrease below those who depreciated naturally. One possible explanation for a negative number of impressions is a platform removing an artist from an existing viewer's home page. Removal from the home page makes a creator less accessible and effectively reduces the audience size below those who naturally depreciate. Another possible concern with this method of audience development is that increasing releases now may be beneficial to future periods. In particular, more videos might serve as a portfolio of videos for new viewers to go back and watch once they discover a creator. In this analysis, I will exclude this possible intertemporal benefit of quantity. In a quickly evolving genre, old releases may not be well-aligned with current preferences. This serves as one possible justification for why the intertemporal quantity benefit can be excluded.
 
 # The Artist's One-Period Maximization Problem
 
-We can assemble the above pieces into the respective one-period revenue maximization problem. The timing of the model is as follows, the artist chooses $m$ and $z$, then the random variables in the algorithm are realized, then consumers stream the artist work according to $n(z)$. In the case where there is only one period, we can interpret $n_{t-1}$ as the total amount of reputation that an artist has earned over the duration of their career up to now. Similarly, $A_{t-1}$ becomes the entire audience that has been retained. In a one period model, objects in the equation of motion represent a lifetime's work, not just one period.
+We can assemble the above pieces into the one-period revenue maximization problem. The timing of the model is as follows, the artist chooses $m$ and $z$, then the random variables in the algorithm are realized, then consumers stream the artist's work according to $\nu(z)$. In the case where there is only one period, we can interpret $n_{t-1}$ as the total amount of reputation that an artist has earned throughout their career up to now. Similarly, $A_{t-1}$ becomes the entire audience that has been retained. In a one-period model, objects in the equation of motion represent a lifetime's work, not just one period.
 
 As such, we can express the artist's problem as:
 
 ```{=tex}
 \begin{equation} \label{eq:one_period_general}
-V(m,z)=\max_{m,z}\left\{E\left[rA_tn(z)-C(m,z;\kappa)\right]  \ \textrm{s.t.} \ A_t=(1-\delta)A_{t-1}+mI(n_{t-1})+\sum_{i=1}^m\varepsilon_{it}\right\}
+V(m,z)=\max_{m,z}\left\{E\left[rA_t\nu(z)-C(m,z;\kappa)\right]  \ \textrm{s.t.} \ A_t=(1-\delta)A_{t-1}+mI(n_{t-1})+\sum_{i=1}^m\varepsilon_{it}\right\}
 \end{equation}
 ```
-Substituting in with $A_t$ allows us to solve this problem as an unconstrained maximization problem with the following first order conditions:
+Substituting in with $A_t$ allows us to solve this problem as an unconstrained maximization problem with the following first-order conditions:
 
 ```{=tex}
 \begin{equation} \label{eq:general_focs}
 \begin{split}
-\frac{\partial V}{\partial z}&\colon r\left[(1-\delta)A_{t-1}+mI(n_{t-1})\right]mn'(z)-C_z(m,z;\kappa)=0 \\
-\frac{\partial V}{\partial m}&\colon r I(n_{t-1})n(z)-C_m(m,z;\kappa)=0
+\frac{\partial V}{\partial z}&\colon r\left[(1-\delta)A_{t-1}+mI(n_{t-1})\right]m\nu'(z)-C_z(m,z;\kappa)=0 \\
+\frac{\partial V}{\partial m}&\colon r I(n_{t-1})\nu(z)-C_m(m,z;\kappa)=0
 \end{split}
 \end{equation}
 ```
-I will now use the implicit function theorem to interpret some comparative statics in terms of the parameters of the model. I summarize the results below
+The implicit function theorem produces some interesting comparative statics in terms of the parameters and state variables of the model. I summarize the results below
 
 | $X$       | $\partial m/\partial X$ | $\partial z/\partial X$ |
 |-----------|:-----------------------:|:-----------------------:|
@@ -239,19 +240,19 @@ I will now use the implicit function theorem to interpret some comparative stati
 | $n_{t-1}$ |           $-$           |           $-$           |
 | $\kappa$  |           $-$           |           $-$           |
 
-: Signs of first order conditions for the one-period model
+: (#tab:foo) *Signs of partial derivatives for the one-period model*
 
-The first column gives the relationships between increasing the parameters and the optimal choice of quantity, $m$. Producing more quantity incurs costs that the artist substitutes away from when given more slack by the other parameters. Interestingly, the previous period's audience makes no impact on the artist's choice to produce a greater quantity. This comes from the fact that prior audience is sunk in $m$. Since $m$ can only influence the number of new listeners, the artist need not consider how much of the previous audience they've retained.
+The first column gives the relationships between increasing the parameters and state variables and the optimal choice of quantity, $m$. Producing more quantity incurs costs that the artist substitutes away from when given more slack by the other parameters. Interestingly, the previous period's audience makes no impact on the artist's choice to produce a greater quantity. This comes from the fact that prior audience is sunk in $m$. Since $m$ can only influence the number of new listeners, the artist need not consider how much of the previous audience they've retained.
 
-Since $z$ does not affect the future engagement measures (because I only consider one period), the artist will try to substitute away from using $z$ in production because it is more costly. As such, when the royalty rate increases, the artist will be able to recoup the same amount of revenue selling fewer units, so they will chose to lower their $z$ due to it's increasing costliness.
+Since $z$ does not affect the future engagement measures (because for now I only consider one period), the artist will try to substitute away from using $z$ in production because it is more costly. As such, when the royalty rate, $r$, increases, the artist will be able to recoup the same amount of revenue selling fewer units, so they will choose to lower their $z$ due to its increasing costliness.
 
 ## One Period-Binary Choice Example {#slug}
 
-I will now explore the case in which the artist can only choose from one of two options. In order to collapse the problem to a binary choice set, instead of using a cost function, I will add an additional budget constraint, $C(m,z)=Y$ which implicitly defines $z$ in terms of $m$. As such, let's consider the case where the artist is choosing to produce either $1$ or $2$ products. If the artist chooses $m=1$, they can produce one higher quality good at quality $\overline{z}$. In the other case, the artist can produce $2$ goods, each at quality $\underline{z}$. The artist will then choose:
+I will now explore the case in which the artist can only choose from one of two options. To collapse the problem to a binary choice set, instead of using a cost function, I will add a budget constraint, $C(m,z)=Y$ which implicitly defines $z$ in terms of $m$. I consider the case where the artist is choosing to produce either $1$ or $2$ products. If the artist chooses $m=1$, they can produce one higher quality good at quality $z_h$. In the other case, the artist can produce $2$ goods, each at a lower quality $z_l$. The artist will then choose:
 
 ```{=tex}
 \begin{equation} \label{eq:binary_choice}
-\max\left\{r\left((1-\delta)A_{t-1}+I(n_{t-1})\right)n(\overline{z}),r\left((1-\delta)A_{t-1}+2I(n_{t-1})\right)n(\underline{z}) \right\}
+\max\left\{r\left((1-\delta)A_{t-1}+I(n_{t-1})\right)\nu(z_h),r\left((1-\delta)A_{t-1}+2I(n_{t-1})\right)\nu(z_l) \right\}
 \end{equation}
 ```
 The artist's optimal production choice can be summarized as
@@ -259,31 +260,27 @@ The artist's optimal production choice can be summarized as
 ```{=tex}
 \begin{equation} \label{eq:one_period_behavior}
 \begin{cases}
-\underline{z} &  n(\overline z) < \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)n(\underline z)\\
-\textrm{Either} & n(\overline z) = \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)n(\underline z) \\
-\overline{z}, &  n(\overline z) > \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)n(\underline z)
+z_l &  \nu(z_h) < \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)\nu(z_l)\\
+\textrm{Either} & \nu(z_h) = \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)\nu(z_l) \\
+z_h, &  \nu(z_h) > \left(1+\frac{I_0}{I_0+(1-\delta)A_0}\right)\nu(z_l)
 \end{cases}
 \end{equation}
 ```
-By monotonicity of demand $n(\overline{z})/n(\underline{z})>1$, so we can think of $\frac{I_0}{I_0+(1-\delta)A_0}$ as the minimal premium for which the artist will produce the high quality option. For example, if consumers stream a high quality product $10\%$ more than a low quality product, the content creator will choose to produce the high quality product whenever
+An alternate way of formulating the above statement comes in the following example. Suppose that demand for the high-quality product is $10\%$ higher than demand for the low-quality product. Further suppose that the expected this-period impressions is $5\%$ higher for a low-quality product than a high-quality product. In this case, the artist will choose to pursue high-quality because the demand percentage is larger than the audience percentage. This percent-to-percent comparison generalizes to any set of initial parameters.
 
-$$
-\frac{I_0}{I_0+(1-\delta)A_0}<.1
-$$
-
-The denominator in the above expression is the expected audience size when the artist chooses the high quality option. As such, we can interpret the premium as the percent of expected audience that is earned by the algorithm (and not coming from past audience). Holding other factors equal, an artist with a larger initial audience, $A_0$, is more likely to have a smaller premium to induce high quality production relative to a new artist where most of their audience is new. Therefore, established artists are more likely to produce high quality content. In contrast, new artists are likely to produce a greater number of lower-quality art and rely on the algorithm to get their art into the hands of new consumers. However, the new creator's preference for low-quality comes from their risk neutrality and zero expected algorithmic shock. A risk averse creator may favor the high quality strategy because it come with lower risk.
+The denominator in the above expression is the expected audience size when the artist chooses the high-quality option. As such, we can interpret the fraction as the percent of expected audience that is earned by the algorithm (and not coming from past audience). Holding other factors equal, an artist with a larger initial audience, $A_0$, is more likely to have a smaller premium to induce high-quality production relative to a new artist where most of their audience is algorithmically generated. Therefore, established artists are more likely to produce high-quality content. In contrast, new artists are likely to produce a greater number of lower-quality art and rely on the algorithm to get their art into the hands of new consumers. However, the new creator's preference for low-quality comes from their risk neutrality and zero expected algorithmic shock. A risk-averse creator may favor the high-quality strategy because it comes with lower risk.
 
 ## One Period with Talent
 
-Since the talent parameter $\kappa$ enters through the cost function, it is not represented in the analysis above. I will now modify the model slightly, allowing $\kappa$ to enter into the binary choice problem. Instead of constraining the artist to produce only one or two items at qualities $\underline{z}$ or $\overline{z}$, I will now examine the case in which the artist still chooses to produce an items of qualities $\underline{z}$ or $\overline{z}$, however the artist's talent dictates the number of releases they can produce. In particular, let $\underline{m}(\kappa)$ be the number of low-quality releases that an artist of talent $\kappa$ can produce in one period. Similarly, define $\overline{m}(\kappa)$ be the number of high quality releases the same artist could produce in one period. In the eyes of a given artist (who only has one talent), they only have two production options, however artists with differing talents face different (though still binary) production options.
+Since the talent parameter $\kappa$ enters through the cost function, it is not represented in the analysis above. I will now modify the model slightly, allowing $\kappa$ to enter into the binary choice problem. Instead of constraining the artist to produce only one or two items at qualities $z_l$ or $z_h$, I will now examine the case in which the artist still chooses to produce items of qualities $z_l$ or $z_h$, however, the artist's talent dictates the number of releases they can produce. In particular, let $m_l(\kappa)$ be the number of low-quality releases that an artist of talent $\kappa$ can produce in one period. Similarly, define $m_h(\kappa)$ be the number of high-quality releases the same artist could produce in one period. In the eyes of a given artist (who only has one talent), they only have two production options, however, artists with differing talents face different (though still binary) production options.
 
-The functions $\underline m(\kappa),\overline m(\kappa)$ should mirror reality in their properties. Namely should require that for all $\kappa$, $\underline m(\kappa)>\overline m(\kappa)$, so more low quality products can be produced than high quality ones. Furthermore, both $\underline m(\kappa)$ and $\overline m(\kappa)$ should be increasing in $\kappa$ and should have diminishing marginal product, $\overline m''(\kappa),\underline m''(\kappa)<0$.
+The functions $m_l(\kappa),m_h(\kappa)$ should mirror reality in their properties. Namely, these functions should satisfy the following for all $\kappa$: $m_l(\kappa)>m_h(\kappa)$. This condition guarantees that more low-quality products can be produced than high-quality ones. Furthermore, both $m_l(\kappa)$ and $m_h(\kappa)$ should be increasing in $\kappa$ and should have diminishing marginal product, $m_h''(\kappa),m_l''(\kappa)<0$.
 
 We can formulate the artist's one-period maximization problem as:
 
 ```{=tex}
 \begin{equation} \label{eq:binary_choice_talent}
-\max\left\{r\left((1-\delta)A_{t-1}+\overline m(\kappa)I(n_{t-1})\right)n(\overline{z}),r\left((1-\delta)A_{t-1}+\underline m(\kappa)I(n_{t-1})\right)n(\underline{z}) \right\}
+\max\left\{r\left((1-\delta)A_{t-1}+m_h(\kappa)I(n_{t-1})\right)\nu(z_h),r\left((1-\delta)A_{t-1}+m_l(\kappa)I(n_{t-1})\right)\nu(z_l) \right\}
 \end{equation}
 ```
 With optimal choice of quality satisfying:
@@ -291,279 +288,805 @@ With optimal choice of quality satisfying:
 ```{=tex}
 \begin{equation} \label{eq:one_period_talent_behavior}
 \begin{cases}
-\underline{z} &  n(\overline z) < \left(1+\frac{(\underline{m}(\kappa)-\overline{m}(\kappa))I_0}{\overline{m}(\kappa)I_0+(1-\delta)A_0}\right)n(\underline z)\\
-\textrm{Either} & n(\overline z) = \left(1+\frac{(\underline{m}(\kappa)-\overline{m}(\kappa))I_0}{\overline{m}(\kappa)I_0+(1-\delta)A_0}\right)n(\underline z) \\
-\overline{z}, &  n(\overline z) > \left(1+\frac{(\underline{m}(\kappa)-\overline{m}(\kappa))I_0}{\overline{m}(\kappa)I_0+(1-\delta)A_0}\right)n(\underline z)
+z_l &  \nu(z_h) < \left(1+\frac{(m_l(\kappa)-m_h(\kappa))I_0}{m_h(\kappa)I_0+(1-\delta)A_0}\right)\nu(z_l)\\
+\textrm{Either} & \nu(z_h) = \left(1+\frac{(m_l(\kappa)-m_h(\kappa))I_0}{m_h(\kappa)I_0+(1-\delta)A_0}\right)\nu(z_l) \\
+z_h, &  \nu(z_h) > \left(1+\frac{(m_l(\kappa)-m_h(\kappa))I_0}{m_h(\kappa)I_0+(1-\delta)A_0}\right)\nu(z_l)
 \end{cases}
 \end{equation}
 ```
 ```{=tex}
 \begin{prop}
-Increases to talent incentivize an artist to produce low quality work whenever their talent satisfies $\underline{m}'(\kappa)\overline{m}(\kappa)-\overline{m}'(\kappa)\underline{m}(\kappa)\geq 0$.
+Increasing talent increases the relative utility of the low-quality strategy whenever the semielasticity of low-quality production in $\kappa$ is greater than the semielasticity of high-quality production in $\kappa$. This condition is equivalent to:
+\[
+\frac{\partial \ln(m_l(\kappa))}{\partial\kappa}>\frac{\partial \ln(m_h(\kappa))}{\partial\kappa}
+\]
 \end{prop}
 ```
-```{=tex}
-\begin{proof}
-By \ref{eq:one_period_talent_behavior} the low quality strategy becomes more desireable when the following quantity increases:  $$\left(1+\frac{(\underline{m}(\kappa)-\overline{m}(\kappa))I_0}{\overline{m}(\kappa)I_0+(1-\delta)A_0}\right)$$
+A proof of this result is available in the [appendix](#proof).
 
-Thererfore, the low quality strategy gains desireability from increases to $\kappa$ whenever the derivative of the above expression is greater than zero. The $\kappa$ derivative is:
-$$
-\frac{(\underline{m}'(\kappa)-\overline{m}'(\kappa))I_0\left(\overline{m}(\kappa)I_0+(1-\delta)A_0\right)-(\underline{m}(\kappa)-\overline{m}(\kappa))I_0\left(\overline{m}'(\kappa)I_0\right)}{\left(\overline{m}(\kappa)I_0+(1-\delta)A_0\right)^2}
-$$
-The denominator is always positive, so positivity on the derivative only requires the numerator to also be positive. Expanding and simplify that expression gives the following inequality:
-$$
-(\underline{m}'-\overline{m}')(1-\delta)A_0+(\underline m'\overline m-\underline m\overline{m'})I_0>0
-$$
+We can interpret these semielasticities as follows: the low-quality option gains relative value whenever a one-unit increase in $\kappa$ allows for a greater percentage change in the available low-quality units than high-quality units. These semielasticities relate one-unit changes to the input, $\kappa$, to percentage changes in the output, $m_l$ and $m_h$. For example, consider a one-unit increase in talent. If this increase in talent allows the creator to produce $10\%$ more low-quality work and $5\%$ more high-quality work, then the utility of the low-quality strategy increased more than the high-quality strategy. This does not directly imply which strategy the creator will choose, but it does say that the low-quality option became more attractive relative to before the talent increase.
 
-Now suppose that $(\underline m'\overline m-\underline m\overline{m'})>0$, and by construction $\underline{m}>\overline{m}$. Note that for an arbitrary $a,b,x,y\in \mathbb{R}^+$, when $ax-by>0$ $x>\frac{b}{a}y$. The condition $x>y$ is weaker than and is implied $x>\frac{b}{a}y$ whenever $a>b$. Letting $a=\overline{m},b=\underline{m},x=\underline m',y=\overline m '$, shows that both terms in the above inequality must be positive, so the whole derivative must also be positive.
-\end{proof}
-```
-This sufficient condition $\underline{m}'(\kappa)\overline{m}(\kappa)-\overline{m}'(\kappa)\underline{m}(\kappa)\geq 0$, is equivalent to: talent causing a $1\%$ increase in the number of high quality units available for production results in a greater than $1\%$ increase in the number of low quality goods available for production. Said another way, a small increase in talent makes the low quality option more desirable whenever this new talent allows relatively more low quality releases than high quality releases.
+If instead this one-unit increase in talent only allowed for $5\%$ more low-quality production and $10\%$ more high-quality production, the high-quality strategy is now comparatively more attractive relative to their talent before.
 
-This says that increases to talent push an artist towards low quality production whenever low quality production is cheap. We should not innately have a sense for whether or not $\underline{m}'(\kappa)\overline{m}(\kappa)-\overline{m}'(\kappa)\underline{m}(\kappa)\geq 0$ holds in reality. One could argue that an additional percent of low quality production may be harder because you produce more low quality goods, so additional units may be more difficult. Alternately, high quality production may be harder because these goods are inherently harder to produce.
+The result implies that increases to talent push an artist towards low-quality production whenever low-quality production is cheap. We should not innately have a sense of whether or not $\frac{\partial \ln(m_l(\kappa))}{\partial\kappa}>\frac{\partial \ln(m_h(\kappa))}{\partial\kappa}$ holds in reality. One could argue that an additional percent of low-quality production may be harder because you produce more low-quality goods, so additional units may be more difficult. Alternately, high-quality production may be harder because these goods are inherently harder to produce.
 
-# Two Period Maximization
+## Conclusions From A Binary Choice Model
 
-I now explore the case where the artist has the same options as in the one-period no-cost case, presented in \ref{slug}. The artist can choose one or two products at quality $\overline z$ and $\underline z$ respectively. However, in this case, I examine the artist's behavior over two periods. In this case, their choice of $z$ in the first period influences the number over impressions that the algorithm produces next period. I will now introduce some new notation. Let $\overline {I}$ be the impressions awarded to the artist when their choice of quality $\overline z$ induces consumption $n(\overline z)$. Define $\underline I$ analogously. I define discount factor $\beta$ that deflates the value of profits in subsequent periods.
+While the analysis above is limited to one period, it still provides useful information for the main conclusions of the paper. In particular, the binary choice model showed that there exists an initial audience threshold such that artists greater than a certain initial audience pursue a high-quality strategy. Artists below this threshold choose to pursue a low-quality strategy. This audience-based strategy switch will be mirrored in the dynamic model, but the results up to this point have not relied on functional form assumptions for demand or audience evolution.
 
-The artist has four options, either quality in either period. I will denote the items in the strategy set: $\left\{\underline z\to\underline z,\overline z\to\underline z,\underline z\to\overline z,\overline z\to\overline z\right\}$, where $\underline z\to \overline{z}$ is the strategy with low quality in period one, and high quality in period two and so on. Each strategy has the following utility.
+Additionally, in this binary choice model, the mechanism for the strategy switch is readily apparent. Here, the agent chooses a quality depending on the ratio of demand and audience from high and low-quality releases. Creators' production decisions are driven by two main uncontrollable factors, consumer preferences for quality and the importance of the algorithm. Going forward I will leverage the comparison of demand to algorithm when explaining the results of the dynamic model.
+
+# Dynamic Programming Model
+
+I will now use dynamic programming as a final method of analyzing the model constructed in \@ref(the-model). I will assume that the content creator has an infinite number of future periods subject to a discount rate. As such, that allows us to recursively state the Bellman condition for the content creator as follows:
 
 ```{=tex}
-\begin{equation} \label{eq:two_period_choices}
-\begin{aligned} 
-E[V(\underline z\to\underline z)]&=r\left((1-\delta)A_{0}+2I_0\right)n(\underline{z})+\beta\left(r\left((1-\delta)A_{1}+2I(n(\underline{z})\right)n(\underline{z})\right)\\
-E[V(\overline z\to\underline z)]&=r\left((1-\delta)A_{0}+I_0\right)n(\overline{z})+\beta\left(r\left((1-\delta)A_{1}+2I(n(\overline{z})\right)n(\underline{z})\right)\\
-E[V(\underline z\to\overline z)]&=r\left((1-\delta)A_{0}+2I_0\right)n(\underline{z})+\beta\left(r\left((1-\delta)A_{1}+I(n(\underline{z})\right)n(\overline{z})\right)\\
-E[V(\overline z\to\overline z)]&=r\left((1-\delta)A_{0}+I_0\right)n(\overline{z})+\beta\left(r\left((1-\delta)A_{1}+I(n(\overline{z})\right)n(\overline{z})\right)
-\end{aligned}
+\begin{equation} \label{eq:dynamic-prog}
+V(n,A)=\max_{m,z}\left\{rE\left[A'\right]n'+\rho E\left[V(n',A')\right]\right\} \newline
+s.t. A'=\mathcal{A}(m,n,A,\varepsilon), n'=\nu(z), \ f(m,z)=\kappa
 \end{equation}
 ```
-## Numerical Simulation of Two Period Optimal Behavior
+I will briefly refresh previously established notation and introduce everything new. Moving Left to right in the expression above, we have the following. The function $V(n,A)$ is the optimal discounted lifetime revenue after the creator has maximized their lifetime utility subject to the equations of motion. The parameter $r$ is the revenue that an artist earns for every stream. $E[A']$ represents the expected audience size this period. $A'$ has a random component but is generated by the audience function and equation of motion, $\mathcal{A}(m,n,A,\varepsilon)$, which takes quantity, last period's streams per capita, last period audience, and a random component respectively.
 
-The optimal strategy is the maximum of the four strategies listed in \ref{eq:two_period_choices}, but the conditions under which certain strategies are preferred are hard to characterize. I will use numerical simulation to describe the conditions that produce certain optimal strategies.
+Last period's streams per capita, $n$, requires careful interpretation. For a brand new artist, they will not have earned a "last period's streams per capita" instead, this $n$, represents how favorable the streaming *platform* is to new creators. A high $n$ implies that the platform treats new artists as though they produce high-quality content. However, we can alternately interpret the model as one snapshot in time for an established artist. In this case, $n$ will actually represent last period's streams per capita which is a function of last period's quality.
 
-In order to simulate the possible conditions, I generate sample values for each of the variables in \ref{eq:two_period_choices}. Absent a more informed prior, I uniformly sample each variable in a reasonable range of values. I summarize these ranges below:
+Next, $n'$ represents the number of streams for every audience member this period. $n'$ is a function of quality, $z$, according to $n'=\nu(z)$. $\rho$ is the discount factor between consecutive periods. Next, $E[V(n',A')]$ gives the expected lifetime utility starting next period given that we start with state variables that have evolved according to the equations of motion. Finally, $f(m,z)=\kappa$ gives a constraint that prevents a creator from producing as much quality and quantity as they want while allowing $\kappa$ to be a meaningful talent parameter by increasing a creator's production options. This production constraint takes the place of the cost function in \ref{eq:one_period_general}. This relationship has the notable benefit of reducing the policy space, the possible choices of $m$ and $z$, to one dimension instead of two by solving for $z$ in terms of $m$ and $\kappa$. A one-dimensional policy space allows for more efficient maximization techniques and reduces the overall number of points that need to be checked. While some information is lost by omitting a cost function, the computational upsides make the tradeoff worthwhile.
 
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Paramater                                   | Symbol               | Minimal Possible Value | Maximal Possible Value |
-+=============================================+======================+========================+========================+
-| Streams per capita, high quality            | $n(\overline z)$     | $0$                    | $10$                   |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Streams per capita, low quality             | $n(\underline z)$    | $0$                    | $10^*$                 |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Starting audience                           | $A_0$                | $0$                    | $100$                  |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Discount factor                             | $\beta$              | $0$                    | $1$                    |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Audience depreciation rate                  | $\delta$             | $0$                    | $1$                    |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Expected impressions per song, high quality | $I(n(\overline z))$  | $0$                    | $100$                  |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Expected impression per song, low quality   | $I(n(\underline z))$ | $0$                    | $100^*$                |
-+---------------------------------------------+----------------------+------------------------+------------------------+
-| Initial expected impressions                | $I_0$                | $0$                    | $100^*$                |
-+---------------------------------------------+----------------------+------------------------+------------------------+
+The specification above is subtly different from that proposed in \@ref(the-model). The specification does not directly include the impressions function $I(m,n,\varepsilon)$, but its effect will be replicated in the functional form specification of $\mathcal{A}$.
 
-: Sample range for simulated parameter values. $^*$Indicates that the maximal value is limited by the high quality alternative.
+The code for the value function iteration is a heavily modified version of the framework proposed in @sargentCakeEatingII.[^8] Their website[^9] provides an excellent Python or Julia introduction to quantitative economics. They solve their dynamic program through value function iteration which I mirror in this analysis. There are three consequential differences between their code and the code required to solve the dynamic program stated in \ref{eq:dynamic-prog}. First, the state space will need to be manually bounded. Next, the random component requires discrete approximation of expected values. Finally, the multidimensional state space from $n$ and $A$ requires additional modifications. Solutions to each of these problems are discussed in greater detail in [the appendix](#test).
 
-The values above are primarily aimed at describing the behavior of new artists, where the algorithm will not show their content to more than $100$ new consumers per release. Furthermore, this assumes that consumers will stream an artist's portfolio no more than $10$ times, an assumption that reflects more durable entertainment like a YouTube video instead of a song. Additionally, I filter out any realization of the random variable in which $I_0$ or $I(n(\underline z))$ are greater than $I(n(\overline z))$ because these are cases in which the algorithm rewards new and low quality art more than high quality art. If the algorithm is to be meaningful, then it should prioritize high quality content. Similarly, I filter out any cases when $n(\underline{z})\geq n(\overline{z})$ because high quality work should be streamed more than low quality alternatives.
+[^8]: Reproducible code is available by contacting the author
 
-With that, I generate a simulation dataset consisting of a randomly generated value for of each of the eight variables in the table above.[^5] My initial dataset is $9908\times 8$, so $9908$ samples from the eight-dimensional parameter space. For each of these sets of parameters, I compute the discounted two-period profit from each of the four strategies. I then rank each of the strategies according to their discounted profit to determine which strategy the agent will choose when maximizing their expected utility.
+[^9]: <https://quantecon.org/>
 
-[^5]: The data and manipulations can be fully reproduced with the following Python Notebook: <https://colab.research.google.com/drive/1vQz0UHOiQwL6Ed7m9Q7mZeuVhMo8FB0-?usp=sharing>
+\newpage
 
-As previously stated, with an eight dimensional parameter space, it is difficult to cleanly characterize the situation the produces a given optimal strategy. To gain some initial intuitions for the conditions that produce each strategy, break the dataset into four depending on which strategy was chosen. Within each of these four strategies there is considerable variation in the parameters that produced the strategy. I compute the median of each of these parameters conditional on the optimal strategy. Doing this gives some sense of what value a parameter likely has when producing a certain strategy.
+## Model Calibration
 
-```{r CleanSimulationData}
-d <- read.csv("../inputs/SimulationData.csv")
+Without functional forms for $\mathcal{A}$, $\nu(z)$, and $f(m,z)$, it will not be possible to solve the dynamic program, as such, I will specify functional forms that have behavior consistent with economic intuition while remaining usable for value function iteration. Once these forms have been specified, I will find parameters within those functions that allow for a continuum of solutions under various starting conditions instead of a corner solution for every starting condition.
+
+### Functional Form Specification
+
+I propose the following logistic functional form for audience evolution, $\mathcal{A}$:
+
+$$
+\mathcal{A}(m,n,A,\varepsilon)=\frac{\overline{A}}{1+ce^{-\alpha n-\beta m-\gamma\varepsilon}}
+$$
+
+Where $\overline{A}$ is the audience limit (total available audience) for a creator to reach. $\overline{A}$ is also the upper bound of the function. $\alpha,\beta,$ and $\gamma$ are parameters that correspond to how important streams per capita, $n$; number of releases, $m$; and the random shock, $\varepsilon$ are to next period's audience respectively. A high value of $\alpha$ increases the steepness of the logistic in $n$. Essentially, a large $\alpha$ causes $n$ even moderately far from $0$ to be quickly pushed to either $0$ or $\overline{A}$ depending on the sign of $n$. Similar interpretations exist for $\beta$ and $\gamma$. Finally, I will let, $c=\frac{\overline{A}-(1-\delta)A}{(1-\delta)A}$ which is constructed so that if $-\alpha n-\beta m -\gamma \varepsilon=0$, then the $A'=(1-\delta)A$. This mirrors the constraint in \ref{eq:eqn_of_motion} which puts downward pressure on a creator's audience absent other factors. The proposed functional form meets all of the previously stated requirements. The other benefit of using this functional form is that the distribution of $\varepsilon$ can take both positive and negative values without issue.
+
+When initially specifying how the algorithm should function in section \@ref(audience-evolution-and-algorithmic-behavior), I implemented a few desirable characteristics of audience evolution that this logistic satisfies. If the audience produces no new work this period and caries forward no reputation, $n$, from the previous period, then an artist's audience should depreciate by a factor of $\delta$ every period. Additionally, I required that an increase in quantity should have an immediate positive effect on the expected audience size. Additionally, I required that more streams per capita last period should positively affect this period's audience on average. Finally, larger values of the random component, $\varepsilon$, should also increase audience size holding other factors constant. When using value function iteration, the equations of motion must be bounded. The logistic proposed meets each of these requirements.
+
+For the quantity-quality tradeoff, I propose the following functional form:
+
+$$
+f(m,z)=mz
+$$
+
+This form satisfies $f_m,f_z>0$. These conditions say that increasing either quality or quantity pushes the agent closer to their constraint value $\kappa$. Furthermore, the function should never have decreasing marginal cost because additional units of one input will come at the expense of the other. This condition is stated as $f_{mm},f_{zz}\geq0$. This simple multiplicative form satisfies these requirements. Later in figure \@ref(fig:kappaplots), one can see how different levels of $\kappa$ allow for increased production of either input. Creators with higher talent can always produce the same $(m,z)$ bundle as their low talent counterparts but will always have the option to increase either $m$, $z$, or both.
+
+The final functional form I will specify before numerically solving the dynamic program is $\nu(z)$ which I will specify as: $\nu(z)=\overline{n}(1-e^{-\lambda z})$. Where $\overline{n}$ is the maximal number of streams per viewer in any period and high $\lambda$ allows lower qualities to result in higher per capita streams. This functional mixes computational requirements and economic intuition. On the computation requirements side, this function naturally bounds $\nu(z)$ between $0$ and $\overline{n}$ which allows for a compact state space to evaluate over. On the economic intuition side, a viewer can't stream any less than $0$ times, so this provides a natural lower bound. Additionally, if we assume a viewer only has finitely many hours a week to stream, additional increases to quality must eventually taper off to zero impact on the number of streams.
+
+### Baseline Parameters
+
+Real streaming platforms have a continuum of creator efforts and audience sizes, as such, the parameters of the proposed model should not result in corner solutions in which all agents prefer one strategy. As such, I calibrate the model so that different starting conditions produce different optimal strategies. I look for a few factors when calibrating the model, first, the numbers should conform to some level of real-world reasonability. Next, I evaluated the possible values of $A'$ and $n'$ for a range of $n,m,z,\varepsilon$. Poorly calibrated parameters would result in a very small range of attainable $A'$ or $n'$ or would result in excess polarization where $A'$ would take only two values. These two heuristics allowed me to narrow in on values for parameters that make sense for this model.
+
+The first parameters that I specified were the ranges of the state space variables, $n,A$. This amounted to choosing suitable $\overline{n}$ and $\overline{A}$. For this model, I chose $\overline{n}=5$, and $\overline{A}=1000$. Neither of these specifications should be taken too literally and only serve as baselines to which the other parameters must conform. The discount rate, $\rho$, was set to $0.96$ following conventional beliefs on human discounting. Next on the list of specifications are $\alpha,\beta$, and $\gamma$ from the audience evolution function $\mathcal{A}$. As an initial baseline, I set $\alpha=\beta=\gamma=0.1$.[^10] I will let the sharpness of consumer demand, $\lambda$, be $1$. Finally, I set the audience depreciation, $\delta$, to a fairly high value at $0.7$, so $70\%$ of an artist's audience depreciates every period. Such a high $\delta$ was set to reflect the quickly shifting trends on many media platforms. The royalty rate per stream, $r$ was set to $1$.
+
+[^10]: I initially considered larger values, but this made the logistic function too sharp and pushed optimal strategies to corner solutions
+
+I vary is the talent parameter, $\kappa$, but as a baseline, it is set to $20$. I set this to such a large value because smaller values did not allow enough differentiation between quality-quantity strategies to see the emergence of different strategies under different conditions.
+
+# Dynamic Programming Results
+
+With the model specified and calibrated, I will now discuss the key insights from the baseline model and how the artist optimally behaves under their maximal lifetime revenue function. After discussing this baseline, I will explore key comparative statics on talent, variance of algorithmic uncertainty, and audience depreciation rate.
+
+## Baseline Results
+
+Recall that there are two initial state variables, $A$ and $n$. As such, a creator's optimal strategy may depend both on their initial audience and initial streams per capita. The optimal strategy was reduced to one dimension, quantity, $m$, but quantity is inversely proportional to quality, $z$. When applicable, I will compare results to the signs of the first derivative from the one-period model in table \@ref(tab:foo). Below is a plot showing how the initial audience and streams per capita induce an optimal strategy $m$.
+
+```{r initialStratPlot,fig.cap="\\textit{Optimal quantity strategy by starting audience and reputation. Initial audience and reputation can also be intepreted as last period's values}"}
+library(dplyr)
+
+v = read.csv("../VFI_Data/BigData/v_data/v_max.csv", header = F)
+m = read.csv("../VFI_Data/BigData/m_data/m_max.csv", header = F)
+nn = read.csv("../VFI_Data/BigData/nn.csv", header = F)
+AA = read.csv("../VFI_Data/BigData/AA.csv", header = F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+d <-
+  data.frame(v = v,
+             m = m,
+             nn = nn,
+             AA = AA)
 
 library(ggplot2)
+
+ggplot(d %>% filter(m > .5)
+       ) +
+  geom_point(aes(x = AA, y = m, col = nn)) +
+  ylab(TeX("Optimal Quantity of Releases, $m$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_gradient(low = "#211030", high = "#FFBA3D", name = "Initial\nReputation, n") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )
+```
+
+Figure \@ref(fig:initialStratPlot) shows how the initial audience size (horizontal axis) affects the optimal choice of quantity (vertical axis) while taking into account how high a creator's initial reputation is (the color of the points). We can draw a few key interpretations from figure \@ref(fig:initialStratPlot), but first a caution. This plot does not show the career trajectory of an artist. Instead, it shows the optimal choice of $m$ given starting conditions. This plot gives the policy function of an artist who is just starting on a platform or an artist who is taking a look at their career thus far and regrouping to maximize their future utility.
+
+Now for the interpretation. The plot above shows that for small initial audience (points on the left), the artist chooses a low volume strategy (high-quality), however, once the audience becomes sufficiently large (by this calibration around 175 audience members), there is a jump in the ideal strategy. The artist shifts from a low volume strategy to a higher quantity strategy. After this steep jump in quantity, the agent slowly transitions to a low-volume, high-quality strategy.
+
+There is, in a way, activation energy for the artist. If the current audience for the artist is small, they will not find it worthwhile to invest in quantity, but once a sufficiently large audience has been attained, the artist will almost discretely change strategies to the higher-volume strategy.
+
+There are essentially three regions in this plot. First, there is an initial waiting game before you switch to a high-volume strategy. I name this first region the *hobbyist* because the artist does not supply sufficient quantity to maintain a large audience and instead focuses on their quality. Then, after a sufficiently large audience, you pursue high volume. I name this second phase the *budding creator* because the creator has reached an audience, but they have not yet met their full potential. Finally, as your audience reaches its maximum, you increase quality. I call this phase the *superstar*, in part as a nod to @rosen1981, but mostly because these artists produce high-quality work for a large audience. In later sections, we will see that some artists go through each of these stages over the course of their careers. We may think of these second two stages as after an artist has "gone viral" and attained a sustainable following.
+
+Another remarkable characteristic of the diagram above is the relation of starting reputation, $n$, on the optimal production decision. Reputation serves an artist in two ways. First, reputation serves as the number of streams per capita. Reputation, $n$, is also factored into the audience development next period. In the growth stage, low $A$, the optimal quality is decreasing in reputation. We can see this in figure \@ref(fig:initialStratPlot) because the points on the left-hand side get darker as $z$ increases. This relationship inverts once the artist has switched to the second stage of production. Once an artist has attained a large following, increases to reputation increase the quality produced in a given period. That is to say, artists with high reputations and large audiences pursue higher quality than low-reputation artists with large audiences.
+
+In table \@ref(tab:foo), an increase to starting audience does not affect quantity choice. In figure \@ref(fig:initialStratPlot), increases to audience have a non-monotonic relation with quantity. The *hobbyist*'s quantity strategy is increasing in $A$, but the *budding creator* and *superstar* decrease their quantity of releases for additional starting audience. The dynamic model differs from the one-period model because the audience evolution function is now non-linear in starting audience.
+
+In the one period model, increases to initial reputation, $n$, decrease the optimal quality choice. This result partially holds in figure \@ref(fig:initialStratPlot). In the *hobbyist* phase, increased reputation increases the quantity strategy. The two more established phases mirror the results from the one-period model in that increases to reputation decrease the optimal quantity. In the one period model, the artist decreases quantity when reputation increases because the cost function is convex. A similar principle occurs for the *budding artist* and *superstar*. For these established artists, additional audience members are difficult to attain (the audience function is concave in $m$ for high audience levels). As such, the creator substitutes away from quantity and toward quality because their audience is increasing from the reputation boost. Since the *hobbyist* still sees convexity of audience in quantity, an increase to reputation makes increasing quantity more desirable.
+
+We should also look at the revenue being generated from a creator's work. We can explore this relationship by plotting $V(n,A)$ which is the expected lifetime discounted revenue for the artist.
+
+\newpage
+
+Figure \@ref(fig:valueFunction1) shows an important monotonicity result. Increases to $A$ (rightward movements) always increase the expected lifetime revenue of an artist. Furthermore, increases to reputation (lightening color) also move the artist's lifetime revenue upward after conditioning on the audience size. Neither of these results are surprising as both $A$ and $n$ serve to benefit the artist with no potential downside (unlike $m$ or $z$).
+
+The discontinuity of the policy function is also demonstrated in the value function. There is a notable jump in the value function around the point at which the artist changes their strategy. This discontinuity again points to the idea of activation energy for an artist. There is a higher level of utility that cannot be attained when your initial audience is small.
+
+```{r valueFunction1, fig.cap="\\textit{Increases to initial audience or reputation increase expected lifetime revenue. Initial audience and reputation can also be intepreted as last period's values}"}
+library(ggplot2)
+library(extrafont)
+
+
+ggplot(d) +
+  geom_point(aes(x = AA, y = v, col = nn)) +
+  ylab(TeX("Expected Discounted Lifetime Optimized Revenue, $V(n,A)$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_gradient(low = "#211030", high = "#FFBA3D",name="Initial Reputation\nPer Capita, n") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black"),
+    #axis.ticks = element_blank(),
+    #axis.text = element_blank()
+    #legend.position = "bottom"
+  )
+```
+
+The discontinuity that exists both in the optimal policy and value functions is unexpected. Nothing in this model is discretized in a way that naturally would produce a discontinuity in the policy function. To further explore what causes the discontinuity, consider figure \@ref(fig:policyHeatmap).
+
+```{r policyHeatmap,fig.cap="\\textit{Visualize the effect of starting parameters on policy discontinuity}"}
+ggplot(d, aes(AA, nn, fill= m)) + 
+  geom_tile(height=1.01)+
+    xlab(TeX("Initial Audience Size, $A$")) +
+    ylab(TeX("Initial Reputation, $n$"))+
+  scale_fill_gradient(low = "#211030", high = "#FFBA3D",name="Optimal\nQuantity, m") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black"),
+    #axis.ticks = element_blank(),
+    #axis.text = element_blank()
+    #legend.position = "bottom"
+  )
+```
+
+In figure \@ref(fig:policyHeatmap), we can see that there exists a cutoff in terms of both initial audience and reputation such that below this cutoff the artist pursues a low-quality, high-quantity strategy, and above this cutoff, the artist pursues a high-quality strategy.
+
+The reason for this cutoff is murky but seems to indicate that given a sufficiently large combination of audience and reputation, an artist will pursue a high equilibrium, and for a small audience and reputation, the artist will pursue a low equilibrium. One possible explanation for this discontinuity is the shape of the logistic curve used to generate future audience. It may be that the change in convexity (from positive to negative) of the logistic causes a sharp change in optimal strategy which is appearing as a jump in the value and policy functions. The discontinuity is difficult to justify, but it does align with the intuition that there is a considerable schism between those who have "made it" on a platform and those who have not.
+
+## Comparative statics
+
+I now vary one parameter at a time from the baseline to explore how an artist's uncontrollable characteristics or market conditions affect optimal production decisions.
+
+The first relevant comparative static is on the talent parameter, $\kappa$. To get an initial sense of how talent affects optimal strategy. Figure \@ref(fig:kappaplots) shows the range of optimal values of $(m,z)$ varying only the level of talent. The highlighted areas correspond to a realized strategy for a given set of $(n,A)$ and $\kappa$. This plot shows that increasing an artist's talent moves the artist to move to a higher quantity strategy. One might initially think that an agent who has limited talent would try to balance their strategy between quality and quantity, but this is not the case. It is difficult to understand why the high talent creator shifts production away from quality and towards quality, but I suspect this comes from the parameters selected, and alternate parameterizations may see different behavior. Table \@ref(tab:foo) suggests, that both quantity and quality should decrease when $\kappa$ increases. That result would not be possible in this dynamic model because increasing quantity necessarily decreases quality according to the production constraint.
+
+```{r kappaplots,fig.cap="\\textit{The effect of varying talent on optimal strategy and revenue. Shaded areas correspond to a chosen strategy for a certain set of state variables}",message=F}
+v = read.csv("../VFI_Data/Variations_From_Baseline/v.csv", header = F)
+m = read.csv("../VFI_Data/Variations_From_Baseline/m.csv", header = F)
+nn = read.csv("../VFI_Data/Variations_From_Baseline/nn.csv", header = F)
+AA = read.csv("../VFI_Data/Variations_From_Baseline/AA.csv", header = F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+AA <- as.matrix(AA)
+AA <- c(AA)
+
+d <-
+  data.frame(v = v,
+             m = m,
+             nn = nn,
+             AA = AA)
+
+library(dplyr)
+d_20 <- 
+  d %>% 
+  mutate(k="20")
+
+v=read.csv("../VFI_Data/Variations_From_Baseline/v_k30.csv",header=F)
+m=read.csv("../VFI_Data/Variations_From_Baseline/m_k30.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_30 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(k="30")
+
+v=read.csv("../VFI_Data/Variations_From_Baseline/v_k10.csv",header=F)
+m=read.csv("../VFI_Data/Variations_From_Baseline/m_k10.csv",header=F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_10 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(k="10")
+
+library(tidyr)
+d_k <- 
+  full_join(d_20,d_30) %>% 
+  full_join(d_10)# %>% 
+  #pivot_longer(cols=c(m,v))
+
+d_k$k <- factor(d_k$k, levels = c("10", "20", "30"))
+d_k <- 
+  d_k %>% 
+  mutate(z=as.numeric(as.character(k))/m)
+
+
+m=seq(.5,60,.001)
+
+z_up=30/m
+z_mid=20/m
+z_down=10/m
+
 library(dplyr)
 
-d <- 
-  d %>% 
-mutate(premium=nu/nd-1)
+q <- 
+  tibble::tibble(m,z_up,z_down,z_mid) %>%
+  select(z_down,z_mid,z_up,m) %>% 
+    rename(`High Talent`=z_up,
+         `Baseline`=z_mid,
+         `Low Talent`=z_down) %>% 
+  tidyr::pivot_longer(cols=c(`High Talent`:`Low Talent`)) %>% 
+  mutate(name=as.factor(name))
 
-d_sum <- 
-  d %>% 
-  group_by(winner) %>% 
-  summarise(across(c(nu:I0,premium),median))
+q$name <- factor(q$name, levels=c('Low Talent', 'Baseline', 'High Talent'))
 
-d_sum <- 
-  d_sum %>% select(-c(winner,premium))
 
-rownames(d_sum) <- 
-  c("$\\underline{z}\\to\\underline{z}$","$\\overline{z}\\to\\underline{z}$","$\\underline{z}\\to\\overline{z}$","$\\overline{z}\\to\\overline{z}$")
-
-knitr::kable(d_sum,
-             digits=1,
-             col.names = c("$n(\\overline{z})$","$n(\\underline{z})$","$A_0$","$\\beta$","$\\delta$","$I(n(\\overline{z}))$","$I(n(\\underline{z}))$","$I_0$"),caption="Median value of sampled parameters conditional on a given strategy being optimal",
-             row.names = TRUE,escape=F,label="MedianSim")
-
-```
-
-There are many important insights that we can draw from the table above. To do so, we can compare each of the values in the table to the unconditional median of that parameter. For example, the overall median of $\delta$ is approximately $.5$, but in the $\delta$ column of the $\underline{z}\to\overline{z}$ row, the median value of $\delta$ is $0.30$, much lower than the overall median. This means that when the low quality, then high quality strategy is optimal, we expect there to be relatively low audience depreciation relative to when other strategies are optimal.
-
-I will now briefly characterize the profile of parameters that produces each of the winning outcomes. First, if $\underline{z}\to\underline{z}$ is optimal, then there is probably, relatively little difference between the number of streams per capita of high and low quality art. Additionally, there is relatively little expected algorithmic benefit from high quality products. As $\underline{z}\to\underline{z}$ is the most pessimistic of the possible strategies, it is not surprising that this strategy arises when both the consumer and the algorithm are not very discerning.
-
-For $\overline{z}\to\underline{z}$ to be optimal, then consumers should not be very picky, but the algorithm should. The algorithm should make it hard to new artists to gain exposure (small $I_0$). Additionally, the artist should have a stronger-than-average concern for the future $\beta=.6$, and a relatively high audience depreciation, $\delta=.6$. This description is consistent with intuition. If consumers are not very picky between high and low quality, but initial impressions are hard to come by, the artist will prioritize using more releases to grow their audience instead of relying on the algorithm.
-
-The $\underline{z}\to\overline{z}$ is very rare among the points sampled, and it requires a unique mix of parameters to be optimal. Consumers should be moderately discerning, and the algorithm should punish low quality content, however, the algorithm also needs to favor new artists ($I_0$) more than low quality content $I(n(\underline z))$. Additionally greater present bias, and high audience retention benefit this strategy. This result, albeit rare, has important implications for how a streaming platform should treat its new artists. If the platform wishes to incentivize future high quality production from artists who start low quality, they should algorithmically favor new content.
-
-The final case $\overline{z}\to\overline{z}$, is essentially the opposite of $\underline{z}\to\underline{z}$. For the high-quality only strategy to exist, both consumers and the algorithm should be very discerning of high quality content, those two conditions alone are usually sufficient to result in $\overline{z}\to\overline{z}$ as the optimal strategy as evidenced by the other variables being near their medians. This again has important implications for the streaming platform, if they wish to establish an environment where high quality content thrives, they should ensure that their algorithm rewards high quality content, but the platform also relies on its consumers to be equally discerning.
-
-The baseline of consumption and algorithmic impressions (regardless of quality) is not very important in determining optimal behavior. What instead matters is the relative difference between high and low quality alternatives. As crude measures of these relative differences, let $\nu=n(\overline{z})/n(\overline{z})-1$ and $\iota=I(n(\overline{z})I/I(n(\overline{z}))-1$. These variables are the percentage difference between the high and low quality versions of streams per capita and expected impressions per release. For the purposes of this paper, I will interpret $\nu$ as a proxy for the talent of the content creator. The parameter $\nu$ serves as a suitable stand in for talent if we are willing to accept that talent is not how easy it is for a producer to produce, but instead how much more desirable a creator's high-effort content is than their low-effort content. While this stand in for talent is constructed using consumer demand, the use of the percentage change allows us to focus on the change in quality of the work and not the overall level of consumer willingness to consume even low quality releases. A high talent artist will have $\nu\gg1$ and a low talent artist has $\nu\approx1$ because their effort to make high-quality content results in only a few additional streams from consumers.
-
-The parameter $\iota$ on the other hand, has a more straightforward interpretation. I will take $\iota$ to be algorithmic stringency, the percentage boost in expected impressions given to high-quality releases. Stringency serves as an adequate descriptor because $\iota$ near $1$ represent a very loose algorithm that doesn't show much preference for high-quality content. $\iota\gg1$ is a very *stringent* algorithm that leaves low quality content behind compared to high quality content when deciding the number of expected impressions.
-
-With these two parameters, we can see how these two parameters affect the optimal strategy in the following figure:
-
-```{r DiscernPlot,fig.cap="\\label{fig:DiscernPlot} Consumer and Algorithmic Discerningness on Optimal Strategy"}
-d <- 
-  d %>% 
-  mutate(con_dis=nu/nd-1,
-         alg_dis=Iu/Id-1)
-
-cols <- c("A"="#211030", "B"="#255059","C"="#FFBA3D","D"="#8C2730")
-strats <- c(expression(underline(z) %->% underline(z)), expression(bar(z) %->% underline(z)),expression(underline(z) %->% bar(z)),expression(bar(z) %->% bar(z)))
-
-ggplot(d)+
-  geom_point(aes(x=log(con_dis),y=log(alg_dis),color=winner),alpha=.1)+
-  scale_color_manual(values = cols, labels = unname(strats) )+
-  theme_bw()+
-  guides(colour = guide_legend(override.aes = list(alpha = 1)))+
+ggplot(q %>% filter(m<60 & value<20))+
+  geom_line(aes(m,value,size=name,color=name))+
+  ylim(0,10)+
+  xlim(0,60)+
+  ylab(TeX("\nQuality, $z$"))+
+  xlab(TeX("Number of Releases, $m$"))+
+  scale_color_manual(values=c("#8C2730","#211030","#255059"),name=TeX("Talent, $\\kappa$"))+
+  scale_size_manual(values=c(.5,1,1.5),name=TeX("Talent, $\\kappa$"))+
+  theme(text = element_text(family = "Tahoma")) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-      panel.background = element_blank(), axis.line = element_line(colour = "black"))+theme(text=element_text(family="serif"),legend.title = element_blank())+
-  xlab(TeX("Log Proxy Talent, $\\ln(\\nu)$"))+
-  ylab(TeX("Log Algorithm Stringency, $\\ln(\\iota)$"))
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+axis.ticks=element_blank(),
+axis.text = element_blank())+
+  geom_point(data=d_k,aes(x=m,y=z),color="#FFBA3D",alpha=.5,shape=0)
 ```
 
-Figure \@ref(fig:DiscernPlot) should not be read like a traditional scatter plot where the $x$-axis values predict the $y$ values. Instead, \@ref(fig:DiscernPlot) should be read more like a map with the the axes providing coordinates that guide us towards the regions where certain optimal strategies are used.
+\newpage
 
-Figure \@ref(fig:DiscernPlot) shows that while there is some overlap between the optimal strategies, the regions are mostly distinct and contiguous. For example, whenever $\ln(\nu)>0$ (high talent, almost no other parameters matter and the artist is essentially guaranteed to choose $\overline{z}\to\overline{z}$ as the ideal strategy. That means, high talent artists are more likely to choose high quality work in both periods because their high quality work induces so many additional streams by their audience that they can live with the lower algorithmic exposure.
+The next two plots take the median of the utility and quantity strategy grouped by the initial reputation $n$. The variable $n$ does not make a large difference on either outcome, so removing its influence in the plots allows the interpretation to be more direct. The next important parameter is the variance of the algorithmic shocks. A random algorithmic shock could be either positive or negative to an artist, and it is not immediately obvious whether the agent benefits on average from increased volatility. Note that in any period the agent is effectively risk-neutral because their per-period utility function is linear in revenue. However, the uncertainty introduces some curvature through its interaction with the audience evolution function, $\mathcal{A}$.
 
-On the contrary when $\ln(\nu),\ln(\iota)<0$ the ideal strategy is almost always $\underline{z}\to\underline{z}$. This means in environments where the algorithm is not very discerning and the creator is relatively untalented, the creator will mostly choose to go for a low quality strategy in both periods. This result is also intuitive because when the creator gets no benefit of high-quality from the algorithm nor their talent, the creator will see the low quality alternative as more desirable.
+```{r volatilityPlot,fig.cap="\\textit{Expected lifetime utility at different levels of algorithmic uncertainty and initial audience. Median over reputation, $n$}"}
 
-In quadrant II where $\ln(\iota)>0$, but $\ln(\nu)<0$, the ideal strategy is least clear. The high algorithmic stringency and low talent push in opposite directions, so it makes sense that quadrant II is ambiguous.
-
-It is worth exploring why quadrant IV is not equally ambiguous. The high talent pushes the artist towards high quality, but the algorithm does not reward high quality as much. The fact that the content creator chooses $\overline{z}\to\overline{z}$ in spite of this push and pull indicates that high talent outweighs low algorithmic discernment, but the inverse is not always true.
-
-## Random reputational shocks
-
-The preceding sections rely on the content creator laying out a strategy based on their expectations of the two period ahead. However, the model in this paper is capable of replicating the unpredictability of the algorithm. In particular, in each period, the algorithm adds a series of unforecastable shock $\varepsilon_i$ to the audience size evidenced in equation \ref{eq:eqn_of_motion}.
-
-In this section, I will allow the content creator to change their strategy before period two (after having seen the effect of one random shock). This will allow to explore a few relevant aspects of a real content creator's decision making. First I will explore whether or not certain ex ante strategies are more susceptible to change after shocks occur.
-
-Additionally, I will be able to explore whether or not mean zero shocks can decrease overall content creator welfare by forcing people to reallocate their resources. For example, a creator might invest heavily in producing high quality products, but the shock forces them to pursue low quality alternatives in period two. Their utility from being forced to switch may now be lower than if they had pursued the low quality option in both periods.
-
-I implement these algorithmic shock according to the following procedure:
-
-1.  Use the same sample parameters as in the previous section.
-2.  Compute the expected utility maximizing strategy as before.
-3.  With this expected utility maximizing choice, infer the first period choice at each set of parameters.
-4.  Compute the expected audience size and expected utility for the high and low quality strategies in the second period.
-5.  Compute the appropriate number of random shocks based on the number of products in period one.
-6.  Add the random shocks to the deterministic audience size from period one.
-7.  Compute new expected utilities for high and low strategies with the shock from period one.
-
-It is important to note that the content creator is still choosing an expected utility because they cannot forecast the size of the shock in period two. The random shocks that I add to production were normally distributed with mean zero and standard deviation 100. The standard deviation was calibrated so that roughly 10% of simulations changed their strategy.
-
-```{r shocksensetableandreadin, fig.cap="Distribution of Total Shocks conditional on a strategy change"}
-d <- 
-  read.csv("../Inputs/SimulationDataWithShocks.csv")
-
-library(dplyr)
-
-
-ggplot(d %>% filter(different=="1"))+
-  geom_violin(aes(x=winner,y=total_shock,col=winner,fill=winner),alpha=.5)+
-  scale_color_manual(values = cols, labels = unname(strats) )+
-  scale_fill_manual(values = cols, labels = unname(strats) )+
-  theme_bw()+
-  guides(colour = guide_legend(override.aes = list(alpha = 1)))+
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-      panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-  theme(text=element_text(family="serif"),legend.title = element_blank())+
-  scale_x_discrete(labels=unname(strats))+
-  xlab("Ex Ante Strategy")+
-  ylab("Unforecasted Change in Audience that induced strategy change")
-
-```
-
-Figure \@ref(fig:shocksensetableandreadin) gives an important heuristic: if a content creator was planning for low quality in period two, a negative shock will never cause the artist to change their strategy. The inverse is also true, a creator planning for a high quality who receives a positive shock will also not change their strategy. Figure \@ref(fig:shocksensetableandreadin) makes this clear because when a strategy has a low quality period 2 (the leftmost distributions), only positive shocks cause strategy changes.
-
-This result aligns with intuition. Increases to quality decrease the deterministic component of audience size (at least initially), so a positive shock to audience size only weakens the detrimental side of the high quality strategy, effectively making the high quality strategy more attractive. In some sense, this can create a feedback loop, a low quality creator who is experiencing "bad luck" with the algorithm is further incentivized to produce low quality content.
-
-With that, we have explored the conditions that cause an artist to change their strategy. Now, I will explore which strategies are the most susceptible to being altered. The table below shows compares the number of times each strategy is chosen ex ante to the number of times that strategy is changed.
-
-```{r}
-for_table <-
+d_one <-
   d %>%
-  select(winner,different) %>%
-  group_by(winner) %>%
-  summarize(`Number of Simulations`=n(),different) %>%
-  group_by(winner,different) %>%
-  summarize(`Number of Switches`=n(),`Number of Simulations`) %>%
-  unique() %>%
-  filter(different=="1") %>%
-  ungroup() %>%
-  select(-different) %>%
-  rename(`Ex ante Strategy`=winner) %>%
-  mutate(`Percent Switched`=100*`Number of Switches`/`Number of Simulations`) %>%
-  select(-`Ex ante Strategy`) %>% 
-  rename(`Num. who Chose Strategy Ex Ante`=`Number of Simulations`) %>% 
-  rename(`Num. of Switches`=`Number of Switches`)
+  mutate(sd = "1.0")
 
-rownames(for_table) <-
-  c("$\\underline{z}\\to\\underline{z}$","$\\overline{z}\\to\\underline{z}$","$\\underline{z}\\to\\overline{z}$","$\\overline{z}\\to\\overline{z}$")
+v = read.csv("../VFI_Data/Variations_From_Baseline/v_sd5.csv", header =
+               F)
+m = read.csv("../VFI_Data/Variations_From_Baseline/m_sd5.csv", header =
+               F)
 
-knitr::kable(for_table,
-             digits=1,caption="\\label{tab:fragility}Fragility of various strategies under algorithmic shock",
-             row.names = TRUE,escape=F)
+AA <- as.matrix(AA)
+AA <- c(AA)
 
+nn <- as.matrix(nn)
+nn <- c(nn)
+
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_5 <- data_frame(v = v,
+                  m = m,
+                  nn = nn,
+                  AA = AA) %>%
+  mutate(sd = "5")
+
+v = read.csv("../VFI_Data/Variations_From_Baseline/v_sdp2.csv", header =
+               F)
+m = read.csv("../VFI_Data/Variations_From_Baseline/m_sdp2.csv", header =
+               F)
+
+m <- as.matrix(m)
+m <- c(m)
+
+v <- as.matrix(v)
+v <- c(v)
+
+d_p2 <-
+  data_frame(v = v,
+             m = m,
+             nn = nn,
+             AA = AA) %>%
+  mutate(sd = "0.2")
+
+d_sd <-
+  d_one %>%
+  full_join(d_5) %>%
+  full_join(d_p2)# %>%
+  #pivot_longer(cols = c(m, v))
+
+d_sd_sum <- 
+  d_sd %>% 
+  group_by(sd,AA) %>% 
+  summarize(v=median(v))
+
+ggplot(d_sd_sum) +
+  geom_line(
+    aes(
+    x = AA,
+    y = v,
+    linetype = sd,
+    color = sd
+  )) +
+  ylab(TeX("Median Optimized Lifetime Utility, $V$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_manual(
+    values = c("#8C2730", "#211030", "#FFBA3D"),
+    name = TeX("Standard Deviation\nof Algorithmic Shock")
+  ) +
+  scale_linetype(name = TeX("Standard Deviation\nof Algorithmic Shock")) +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  ) +
+  guides(shape = guide_legend(override.aes = list(color = "#211030"))) +
+  guides(color = guide_legend(override.aes = list(alpha = 1)))
 ```
 
-Table \ref{tab:fragility} reveals that the low-quality to high-quality strategy, $\underline{z}\to\overline{z}$, is the most sensitive to perturbation. This result makes sense because $\underline{z}\to\overline{z}$ is the least common ex ante strategy, so small changes to parameters are likely to change the creators optimal strategy.
+Figure \@ref(fig:volatilityPlot) shows how volatility affects an artist's optimized lifetime discounted revenue. The actual values of lifetime revenue are not individually important. The relative difference between the utility at the baseline and the utility at alternate values of algorithmic unpredictability does provide a useful comparison. The plot above gives the difference between the lifetime utility at the baseline standard deviation $\sigma=1$ and alternate values. The change from $1$ to $0.2$ has relatively little impact on the lifetime expected utility of the agent. However, increasing the standard deviation from $1$ to $5$ notably decreases the expected lifetime revenue of a creator. On average, a creator loses lifetime utility by increased variance.
 
-# Dimensionality Reduction
+```{r depreciationPlot, fig.cap="\\textit{Median optimal quantity as a function of initial audience size and audience depreciation rate. Median over reputation, $n$}"}
+d_70 <- 
+  d %>% 
+  mutate(d="0.70")
 
-In the proceeding analysis, I have sampled parameters over a continuous range. These results have the the benefit of covering many possible outcomes but make interpretation cumbersome. In this section, will limit non-central parameters to one or two possible values. Using heuristics about the streaming platform economy, I will set a "baseline" value for each parameter that can be held fixed and allow for the individual analysis of parameters.
+v=read.csv("../VFI_Data/Variations_From_Baseline/v_d85.csv",header=F)
+m=read.csv("../VFI_Data/Variations_From_Baseline/m_d85.csv",header=F)
 
-I set the baseline cases as follows:
+m <- as.matrix(m)
+m <- c(m)
 
-| Variable                                    | Symbol               | Baseline Value | Altered Value |
-|---------------------------------------------|----------------------|----------------|---------------|
-| Streams per capita, high quality            | $n(\overline z)$     | $8$            | $5$           |
-| Streams per capita, low quality             | $n(\underline z)$    | $4$            | $0$           |
-| Starting audience                           | $A_0$                | $0$            | $100$         |
-| Discount factor                             | $\beta$              | $.95$          | $.75$         |
-| Audience depreciation rate                  | $\delta$             | $.25$          | $1$           |
-| Expected impressions per song, high quality | $I(n(\overline z))$  | $75$           | $35$          |
-| Expected impression per song, low quality   | $I(n(\underline z))$ | $25$           | $0$           |
-| Initial expected impressions                | $I_0$                | $50$           | $75$          |
+v <- as.matrix(v)
+v <- c(v)
 
-: Baseline and alternate parameter values
+d_85 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(d="0.85")
 
-The values above require justification. First, these values are not intended to accurately match what a content creator might experience in real life. That is, I am not asserting that an artist expects $25\%$ of their audience to forget about their content after one period because the baseline $\delta=.25$. Instead, these values are intended to explore interesting cases that a content creator might actually experienced, but mapped onto reasonable values of the parameters given the sensitivity of the system.
+v=read.csv("../VFI_Data/Variations_From_Baseline/v_d35.csv",header=F)
+m=read.csv("../VFI_Data/Variations_From_Baseline/m_d35.csv",header=F)
 
-In particular, I choose $n(\overline{z})=8$ and $n(\underline{z})=4$ as the baseline values because this makes consumers quite responsive to changes in quality. The altered values explore two different cases. One, where consumers are not discerning, $n(\overline{z})=5$. The other where consumers are completely intolerant of low quality work and will not stream it at all $n(\underline{z})=0$.
+m <- as.matrix(m)
+m <- c(m)
 
-The baseline initial audience, $A_0=0$, was chosen because this paper aims to explore the behavior of new artists who have not yet established a reputation or audience. The alternate, $A_0=100$, is the complete opposite and is intended to explore how the most established artist might behave when entering a new platform.
+v <- as.matrix(v)
+v <- c(v)
 
-The baseline discount factor, $\beta=.95$, is intended to be a reasonable number for when the time between periods is relatively short. The content creator is roughly as concerned about the present as the near future. The other case, $\beta=.75$ is intended to capture the case when the future might be far away and creator is slightly less concerned about the future.
+d_35 <- 
+  data_frame(v=v,m=m,nn=nn,AA=AA) %>% 
+  mutate(d="0.35")
 
-Next we have the expected number of algorithmic impressions after high and low quality releases. Similar to consumer streams, I chose the baseline $I(n(\overline{z}))=75$ and $I(n(\underline{z}))=25$ so that the algorithm is quite discerning between high and low quality art. The alternate $I(n(\overline{z}))=35$ explores the case where the algorithm is not very responsive to the quality of the art. The other alternative, $I(n(\underline{z}))=0$ explores the case where the algorithm is completely intolerant of low quality streams and is expected to show the work to no one after seeing a low quality work.
+d_d <- 
+  full_join(d_35,d_70) %>% 
+  full_join(d_85)
+  #pivot_longer(cols=c(m,v))
 
-Finally, the initial impressions for new artists, $I_0=50$ reflects that the algorithm may treat a new artist like an average artist because they have no better information. The alternate, $I_0=75$ was chosen to explore the case in which the algorithm gives a boost to new artists. This situation might reflect reality because it encourages new potentially-talented creators to stay on platform instead of giving up due to limited exposure. This is especially true because the cost to the platform of hosting additional, bad creators, is quite small compared to the potential upside of a successful one.
+d_d_sum <- 
+  d_d %>% 
+  group_by(d,AA) %>% 
+  summarize(across(v:nn,median))
 
-# Next Steps, again
 
-1.  In that numerical simulation, see which strategy produces the biggest audiences for a given set of parameters
+ggplot(d_d_sum# %>%
+         #filter(10/m<3)
+         ) +
+  geom_point(aes(
+    x = AA,
+    y = m,
+    col = d,
+    #col = nn,
+    shape = d,
+    group = d
+  ), alpha = 1) +
+    geom_line(aes(
+    x = AA,
+    y = m,
+    col = d), alpha = 1) +
+  ylab(TeX("Median Optimal Quantity, $m$")) +
+  xlab(TeX("Initial Audience Size, $A$")) +
+  scale_color_manual(
+    name = TeX("Audience Depreciation, $\\delta$"),
+    values = c("#8C2730", "#211030", "#255059"),
+    labels =c("Low, .35","Baseline, .7", "High, .85")
+  ) +
+  scale_shape_manual(name = TeX("Audience Depreciation, $\\delta$"),
+    labels =c("Low, .35","Baseline, .7", "High, .85"),
+    values = c(0,1,2)) +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  ) +
+  guides(shape = guide_legend(override.aes = list(alpha = 1)))
+```
 
-2.  Do the sensitivity analysis of how shocks affect behavior
+Figure \@ref(fig:depreciationPlot) shows the median optimal quantity, $m$, for a given initial audience, $A$ at three levels of audience depreciation rate, $\delta$. For artists with low audience depreciation, $\delta=0.35$, the strategy does not have a sharp jump in the optimal strategy. For a creator who loses a considerable portion of their audience every period. There is a certain audience threshold below which it is not worth investing in high quantity. This threshold I termed activation energy. The low depreciation artist never experiences this jump. They can afford to invest in quality because they know their audience sticks around. The other artists rely more on algorithmic exposures. More precisely, the quality chosen now affects the number of algorithmic impressions next period. If you can rely on your audience staying around, you are given more freedom to invest in the intertemporal benefit of quality. Creators with high depreciation do not have this same luxury. This low depreciation transitions smoothly from *hobbyist* to *superstar* without a steep jump.
 
-3.  Get a better structure for the results section (though that may only come once I've narrowed down the results that are worth including).
+The other notable effect of depreciation on optimal quantity is the steepness of the strategy jump for the high deprecation artist. The baseline and high depreciation creators move together while in the hobbyist phase, but the high depreciation artist has a greater jump in quantity than the baseline when entering the *budding creator* phase. At any audience level, the high depreciation artist has to work harder to maintain the same audience next period. As such, it is not a surprise that the high depreciation artist focuses on high quantity and not quality. What this may indicate is that in genres where the content creator is not very memorable, the content creator will focus on creating a lot of new and finding as many new audience members each period.
+
+"How-To" videos on YouTube may be an example of a high-depreciation genre. After watching a tutorial and completing the task, a viewer has little incentive to watch that creator's other work. As such, tutorial creators may find it optimal to pursue quantity over quality. YouTube intimates this fact in a previously mentioned video by Simon Whistler speaking for YouTube's Creator Academy. He stresses the importance of concision in tutorial videos @youtubecreatorsWhatIdealVideo2018. A creator making short videos can make more videos than a creator making long videos.
+
+In table \@ref(tab:foo), increases to depreciation rate make no change to quantity strategy. In figure \@ref(fig:depreciationPlot) we see that for *budding creators* and *superstars* increasing depreciation also increases quantity. The difference from the one-period model has two reasons. The dynamic model is non-zero because the audience evolution function is no longer linear in the depreciation rate. The relationship is positive for established creators because high depreciation means that investing in quality has much less of a two-period benefit, so the creator substitutes toward quantity.
+
+The talent parameter, $\kappa$, is worth additional analysis. In particular, I ask whether or not revenue is convex in talent similar to the result in @rosenEconomicsSuperstars1981a. I solve the dynamic program multiple times changing only the talent parameter $\kappa$ while keeping all others at their baseline.
+
+```{r kappaPlot, fig.cap="\\textit{Affect of Changes to Talent on Optimal Lifetime Revenue. Median over reputation, $n$}"}
+k <- read.csv("../VFI_Data/kappa_tests/k_data.csv")
+
+k_sum_nn <-
+  k %>%
+  group_by(k,AA) %>%
+  summarize(v = median(v))
+
+ggplot(k_sum_nn) +
+  geom_line(aes(
+    x = k,
+    y = v,
+    col = AA,
+    group = AA
+  )) +
+  geom_vline(aes(xintercept=20),linetype="dashed",alpha=.4)+
+xlab(TeX("Talent, $\\kappa$")) +
+  ylab(TeX("Median Discounted Lifetme Utility, $V$")) +
+  scale_color_gradient(low = "#211030", high = "#FFBA3D", name = "Starting Audience\nSize, A") +
+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(#panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black"))+
+  annotate("text",label="Baseline Talent",x=29,y=18000,family = "Tahoma",alpha=.4,size=3)
+```
+
+\newpage
+
+In \@ref(fig:kappaPlot), we can see that the effect of talent on lifetime revenue is nonlinear. Initially, there appears to be a convexity of revenue in talent, but then at higher levels of talent, additional talent becomes less and less meaningful. This is partially justifiable by the model specification. When talent is very large, the artist has enough of both $z$ and $m$ to near the maximal audience size, regardless of their starting $n,A$. As such, a more robust model that does not have a permanent upper bound on the audience size may see the convexity of revenue in talent for the entire range of talents.
+
+Figure \@ref(fig:kappaPlot) provides modest support for the generalization of Rosen's superstar theory to streaming markets. The result is especially pronounced in the transition from low to moderate talent in which small changes to talent can result in disproportionately large increases in lifetime revenue.
+
+The effect of varying talent is not included because I found it to have a relatively small impact on the convexity of profit in talent.
+
+## Additional Simulations
+
+The previous sections explored how changing an artist's state variables $n,A$ affected their optimal production decision. This is useful when looking at the first-period behavior of multiple artists, but it does not give insight into the career trajectories of a single artist. Of course, algorithmic uncertainty prevents an artist from completely mapping out production decisions in every future period. However, the dynamic programming formulation allows the agent to re-optimize their quantity-quality tradeoff in every new period following the shock from the previous.
+
+To explore these career trajectories, first I solve the dynamic program for a given set of parameters. Then I choose the number of time intervals to simulate and how many paths of shocks will be simulated. I set each simulation to the same initial audience and streams per capita, $(n,A)$. From there the artist chooses an optimal quality and quantity based on the solved dynamic program. Then a new shock is randomly generated for the artist, and their production choice is combined with the shock to determine this period's revenue and audience. Next period's audience will likely not be what the artist was envisioning, so they have an opportunity to choose a new optimal quantity and quality. The artist experiences a shock that brings them to the current period, but the revenue they have this period will be affected by a shock they have not yet observed. Artists across simulations do not interact in any way.
+
+Repeating this process for 1000 artists each over 100 periods produces a sufficient data set to find the average career for a set of starting parameters. First, I consider the case where both starting audience and starting reputation are very near zero.
+
+```{r SimulationPlotBase, fig.cap="\\textit{Baseline Simulation, $n_0,A_0=0,0$}"}
+library(dplyr)
+d30 <- 
+  read.csv("../VFI_Data/SimulationData/sim_d30.csv")
+k20 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k20.csv")
+k10 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k10.csv")
+sd5 <- 
+  read.csv("../VFI_Data/SimulationData/sim_sd5.csv")
+
+
+d30 <- 
+  d30 %>% 
+  mutate(sim="d30") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k20 <- 
+  k20 %>% 
+  mutate(sim="k20") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k10 <- 
+  k10 %>% 
+  mutate(sim="k10") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+sd5 <- 
+  sd5 %>% 
+  mutate(sim="sd5") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+
+d <- 
+  d30 %>% 
+  full_join(k20) %>% 
+  full_join(k10) %>% 
+  full_join(sd5) %>% 
+  mutate(z=case_when(sim=="k10"~10/m,
+                     T~20/m))
+
+d <- 
+  d %>% 
+  #filter(ids<100) %>% 
+  #filter(t!=0) %>% 
+  filter(t!=99)
+
+d_roll <- 
+  d %>% 
+  select(sim,t,A,ids) %>% 
+  group_by(sim,t) %>% 
+  summarize(A=mean(A))
+
+d <- 
+  d %>% 
+  filter(ids<100)
+  
+
+p_z <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=z,group=interaction(ids,sim),col=sim),alpha=.05, size=.4)+
+  guides(colour = guide_legend(override.aes = list(alpha = 1,size=5)))+
+  ylab("Quality")+
+  xlab("Time")+
+  scale_color_manual(values = c("#8C2730","#C36477","#211030","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    #panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )+
+  coord_cartesian(ylim=c(1.5,5))
+
+p_A <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=A,group=interaction(ids,sim),col=sim),alpha=.05, size=.4)+
+  geom_line(data=d_roll,aes(x=t,y=A,col=sim),size=1)+
+  scale_color_manual(values = c("#8C2730","#C36477","#211030","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())+
+  scale_y_continuous(position = "right")+
+  ylab("Audience")+
+  xlab("Time")+
+    theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    #panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )
+  
+
+ggpubr::ggarrange(p_z,p_A, ncol=2, nrow=1, common.legend = TRUE, legend="bottom")
+```
+
+\newpage
+
+In figure \@ref(fig:SimulationPlotBase), we can see a few facts. The right plot is a creator's audience over time. Three of the selected creator profiles maintain a considerable audience over time: baseline, high loyalty, and high volatility. Matching the results from the comparative statics, increased loyalty benefits the creator by increasing the audience over time. Again like the comparative statics, additional unpredictability decreases the creator's average audience over time. Of course, with additional unpredictability, some creators outperform the baseline for a while, but the average is below the baseline. The high-unpredictability creator may not gain an audience for many periods, but no creators are permanently prevented from going viral. A model with a reservation utility may see these unlucky creators drop out eventually, but that is not possible here.
+
+Shifting focus to the left of the plot, we can see the three previously discussed stages emerge for the successful artists. In the first few periods, the creator's quality is very high when they are in the *hobbyist* phase. The successful artists then remain steady at a lower quality for a while while they are in the *budding creator* phase and accumulating audience. Eventually, as the creator becomes a *superstar*, the creator ramps up quality as their audience stabilizes. The high volatility creator profile's three-stage strategy is less obvious, but it is still present. For the high volatility case, different creators go through the different phases at different times.
+
+The unsuccessful creator starts with a high-quality level, lowers it, but never gains enough of a following to truly enter the *budding creator* phase. The low talent creator does experience shocks, but their audience is so small that it makes almost no change to their strategy or audience. This plot shows that algorithmic shocks are insufficient to develop an audience. All creators start with the same audience and reputation, but we do not see any simulations of the low talent profile gaining a large audience by chance.
+
+The quality chosen by an artist does not immediately determine audience size. In fact, the two most popular artists, high loyalty and baseline, have the highest and lowest quantity strategy respectively. This result shows that multiple types of artists can be popular on a platform.
+
+This plot answers one of the initial questions of the paper, whether or not multiperiod models allow for small artists to invest in high-quality production. This simulation shows that artists who start small will be able to produce a high level of quality in the later periods of the simulation.
+
+The final notable characteristic of figure \@ref(fig:SimulationPlotBase) is that there appears to be an ergodic equilibrium in audience size and strategy over time. That is, after a certain audience size is reached, the artist will on average maintain their current audience and strategy over time. There may be random fluctuations in audience and resulting optimal strategy, but both ultimately revert to values around their averages. This result should not be taken too literally because there are no genre dynamics in this model. In reality, we expect certain media markets to rise and fall over time according to current tastes. This model holds consumer preferences as constant over time.
+
+The artist is not just maximizing their discounted audience over time, they are maximizing their discounted revenue which is proportional to the number of total streams per period. As such, one may be concerned that the plot above does not adequately describe the careers of an artist over time. However, a plot of the total number of streams per period looks almost identical to the plot above of audience size in every period. In our model, this means, that artists optimally focus on growing their audience. Investing in a small audience who streams frequently is not optimal.
+
+Next, I will explore how changing an artist's starting parameters affects their career trajectory.
+
+```{r SimulationPlotHighRep, fig.cap="\\textit{Higher Initial Reputation Simulation, $n_0,A_0=5,0$}"}
+library(dplyr)
+d30 <- 
+  read.csv("../VFI_Data/SimulationData/sim_d30_n5.csv")
+k20 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k20_n5.csv")
+k10 <- 
+  read.csv("../VFI_Data/SimulationData/sim_k10_n5.csv")
+sd5 <- 
+  read.csv("../VFI_Data/SimulationData/sim_sd5_n5.csv")
+
+
+d30 <- 
+  d30 %>% 
+  mutate(sim="d30") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k20 <- 
+  k20 %>% 
+  mutate(sim="k20") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+k10 <- 
+  k10 %>% 
+  mutate(sim="k10") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+sd5 <- 
+  sd5 %>% 
+  mutate(sim="sd5") %>% 
+  rename(m=1, v =2, A =3, n =4, u=5, t=6, ids=7)
+
+d <- 
+  d30 %>% 
+  full_join(k20) %>% 
+  full_join(k10) %>% 
+  full_join(sd5) %>% 
+  mutate(z=case_when(sim=="k10"~10/m,
+                     T~20/m))
+
+d <- 
+  d %>% 
+  #filter(ids<100) %>% 
+  #filter(t!=0) %>% 
+  filter(t!=99)
+
+d_roll <- 
+  d %>% 
+  select(sim,t,A,ids) %>% 
+  group_by(sim,t) %>% 
+  summarize(A=mean(A))
+
+d <- 
+  d %>% 
+  filter(ids<100)
+
+  
+
+p_z <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=z,group=interaction(ids,sim),col=sim),alpha=.05, size=.4)+
+  guides(colour = guide_legend(override.aes = list(alpha = 1,size=5)))+
+  ylab("Quality")+
+  xlab("Time")+
+  scale_color_manual(values = c("#8C2730","#C36477","#211030","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())+  theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    #panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )+
+  coord_cartesian(ylim=c(1.5,5))
+
+p_A <- 
+  ggplot(d) +
+  geom_line(aes(x=t,y=A,group=interaction(ids,sim),col=sim),alpha=.05, size=.4)+
+  geom_line(data=d_roll,aes(x=t,y=A,col=sim),size=1)+
+  scale_color_manual(values = c("#8C2730","#C36477","#211030","#FFBA3D"),labels=c("High Loyalty", "Low Talent", "Baseline", "High Volatility"),name=element_blank())+
+  scale_y_continuous(position = "right")+
+  ylab("Audience")+
+  xlab("Time")+
+    theme(text = element_text(family = "Tahoma")) +
+  theme(legend.title = element_text(hjust = .5)) +
+  theme(
+    #panel.grid.major = element_blank(),
+    #panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.line = element_line(colour = "black")
+  )
+  
+
+ggpubr::ggarrange(p_z,p_A, ncol=2, nrow=1, common.legend = TRUE, legend="bottom")
+```
+
+In figure \@ref(fig:SimulationPlotHighRep), we can see the effect of a high starting reputation on audience and quality over multiple periods. There are a few questions that this plot immediately answers. First, we might ask if a high starting reputation allows low-talent artists to "fake it" and maintain a large audience. In this model, the answer is no. Despite an initial boost to reputation, this level of reputation cannot be maintained by low-talent artists, so their audience and revenue are quickly lost.
+
+The other question that this plot answers is whether or not different starting conditions allow an artist to reach a different equilibrium. Again, the answer is no. The equilibrium level of audience for all creator profiles is equal to that in figure \@ref(fig:SimulationPlotBase).
+
+The initial boost to reputation allows the successful artists to mostly skip the *hobbyist* phase. We can see that the hobbyist phase is skipped because the initial drop in quality is much smaller, so the strategy discontinuity is not being used.
+
+# Conclusion
+
+This paper constructs a model to explore the optimal behavior of a content creator on a streaming platform with an uncertain algorithm. I began by asking if small creators are able to invest in high-quality production in a multi-period. I was also interested in discovering whether or not a creator's revenue is convex in their talent. Starting with a one-period binary-choice example and then moving to dynamic programming, I found the following results.
+
+First and foremost, this model predicts that different talent and reputation produce of three types of artists: *hobbyists*, *budding creators*, and *superstars*. Hobbyists pursue high-quality production and do not reach a large audience. After a certain audience is reached, budding creators focus on high-volume production to grow their audience. Superstars have large audiences and switch to a higher-quality strategy maintaining their current audience becomes a priority. The multiperiod model allows even small creators to eventually pursue a high-quality strategy.
+
+In this model, content creators are more likely to invest in the intertemporal benefit of high-quality production when they are confident most of their audience will be retained next period. As such, a platform wishing to create a community of high-quality creators may find it optimal to keep consumers connected to the creators they have found in the past.
+
+Another interesting result from the model is the relationship of algorithmic unpredictability to the career path of an artist. A more unpredictable algorithm decreases the expected lifetime discounted revenue of an artist. However, even if an artist experiences multiple negative shocks, they will not be prevented from eventually gaining a following.
+
+Lower talent also decreases lifetime utility. Even if an algorithm gives a bonus to new artists, low-talent artists cannot "fake it" until they "make it." Talent plays an important role in predicting lifetime utility. For low-talent artists, initial gains to talent are very useful. These low-talent creators face a convex value function in talent. However, the additional benefits of talent decrease, and very talented artists face decreasing marginal expected lifetime revenue in talent.
+
+Future research could use a technique like web scraping to collect data and construct a panel of a creator's followers and view count over time. These data could further calibrate the model presented above. Other avenues for further research include generalizing the model presented above to allow for direct competition between creators for views. This would allow for the size of the audience to be limited endogenously, not exogenously. More nuanced research of what determines a creator's audience over time would allow for more generalizable models and results. Further attention should also be paid to optimal platform design by the companies who create streaming services. More freely-accessible and publicly-available analysis of a platform's optimal algorithmic uncertainty, audience depreciation, and consumer-creator matching would be extraordinarily valuable both financially and economically.
 
 \newpage
 
 # References {.unnumbered}
+
+::: {#refs}
+:::
+
+\newpage
+
+# Appendix {.unnumbered}
+
+### Proof of Proposition I {#proof .unnumbered}
+
+By \ref{eq:one_period_talent_behavior} the low-quality strategy becomes more desirable relative to the high-quality strategy when the following quantity increases: $$\left(1+\frac{(m_l(\kappa)-m_h(\kappa))I_0}{m_h(\kappa)I_0+(1-\delta)A_0}\right)$$
+
+Therefore, the low-quality strategy gains desirability from increases to $\kappa$ whenever the derivative of the above expression is greater than zero. The $\kappa$ derivative is: $$
+\frac{(m_l'(\kappa)-m_h'(\kappa))I_0\left(m_h(\kappa)I_0+(1-\delta)A_0\right)-(m_l(\kappa)-m_h(\kappa))I_0\left(m_h'(\kappa)I_0\right)}{\left(m_h(\kappa)I_0+(1-\delta)A_0\right)^2}
+$$ The denominator is always positive, so positivity on the derivative only requires the numerator to also be positive. Expanding and simplifying that expression gives the following inequality: $$
+(m_l'-m_h')(1-\delta)A_0+(m_l'm_h-m_lm_h')I_0>0
+$$
+
+Now suppose that $(m_l'm_h-m_l\overline{m'})>0$, and by construction $m_l>m_h$. Note that for an arbitrary $a,b,x,y\in \mathbb{R}^+$, when $ax-by>0$, $x>\frac{b}{a}y$. The condition $x>y$ is weaker than and is implied $x>\frac{b}{a}y$ whenever $b>a$. Letting $a=m_h,b=m_l,x=m_l',y=m_h '$, shows that both terms in the above inequality must be positive, so the whole derivative must also be positive. Finally,
+
+$$
+m_l'm_h-m_lm_h'>0\iff\frac{m_l'}{m_l}>\frac{m_h'}{m_h}\iff\frac{\text{d}\ln(m_l)}{\text{d}\kappa}>\frac{\text{d}\ln(m_h)}{\text{d}\kappa}
+$$
+
+This completes the proof.
+
+### Notes Value Function Iteration Implementation {#test .unnumbered}
+
+The first difference between @sargentCakeEatingII and the model used in this paper is that the state space is multidimensional. The control variables, $m$ and $z$ can be reduced to a one-dimensional relationship according to $f(m,z)=\kappa$. In this way, the artist is only choosing one variable in every period. That being said, the state variables, $n$ and $A$ cannot be reduced to one dimension. Therefore, the set of potential input points at which the value function must be numerically maximized is two-dimensional. Resolving this difference amounted to little more than careful index chasing, array reshaping, and waiting much longer for computations.
+
+The next substantial difference between @sargentCakeEatingII's work and the problem at hand is the presence of uncertainty. Computing the expected audience size required that I first assume a distribution for the random variable $\varepsilon$. I chose a normal distribution because it has mean zero and its variance can easily be rescaled. The normal distribution is continuous and requires discretization to compute an estimated expected value. To fairly compute the expected value, I create $N$ evenly spaced numbers between $0$ and $1$. I then evaluate the inverse cumulative density function of the distribution at each of those $N$ points. Therefore, the sampling of the distribution evenly represents where samples are likely to lie. From there, I compute discrete expected value by finding the total probability mass between two evaluation points, then computing the audience conditional on a given $\varepsilon$. Then I multiply the mass and the audience and sum each of these pieces together.
+
+The final substantial difference between @sargentCakeEatingII's work and mine is the boundedness of the equation of motion. In their case of cake eating, a consumer can consume anything between $0$ and the total cake remaining. The state variable sent to next period is simply the starting cake less consumption that period. In my case, the relationship between two periods comes from $\nu(z)$ and $A'=A(m,n,A,\varepsilon)$. Absent the requirements of dynamic programming, there is no reason for most new creators to see any upper limit to their audience size or streams per viewer. However, to prevent both functions from growing off to infinity, any output lying outside of a chosen range is brought back to the maximum or minimum of this range. This weakens results, however, if sufficiently high and low bounds are chosen, the omitted values contribute relatively little to overall results. I give the audience evolution function a logistic shape that naturally has upper and lower bounds. Further, I give $\nu(z)$ a shape that bounds it between $0$ and a choice of maximal $\overline{n}$ for all $z\in[0,\infty)$.

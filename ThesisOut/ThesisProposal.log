@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.3.20)  20 MAR 2022 10:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.25)  27 APR 2022 13:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **ThesisProposal.tex
 (./ThesisProposal.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-02-24> (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
+L3 programming layer <2022-04-20> (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
@@ -1472,97 +1472,91 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@headsep=\skip67
 \dth@everypar=\toks53
 LaTeX Info: Redefining \textsquare on input line 427.
+) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count329
+\float@exts=\toks54
+\float@box=\box72
+\@float@everytoks=\toks55
+\@floatcapt=\box73
 )
-\c@prop=\count329
-\c@theorem=\count330
-\c@lemma=\count331
-\c@corollary=\count332
-\c@proposition=\count333
-\c@conjecture=\count334
-\c@definition=\count335
-\c@example=\count336
-\c@exercise=\count337
-\c@hypothesis=\count338
+\c@prop=\count330
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count339
-\l__pdf_internal_box=\box72
-) (./ThesisProposal.aux
-
-LaTeX Warning: Label `fig:DiscernPlot' multiply defined.
-
-)
+File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count331
+\l__pdf_internal_box=\box74
+) (./ThesisProposal.aux)
 \openout1 = `ThesisProposal.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/zutmi/m/it on input line 138.
-LaTeX Font Info:    Trying to load font information for OML+zutmi on input line 138.
+LaTeX Font Info:    Checking defaults for OML/zutmi/m/it on input line 123.
+LaTeX Font Info:    Trying to load font information for OML+zutmi on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/omlzutmi.fd
 File: omlzutmi.fd 2014/04/14 Fontinst v1.933 font definitions for OML/zutmi.
 )
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 138.
-LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 138.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 123.
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 138.
-LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 138.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 123.
+LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/cyrillic/t2acmr.fd
 File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for T2B/cmr/m/n on input line 138.
-LaTeX Font Info:    Trying to load font information for T2B+cmr on input line 138.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T2B/cmr/m/n on input line 123.
+LaTeX Font Info:    Trying to load font information for T2B+cmr on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/cyrillic/t2bcmr.fd
 File: t2bcmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for T2C/cmr/m/n on input line 138.
-LaTeX Font Info:    Trying to load font information for T2C+cmr on input line 138.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T2C/cmr/m/n on input line 123.
+LaTeX Font Info:    Trying to load font information for T2C+cmr on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/cyrillic/t2ccmr.fd
 File: t2ccmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 138.
-LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 138.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 123.
+LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/ly1/ly1ptm.fd
 File: ly1ptm.fd 2001/02/01 font definitions for LY1/ptm using Berry names.
 )
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 138.
-LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 138.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 123.
+LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 138.
-LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 138.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 123.
+LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 138.
+LaTeX Font Info:    ... okay on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 138.
+Package hyperref Info: Link coloring ON on input line 123.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1570,11 +1564,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count340
+\c@section@level=\count332
 )
-LaTeX Info: Redefining \ref on input line 138.
-LaTeX Info: Redefining \pageref on input line 138.
-LaTeX Info: Redefining \nameref on input line 138.
+LaTeX Info: Redefining \ref on input line 123.
+LaTeX Info: Redefining \pageref on input line 123.
+LaTeX Info: Redefining \nameref on input line 123.
 (./ThesisProposal.out) (./ThesisProposal.out)
 \@outlinefile=\write4
 \openout4 = `ThesisProposal.out'.
@@ -1615,42 +1609,46 @@ LaTeX Info: Redefining \nameref on input line 138.
 
 
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into your preamble.
- on input line 138.
+ on input line 123.
 
-\c@mv@tabular=\count341
-\c@mv@boldtabular=\count342
+\c@mv@tabular=\count333
+\c@mv@boldtabular=\count334
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 140.
+(Font)              scaled to size 17.28pt on input line 125.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 140.
+(Font)              scaled to size 12.0pt on input line 125.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 8.8pt on input line 140.
+(Font)              scaled to size 8.8pt on input line 125.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 6.6pt on input line 140.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 140.
+(Font)              scaled to size 6.6pt on input line 125.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 125.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 140.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 125.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 140.
+LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 125.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 140.
+LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 125.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 140.
+LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 125.
 (/Users/aarongraybill/Library/TinyTeX/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 144.
+(Font)              scaled to size 9.0pt on input line 125.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 144.
+(Font)              scaled to size 9.0pt on input line 125.
+LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
+(Font)              scaled to size 14.4pt on input line 132.
+LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
+(Font)              scaled to size 14.4pt on input line 132.
 (./ThesisProposal.toc
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
 (Font)              scaled to size 10.0pt on input line 1.
@@ -1658,70 +1656,204 @@ LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
 (Font)              scaled to size 7.3pt on input line 3.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 3.
-)
+[1
+
+{/Users/aarongraybill/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@toc=\write5
 \openout5 = `ThesisProposal.toc'.
 
+[2]
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 150.
+(Font)              scaled to size 8.0pt on input line 140.
 LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/n' will be
-(Font)              scaled to size 6.2pt on input line 150.
-
-Underfull \hbox (badness 10000) in paragraph at lines 150--150
-[][][]\T1/Heuristica-TLF/m/n/8 Available on page 5 at [][]$https : / / s22 . q4cdn . com / 540910603 / ^^[les / doc _ ^^[nancials / 2020 / ar / 4e770a8c -[] ee99 -[] 49a8 -[] 9f9e -[]
+(Font)              scaled to size 6.2pt on input line 140.
+LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/it' will be
+(Font)              scaled to size 8.0pt on input line 140.
+LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/it' will be
+(Font)              scaled to size 10.0pt on input line 142.
+[3] [4]
+LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
+(Font)              scaled to size 12.0pt on input line 168.
+[5] [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 206--206
+\T1/Heuristica-TLF/m/n/8 com / youtube / answer / 7403255 ? hl = en# : ~ : text = The % 20ads % 20you % 20see % 20may ,[] Google % 20services % 2C % 20like % 20Google %
  []
 
-[1
-
-{/Users/aarongraybill/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Font shape `T1/Heuristica-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 152.
-[2] [3]
-LaTeX Font Info:    Font shape `T1/Heuristica-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 180.
-[4] [5] [6] [7] [8] [9] [10] [11] [12]
-<ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf, id=248, 469.755pt x 325.215pt>
+[8] [9] [10] [11] [12]
+<ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf, id=283, 469.755pt x 325.215pt>
 File: ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf Graphic file (type pdf)
 <use ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf>
-Package pdftex.def Info: ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf  used on input line 288.
+Package pdftex.def Info: ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf  used on input line 262.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[13 <./ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf>] [14] [15] [16] [17] [18] [19]
-<ThesisProposal_files/figure-latex/DiscernPlot-1.pdf, id=316, 469.755pt x 325.215pt>
-File: ThesisProposal_files/figure-latex/DiscernPlot-1.pdf Graphic file (type pdf)
-<use ThesisProposal_files/figure-latex/DiscernPlot-1.pdf>
-Package pdftex.def Info: ThesisProposal_files/figure-latex/DiscernPlot-1.pdf  used on input line 521.
+[13
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.275 
+       <./ThesisProposal_files/figure-latex/VisualizeAudienceDevelopment-1.pdf>] [14] [15] [16] [17] [18] [19] [20]
+<ThesisProposal_files/figure-latex/initialStratPlot-1.pdf, id=371, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/initialStratPlot-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/initialStratPlot-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/initialStratPlot-1.pdf  used on input line 453.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[20] [21 <./ThesisProposal_files/figure-latex/DiscernPlot-1.pdf>]
-<ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf, id=340, 469.755pt x 325.215pt>
-File: ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf Graphic file (type pdf)
-<use ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf>
-Package pdftex.def Info: ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf  used on input line 569.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[22] [23 <./ThesisProposal_files/figure-latex/shocksensetableandreadin-1.pdf>] [24] [25] [26]
-Underfull \hbox (badness 10000) in paragraph at lines 700--702
-\T1/Heuristica-TLF/m/n/10 link -[] explain -[] how -[] algorithm -[] changes -[] supercharged -[] their -[] business -[] to -[] an -[] estimated -[] 17 -[] 5 -[] million -[]
+
+Underfull \hbox (badness 10000) in paragraph at lines 453--453
+[][]
  []
 
-[27] (./ThesisProposal.aux)
+[21
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.457 
+       <./ThesisProposal_files/figure-latex/initialStratPlot-1.pdf>] [22] [23]
+<ThesisProposal_files/figure-latex/valueFunction1-1.pdf, id=404, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/valueFunction1-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/valueFunction1-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/valueFunction1-1.pdf  used on input line 479.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-LaTeX Warning: There were multiply-defined labels.
+Underfull \hbox (badness 10000) in paragraph at lines 479--479
+[][]
+ []
 
+<ThesisProposal_files/figure-latex/policyHeatmap-1.pdf, id=406, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/policyHeatmap-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/policyHeatmap-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/policyHeatmap-1.pdf  used on input line 485.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 485--485
+[][]
+ []
+
+[24
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.491 
+       <./ThesisProposal_files/figure-latex/valueFunction1-1.pdf>] [25
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.491 
+       <./ThesisProposal_files/figure-latex/policyHeatmap-1.pdf>]
+<ThesisProposal_files/figure-latex/kappaplots-1.pdf, id=435, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/kappaplots-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/kappaplots-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/kappaplots-1.pdf  used on input line 500.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 500--500
+[][]
+ []
+
+[26] [27
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.503 \newpage
+               <./ThesisProposal_files/figure-latex/kappaplots-1.pdf>]
+<ThesisProposal_files/figure-latex/volatilityPlot-1.pdf, id=455, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/volatilityPlot-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/volatilityPlot-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/volatilityPlot-1.pdf  used on input line 508.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 508--508
+[][]
+ []
+
+<ThesisProposal_files/figure-latex/depreciationPlot-1.pdf, id=457, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/depreciationPlot-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/depreciationPlot-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/depreciationPlot-1.pdf  used on input line 514.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 514--514
+[][]
+ []
+
+[28
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.515 \end{figure}
+                   <./ThesisProposal_files/figure-latex/volatilityPlot-1.pdf>] [29
+pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.520 
+       <./ThesisProposal_files/figure-latex/depreciationPlot-1.pdf>]
+<ThesisProposal_files/figure-latex/kappaPlot-1.pdf, id=488, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/kappaPlot-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/kappaPlot-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/kappaPlot-1.pdf  used on input line 528.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 528--528
+[][]
+ []
+
+[30] [31
+pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.531 \newpage
+               <./ThesisProposal_files/figure-latex/kappaPlot-1.pdf>]
+<ThesisProposal_files/figure-latex/SimulationPlotBase-1.pdf, id=513, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/SimulationPlotBase-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/SimulationPlotBase-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/SimulationPlotBase-1.pdf  used on input line 549.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 549--549
+[][]
+ []
+
+[32] [33
+pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.552 \newpage
+               <./ThesisProposal_files/figure-latex/SimulationPlotBase-1.pdf>] [34]
+<ThesisProposal_files/figure-latex/SimulationPlotHighRep-1.pdf, id=540, 469.755pt x 325.215pt>
+File: ThesisProposal_files/figure-latex/SimulationPlotHighRep-1.pdf Graphic file (type pdf)
+<use ThesisProposal_files/figure-latex/SimulationPlotHighRep-1.pdf>
+Package pdftex.def Info: ThesisProposal_files/figure-latex/SimulationPlotHighRep-1.pdf  used on input line 571.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 571--571
+[][]
+ []
+
+[35
+pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.584 
+       <./ThesisProposal_files/figure-latex/SimulationPlotHighRep-1.pdf>] [36] [37]
+Underfull \hbox (badness 10000) in paragraph at lines 684--686
+[][]$\T1/Heuristica-TLF/m/n/10 https : / / www . fastcompany . com / 3054965 / its -[] o^^\cial -[] the -[] beatles -[] are -[] coming -[] to -[] spotify -[] apple -[]
+ []
+
+[38] [39] [40] (./ThesisProposal.aux)
 Package rerunfilecheck Info: File `ThesisProposal.out' has not changed.
-(rerunfilecheck)             Checksum: A53FF84B9462CC3BA30795F7CDD2CE46;3527.
+(rerunfilecheck)             Checksum: 8AFFBD34E4FF5663AB596E51BB1667BC;4083.
  ) 
 Here is how much of TeX's memory you used:
- 35767 strings out of 480236
- 804108 string characters out of 5894377
- 1187292 words of memory out of 5000000
- 52952 multiletter control sequences out of 15000+600000
- 540772 words of font info for 143 fonts, out of 8000000 for 9000
+ 35933 strings out of 480193
+ 810656 string characters out of 5892299
+ 1184889 words of memory out of 5000000
+ 53088 multiletter control sequences out of 15000+600000
+ 549625 words of font info for 152 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 84i,16n,80p,2286b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,16n,80p,2256b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/enc/dvips/heuristica/zut_geqeyh.enc}</Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/heuristica/Heuristica-Bold.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/heuristica/Heuristica-Italic.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/heuristica/Heuristica-Regular.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/erewhon/erewMI.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txexs.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txmiaSTbb.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></Users/aarongraybill/Library/TinyTeX/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on ThesisProposal.pdf (27 pages, 1093060 bytes).
+Output written on ThesisProposal.pdf (40 pages, 2253597 bytes).
 PDF statistics:
- 481 PDF objects out of 1000 (max. 8388607)
- 423 compressed objects within 5 object streams
- 116 named destinations out of 1000 (max. 500000)
- 188 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 722 PDF objects out of 1000 (max. 8388607)
+ 631 compressed objects within 7 object streams
+ 163 named destinations out of 1000 (max. 500000)
+ 255 words of extra memory for PDF output out of 10000 (max. 10000000)
 

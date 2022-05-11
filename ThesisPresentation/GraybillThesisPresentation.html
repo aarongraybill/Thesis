@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Exposure Doesn’t Pay the Bills:</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Aaron Graybill" />
+    <meta name="date" content="2022-04-05" />
+    <script src="libs/header-attrs-2.13/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="bullets.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Exposure Doesn’t Pay the Bills:
+]
+.subtitle[
+## .small[Aristic Production under Algorithmic Uncertainty in Streaming Markets]
+]
+.author[
+### Aaron Graybill
+]
+.date[
+### 05 April 2022
+]
+
+---
+
+
+
+
+
+
+# Outline
+
+1.    Intro and Motivation
+1.    Model
+1.    Findings
+1.    Questions
+---
+class: left
+
+# Intro and Motivation
+-   YouTube's 2021 Q3 Ad Revenue is $7.2B&lt;sup&gt;1&lt;/sup&gt; 
+-   Streaming Platforms are driven by **content creators**
+-   Content creation can be a full time job
+-   Creators make content, but algorithm decides who sees it
+
+.footnote[
+[1] [Source](https://abc.xyz/investor/static/pdf/2021Q3_alphabet_earnings_release.pdf)
+]
+
+---
+# Motivation, continued. My Niche in the Literature
+
+-   Artist's problem on streaming platforms
+  - Choose ideal quantity and quality each period
+-   Role of algorithmic uncertainty on producers
+-   Effect of time on quality
+
+
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+# .white[The Model]
+
+---
+
+## What should a model describe?
+
+.lesspaced[
+### Consumer Behavior:
+-   Artist discovery
+-   Consumption based on quality
+
+### Artist/Content Creator:
+-   Maximize royalties from streams
+-   Quality-quantity trade-off under audience uncertainty
+
+### Streaming Platform:
+- Algorithmic consumer-artist matching
+- Useful but imperfect matching 
+]
+
+---
+
+# Putting the pieces together
+
+### Audience Evolution
+#### `\(\mathcal{A}(m,n,A,\varepsilon)\)`
+
+### Consumer demand
+#### `\(\nu(z)\)`
+
+---
+
+# Putting the pieces together:
+
+### Per-period revenue: 
+#### `\(\mathcal{A}(m,n,A,\varepsilon)\nu(z)r\)`
+
+### Subject to:
+
+#### `\(f(m,z)=\kappa\)`
+
+---
+
+## Insights from a binary-choice one period model
+
+- There is a strategy cutoff dependent on `\(A\)`:
+  - Established artists choose high quality, new artists choose more exposure
+- If algorithm is very favorable to new artists, both may choose high quality
+- *This doesn't rely on functional form assumptions*
+
+---
+
+class: center, middle, inverse
+background-image: url("image (3).jpg")
+
+&lt;/br&gt;
+&lt;/br&gt;
+# .white[Dynamic Problem and Main Results]
+
+---
+## Solving Dynamically Using Recursion:
+
+`\begin{gather*}
+V(n_{-1},A_{-1})=\max_{m,z}\left\{E[Anr+\rho V(n,A)]\right\} \\
+s.t. \\
+A=\mathcal{A}(m,n_{-1},A_{-1},\varepsilon), \ \text{Audience Evolution} \\
+n=\nu(z), \ \text{Consumer Demand}  \\
+f(m,z)=\kappa, \ \text{Tradeoff}
+\end{gather*}`
+
+---
+
+## Solving for `\(V\)` and optimal `\(m,z\)`:
+
+`\begin{gather*}
+V(n_{-1},A_{-1})=\max_{m,z}\left\{E[Anr+\rho V(n,A)]\right\}
+\end{gather*}`
+
+- In this form, we have preexisting solving techniques!
+- Solutions computed numerically
+- Calibrated baseline for boundedness, interior solutions
+  - Should not interpret magnitude of numbers, only differences from baseline
+---
+
+## Three variations from the baseline:
+
+&lt;img src="GraybillThesisPresentation_files/figure-html/unnamed-chunk-1-1.png" width="110%" style="display: block; margin: auto;" /&gt;
+
+---
+## Conclusion
+.lesspaced[
+- Quality does not determine audience
+]
+.lesspaced[
+- Successful artists shift from lower to higher quality
+  - After they "go viral"
+]
+.lesspaced[
+- Agents who do not understand the algorithm will not maintain audience
+]
+.lesspaced[
+- Talent can also filter out artists
+]
+.lesspaced[
+- Future research: 
+  - How does talent influence distribution of revenue
+  - Fit with data
+]
+
+---
+class: center, middle
+background-image: url("image (3).jpg")
+
+&lt;/br&gt;
+&lt;/br&gt;
+# .white[Thanks, Questions?]
+
+---
+
+
+.tiny[
+&lt;p&gt;&lt;cite&gt;Aguiar, L. and J. Waldfogel
+(2018).
+&amp;ldquo;Quality Predictability and the Welfare Benefits from New Products: Evidence from the Digitization of Recorded Music&amp;rdquo;.
+In: &lt;em&gt;Journal of Political Economy&lt;/em&gt; 126.2. &lt;a href="http://www.journals.uchicago.edu/doi/full/10.1086/696229"&gt;http://www.journals.uchicago.edu/doi/full/10.1086/696229&lt;/a&gt;, pp. 492&amp;ndash;524.
+ISSN: 0022-3808.
+DOI: &lt;a href="https://doi.org/10.1086/696229"&gt;10.1086/696229&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;cite&gt;Klein, B. and K. Leffler
+(1981).
+&amp;ldquo;The Role of Market Forces in Assuring Contractual Performance&amp;rdquo;.
+In: &lt;em&gt;The Journal of Political Economy&lt;/em&gt;.&lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;cite&gt;MacDonald, G. M.
+(1988).
+&amp;ldquo;The Economics of Rising Stars&amp;rdquo;.
+In: &lt;em&gt;The American Economic Review&lt;/em&gt; 78.1. &lt;a href="https://www.jstor.org/stable/1814704"&gt;https://www.jstor.org/stable/1814704&lt;/a&gt;, pp. 155&amp;ndash;166.
+ISSN: 0002-8282.&lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;cite&gt;Shapiro, C.
+(1983).
+&amp;ldquo;Premiums for High Quality Products as Returns to Reputations&amp;rdquo;.
+In: &lt;em&gt;The Quarterly Journal of Economics&lt;/em&gt; 98.4. &lt;a href="https://www.jstor.org/stable/1881782"&gt;https://www.jstor.org/stable/1881782&lt;/a&gt;, pp. 659&amp;ndash;679.
+ISSN: 0033-5533.
+DOI: &lt;a href="https://doi.org/10.2307/1881782"&gt;10.2307/1881782&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;cite&gt;Thomes, T. P.
+(2013).
+&amp;ldquo;An Economic Analysis of Online Streaming Music Services&amp;rdquo;.
+In: &lt;em&gt;Information Economics and Policy&lt;/em&gt; 25.2. &lt;a href="https://www.sciencedirect.com/science/article/pii/S0167624513000103"&gt;https://www.sciencedirect.com/science/article/pii/S0167624513000103&lt;/a&gt;, pp. 81&amp;ndash;91.
+ISSN: 0167-6245.
+DOI: &lt;a href="https://doi.org/10.1016/j.infoecopol.2013.04.001"&gt;10.1016/j.infoecopol.2013.04.001&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
+]
+---
+
+
+## Visualizing Audience Uncertainty:
+
+&lt;img src="GraybillThesisPresentation_files/figure-html/Audience Uncertanity-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+ 
+---
+
+
+## Functional Forms
+.small[
+`\begin{gather}
+\mathcal{A}(m,n,A,\varepsilon)=\frac{\overline{A}}{1+ce^{-\alpha n-\beta m-\gamma\varepsilon}}, c=\frac{\overline{A}-(1-\delta)A}{(1-\delta)A}\\
+f(m,z)=mz\\
+n(z)=\overline{n}(1-e^{-\lambda z})\\
+\varepsilon \sim N(0,\sigma^2)
+\end{gather}`
+]
+
+---
+
+
+&lt;img src="GraybillThesisPresentation_files/figure-html/unnamed-chunk-2-1.png" width="110%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+&lt;img src="GraybillThesisPresentation_files/figure-html/unnamed-chunk-3-1.png" width="110%" style="display: block; margin: auto;" /&gt;
+---
+
+
+&lt;img src="GraybillThesisPresentation_files/figure-html/plot of n-1.png" width="110%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+&lt;img src="GraybillThesisPresentation_files/figure-html/unnamed-chunk-4-1.png" width="110%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+&lt;img src="GraybillThesisPresentation_files/figure-html/unnamed-chunk-5-1.png" width="110%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+&lt;img src="GraybillThesisPresentation_files/figure-html/unnamed-chunk-6-1.png" width="110%" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

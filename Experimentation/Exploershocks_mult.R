@@ -14,6 +14,21 @@ ggplot(d_sum)+
   xlab("Variance In Simulation")+
   ylab("Proportion who switch from ex ante Strategy")
 
+d <- 
+  d %>% 
+  mutate(talent=(nu-nd)/nd) %>% 
+  mutate(u_max=pmax(u_high, u_low),
+         u_min=pmin(u_high, u_low)) %>% 
+  group_by(var) %>% 
+  mutate(u_diff=u_max/abs(total_shock))
+
+ggplot(d)+
+  geom_point(aes(x=log(talent),y=u_max,col=as.factor(var)))
+
+
+ggplot(d)+
+  geom_point(aes(x=log(talent),y=log(u_diff)))+
+  facet_wrap(vars(var))
 
   
   
